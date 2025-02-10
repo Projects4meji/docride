@@ -6,7 +6,11 @@ import {
   Typography,
   TextField,
   Button,
+  IconButton,
 } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import contact from "../../assets/contact.png"; // ✅ Import Contact Image
 
 const Contact = () => {
@@ -20,26 +24,18 @@ const Contact = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: "100vw",
-        pt: 8,
-        px: { xs: 2, sm: 4, md: 6, lg: 10 },
-      }}
-    >
+    <Box sx={{ width: "100vw", pt: 8, px: { xs: 2, sm: 4, md: 6, lg: 10 } }}>
       {/* Contact Header Section */}
       <Container maxWidth="md" sx={{ textAlign: "center", mb: 6 }}>
         <Typography
-          variant="h5"
-          fontWeight="bold"
-          sx={{ color: "#032C34", mb: 1 }}
+          variant="h6"
+          sx={{ color: "#032C34", mb: 1, fontWeight: "bold" }}
         >
           FOR MORE QUERIES
         </Typography>
         <Typography
           variant="h3"
-          fontWeight="bold"
-          sx={{ color: "#72B7A4", mb: 3 }}
+          sx={{ color: "#72B7A4", fontWeight: "bold", mb: 3 }}
         >
           Contact Us
         </Typography>
@@ -48,41 +44,56 @@ const Contact = () => {
       {/* Two-Column Layout (Text + Form) */}
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
-          {/* Left Side - Text + Image */}
+          {/* Left Side - Contact Info + Image */}
           <Grid item xs={12} md={6}>
             <Typography
               variant="h5"
-              sx={{
-                fontWeight: "bold",
-                color: "#032C34",
-                lineHeight: "1.6",
-                mb: 3, // ✅ Add spacing before image
-              }}
+              sx={{ fontWeight: "bold", color: "#032C34", mb: 3 }}
             >
-              <span style={{ color: "#72B7A4" }}>DocRide </span>
-              strikes the perfect balance between{" "}
-              <span style={{ color: "#72B7A4", textDecoration: "underline" }}>
+              <span style={{ color: "#72B7A4" }}>DocRide</span> strikes the
+              perfect balance between{" "}
+              <span style={{ color: "#c94b32", textDecoration: "underline" }}>
                 flexibility and simplicity
               </span>
               , ensuring ease of use without sacrificing functionality.
             </Typography>
 
-            {/* Image Below Text - Fix alignment */}
+            {/* Contact Info */}
             <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "flex-end", // ✅ Ensures the image touches the bottom
-                height: "100%", // ✅ Makes sure it stretches to fill
-              }}
+              sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}
+            >
+              <Box display="flex" alignItems="center" gap={2}>
+                <EmailIcon sx={{ color: "#72B7A4" }} />
+                <Typography variant="body1" sx={{ color: "#032C34" }}>
+                  support@docride.co.uk
+                </Typography>
+              </Box>
+              <Box display="flex" alignItems="center" gap={2}>
+                <PhoneIcon sx={{ color: "#72B7A4" }} />
+                <Typography variant="body1" sx={{ color: "#032C34" }}>
+                  +44 123 456 789
+                </Typography>
+              </Box>
+              <Box display="flex" alignItems="center" gap={2}>
+                <LocationOnIcon sx={{ color: "#72B7A4" }} />
+                <Typography variant="body1" sx={{ color: "#032C34" }}>
+                  London, UK
+                </Typography>
+              </Box>
+            </Box>
+
+            {/* Contact Image */}
+            <Box
+              sx={{ display: "flex", justifyContent: "center", height: "100%" }}
             >
               <img
                 src={contact}
                 alt="Contact"
                 style={{
                   width: "100%",
-                  height: "100%", // ✅ Ensures it stretches fully
-                  objectFit: "contain", // ✅ Prevents cropping
+                  maxWidth: "500px",
+                  height: "auto",
+                  objectFit: "contain",
                   borderRadius: "8px",
                 }}
               />
@@ -99,16 +110,25 @@ const Contact = () => {
                 boxShadow: 3,
               }}
             >
-              
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: "bold",
+                  color: "#032C34",
+                  mb: 2,
+                  textAlign: "center",
+                }}
+              >
+                Send Us a Message
+              </Typography>
 
               <Box component="form" onSubmit={handleSubmit}>
                 {/* Name Field */}
                 <TextField
                   fullWidth
                   required
-                  label="Enter Your Name"
+                  label="Your Name"
                   variant="outlined"
-                  placeholder="Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   sx={{
@@ -125,10 +145,9 @@ const Contact = () => {
                 <TextField
                   fullWidth
                   required
-                  label="Enter Your Email"
+                  label="Your Email"
                   type="email"
                   variant="outlined"
-                  placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   sx={{
@@ -146,9 +165,8 @@ const Contact = () => {
                   fullWidth
                   multiline
                   minRows={3}
-                  label="More Queries"
+                  label="Your Message"
                   variant="outlined"
-                  placeholder="Your Query"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   sx={{
@@ -160,14 +178,14 @@ const Contact = () => {
                     },
                   }}
                 />
+
+                {/* CAPTCHA */}
                 <Box sx={{ marginBottom: "20px", textAlign: "center" }}>
                   <div
                     className="h-captcha"
-                    data-sitekey="your-hcaptcha-site-key" // Replace with your actual site key
+                    data-sitekey="your-hcaptcha-site-key"
                   ></div>
                 </Box>
-
-                {/* Load hCaptcha Script */}
                 <script
                   src="https://js.hcaptcha.com/1/api.js"
                   async
@@ -195,6 +213,26 @@ const Contact = () => {
           </Grid>
         </Grid>
       </Container>
+
+      {/* Embedded Google Map */}
+      <Box sx={{ mt: 6, textAlign: "center" }}>
+        <Typography
+          variant="h5"
+          sx={{ fontWeight: "bold", color: "#032C34", mb: 2 }}
+        >
+          Visit Us
+        </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <iframe
+            title="Google Map"
+            width="90%"
+            height="300"
+            style={{ borderRadius: "12px", border: "none" }}
+            src="https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=London,UK"
+            allowFullScreen
+          ></iframe>
+        </Box>
+      </Box>
     </Box>
   );
 };

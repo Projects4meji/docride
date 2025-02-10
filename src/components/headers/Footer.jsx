@@ -150,29 +150,31 @@ const Footer = () => {
                   Quick Links
                 </Typography>
                 <Box sx={{ mt: 3 }}>
-                  {["Watch Video", "Modules", "DocRide Features"].map(
-                    (item, index) => (
-                      <Box key={index}>
-                        <Typography variant="body2" sx={{ mb: 2 }}>
-                          <Link
-                            href="#"
-                            underline="none"
-                            sx={{
-                              color: "#ffffff",
-                              "&:hover": { color: "#73C7AD" },
-                            }}
-                          >
-                            {item}
-                          </Link>
-                        </Typography>
-                        {index !== 2 && (
-                          <Divider
-                            sx={{ bgcolor: "#A0D0C5", width: "100%", mb: 2 }}
-                          />
-                        )}
-                      </Box>
-                    )
-                  )}
+                  {[
+                    { label: "Blogs", link: "/blog" }, // ✅ Add correct path for FAQ page
+                    { label: "Modules", link: "/modules" },
+                    { label: "Docride - Features", link: "/features" },
+                  ].map((item, index) => (
+                    <Box key={index}>
+                      <Typography variant="body2" sx={{ mb: 2 }}>
+                        <Link
+                          href={item.link} // ✅ Dynamic link for each item
+                          underline="none"
+                          sx={{
+                            color: "#ffffff",
+                            "&:hover": { color: "#73C7AD" },
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+                      </Typography>
+                      {index !== 2 && (
+                        <Divider
+                          sx={{ bgcolor: "#A0D0C5", width: "100%", mb: 2 }}
+                        />
+                      )}
+                    </Box>
+                  ))}
                 </Box>
               </Grid>
 
@@ -182,18 +184,22 @@ const Footer = () => {
                   Support
                 </Typography>
                 <Box sx={{ mt: 3 }}>
-                  {["FAQ", "Pricing", "Partner Program"].map((item, index) => (
+                  {[
+                    { label: "FAQ", link: "/questions" }, // ✅ Add correct path for FAQ page
+                    { label: "Pricing", link: "#" },
+                    { label: "Partner Program", link: "#" },
+                  ].map((item, index) => (
                     <Box key={index}>
                       <Typography variant="body2" sx={{ mb: 2 }}>
                         <Link
-                          href="#"
+                          href={item.link} // ✅ Dynamic link for each item
                           underline="none"
                           sx={{
                             color: "#ffffff",
                             "&:hover": { color: "#73C7AD" },
                           }}
                         >
-                          {item}
+                          {item.label}
                         </Link>
                       </Typography>
                       {index !== 2 && (
@@ -286,20 +292,20 @@ const Footer = () => {
         {/* Privacy Section */}
         <Box sx={{ display: "flex", justifyContent: "center", gap: 3 }}>
           {[
-            { name: "Privacy Policy", path: "/policy" },
-            { name: "Cookie Policy", path: "/cookie-policy" },
-            { name: "Fee Refund Policy", path: "/fee-refund-policy" },
+            { label: "Privacy Policy", link: "/policy" },
+            { label: "Cookie Policy", link: "/cookie-policy" },
+            { label: "Fee Refund Policy", link: "/fee-refund-policy" },
           ].map((item, index) => (
             <Typography key={index} variant="body2">
               <Link
-                href={item.path}
+                href={item.link} // ✅ Use React Router Link if applicable
                 underline="none"
                 sx={{
                   color: "#ffffff",
                   "&:hover": { color: "#73C7AD" },
                 }}
               >
-                {item.name}
+                {item.label} {/* ✅ Using label instead of name */}
               </Link>
             </Typography>
           ))}

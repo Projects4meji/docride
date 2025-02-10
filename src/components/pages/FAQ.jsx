@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import { ExpandMore, Search } from "@mui/icons-material";
 import bgimage from "../../assets/bgimage.jpg";
-import faq from "../../assets/faq.png";
 
 const faqData = [
   {
@@ -156,7 +155,6 @@ const FAQ = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundImage: `url(${faq})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
@@ -260,7 +258,6 @@ const FAQ = () => {
                     }}
                   >
                     <Typography
-                      fontWeight="bold"
                       sx={{
                         fontSize: {
                           xs: "16px",
@@ -375,7 +372,6 @@ const FAQ = () => {
                 bgcolor: "#6DB9A0",
                 color: "white",
                 fontSize: { xs: "14px", sm: "16px" },
-                fontWeight: "bold",
                 py: { xs: 1, sm: 1.2 }, // Adjust padding for different screen sizes
                 "&:hover": { bgcolor: "#51A18B" },
               }}

@@ -10,6 +10,7 @@ import Contact from "./components/pages/Contact";
 import FAQ from "./components/pages/FAQ";
 import Policy from "./components/pages/Policy";
 import Modules from "./components/pages/Modules";
+import Blogs from "./components/pages/Blogs";
 
 // Custom Theme
 const theme = createTheme({
@@ -37,6 +38,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blogs />} />
           <Route path="/features" element={<Features />} />
           <Route path="/modules" element={<Modules />} />
           <Route path="/contact" element={<Contact />} />

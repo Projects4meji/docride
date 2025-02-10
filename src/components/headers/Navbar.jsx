@@ -133,6 +133,7 @@ const Navbar = () => {
           <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
             {[
               { name: "Home", path: "/" },
+              { name: "Blogs", path: "/blog" },
               { name: "About us", path: "/about" },
               { name: "Features", path: "/features" },
               { name: "Modules", path: "/modules" },
@@ -148,7 +149,6 @@ const Navbar = () => {
                   color: "#A0D0C5",
                   textTransform: "none",
                   fontSize: { xs: "14px", sm: "15px", md: "20px" }, // ✅ Adjust font size
-                  fontWeight: "bold",
                   transition: "color 0.3s ease-in-out",
                   "&:hover": { color: "white" },
                 }}
@@ -221,6 +221,7 @@ const Navbar = () => {
         <List>
           {[
             { name: "Home", path: "/" },
+            { name: "Blogs", path: "/blog" },
             { name: "About us", path: "/about" },
             { name: "Features", path: "/features" },
             { name: "Modules", path: "/modules" },

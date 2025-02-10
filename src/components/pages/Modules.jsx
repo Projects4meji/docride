@@ -1,5 +1,13 @@
 import React, { useRef } from "react";
-import { Container, Typography, Box } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Box,
+  Button,
+  Grid,
+  Card,
+  CardContent,
+} from "@mui/material";
 import { motion, useInView } from "framer-motion";
 import riskImage from "../../assets/modules/risk.png"; // Ensure correct path
 import riskIcon from "../../assets/modules/i1.png"; // Ensure correct path
@@ -226,85 +234,118 @@ const Modules = () => {
           backgroundImage: `url(${privacy})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          alignItems: "center",
-          justifyContent: "center",
+          position: "relative",
           textAlign: "center",
           px: { xs: 2, sm: 4, md: 6 },
-          py: 5,
+          py: 6,
+          "::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
+            zIndex: 1,
+          },
         }}
       >
-        <Typography
-          fontSize={{ xs: 20, sm: 28, md: 40 }}
-          fontWeight="bold"
-          color="#ffffff"
-          textAlign="center"
-          px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
-          stroke="black"
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 2,
+            color: "#ffffff",
+            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)", // Subtle text shadow
+          }}
         >
-          <Box component="span" color="#96e0cc">
-            17 Comprehensive Modules
-          </Box>{" "}
-          to cover Every
-          <Box component="span" color="#68b9ba">
-            {" "}
-            Aspect of Health & Safety Management
-          </Box>
-        </Typography>
+          <Typography
+            fontSize={{ xs: 20, sm: 28, md: 40 }}
+            fontWeight="bold"
+            px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
+          >
+            <Box component="span" color="#96e0cc">
+              17 Comprehensive Modules
+            </Box>{" "}
+            to cover Every
+            <Box component="span" color="#68b9ba">
+              {" "}
+              Aspect of Health & Safety Management
+            </Box>
+          </Typography>
 
-        <Box>
           <Typography
             fontSize={{ xs: 14, sm: 18, md: 24 }}
             fontWeight="bold"
-            color="#ffffff"
-            textAlign="center"
             px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
             mt={2}
           >
             Step into the future with DocRide—the smart, efficient way to
             safeguard your workplace from Health and Safety Risks.
           </Typography>
+
+          <Button
+            variant="contained"
+            sx={{
+              mt: 3,
+              backgroundColor: "#E25E3E",
+              color: "#ffffff",
+              fontWeight: "bold",
+              textTransform: "none",
+              px: 4,
+              py: 2,
+              "&:hover": {
+                backgroundColor: "#c94b32",
+              },
+            }}
+          >
+            Learn More
+          </Button>
         </Box>
       </Box>
 
-      {/* Dynamic Animated Sections */}
-      {moduleData.map((module, index) => {
-        const ref = useRef(null);
-        refs.current[index] = ref;
-        const isInView = useInView(ref, { once: false, margin: "-300px" });
+      {/* Modules Section */}
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        {moduleData.map((module, index) => {
+          const ref = useRef(null);
+          const isInView = useInView(ref, { once: false, margin: "-100px" });
 
-        return (
-          <Container
-            key={index}
-            maxWidth="xl"
-            sx={{
-              px: { xs: 2, sm: 4, md: 6, lg: "20px" },
-              py: { xs: 4, sm: 6, md: 8 },
-            }}
-          >
+          return (
             <motion.div
               ref={ref}
-              initial={{ opacity: 0, x: -10 }} // Reduce movement on mobile
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              viewport={{ once: true, amount: 0.2 }} // Adjusted viewport settings
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{ width: "100%" }}
             >
-              <Box
+              <Card
                 sx={{
+                  borderRadius: "15px",
+                  background:
+                    "linear-gradient(180deg, #FFFFFF 0%, rgba(155, 215, 199, 0.43) 100%)",
                   display: "flex",
-                  backgroundColor: "transparent",
-                  backgroundImage: "linear-gradient(180deg,rgba(155, 215, 199, 0.43) 0%, #FFFFFF 100%)",
-                  borderRadius: "20px",
                   flexDirection: { xs: "column", md: "row" },
                   alignItems: "center",
                   justifyContent: "space-between",
-                  gap: { xs: 3, md: 2 },
-                  p: { xs: 5, md: 5 },
-                  textAlign: "left",
-                  zIndex: 2,
+                  maxWidth: "100%",
+                  minHeight: "550px", // Increased height to match image
+                  overflow: "hidden",
+                  mb: 4,
                 }}
               >
-                {/* Left Section */}
-                <Box sx={{ flex: 1, maxWidth: { xs: "100%", md: "600px" } }}>
+                {/* Module Content (Left Side) */}
+                <CardContent
+                  sx={{
+                    flex: 1,
+                    textAlign: "left",
+                    px: { xs: 3, sm: 5 },
+                    py: { xs: 3, sm: 4 },
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    height: "100%", // Ensure same height
+                  }}
+                >
                   <Box display="flex" alignItems="center" gap={2} mb={2}>
                     <img
                       src={module.icon}
@@ -312,67 +353,56 @@ const Modules = () => {
                       width={100}
                       height={100}
                     />
-                    <Typography
-                      variant="body1"
-                      color="#1E626C"
-                      fontSize={{ xs: 14, sm: 16, md: 18 }}
-                    >
-                      Where
-                    </Typography>
+                    <Box>
+                      <Typography
+                        variant="h5"
+                        fontWeight="bold"
+                        sx={{ color: "#1E626C" }}
+                      >
+                        {module.title}
+                      </Typography>
+                      {/* Orange Line Below the Title */}
+                      <Box
+                        sx={{
+                          width: "100px",
+                          height: "4px",
+                          bgcolor: "#E25E3E",
+                          mt: 1, // ✅ Adds space between title and line
+                        }}
+                      />
+                    </Box>
                   </Box>
-                  <Typography
-                    variant="h4"
-                    fontWeight="bold"
-                    color="#1E626C"
-                    gutterBottom
-                    sx={{ fontSize: { xs: 24, sm: 28, md: 36 } }}
-                  >
-                    {module.title}
-                  </Typography>
-                  <Box
-                    sx={{
-                      width: "160px",
-                      height: "4px",
-                      bgcolor: "#E25E3E",
-                      mb: 2,
-                      mx: { xs: "left", md: "0" },
-                    }}
-                  />
+
                   <Typography
                     variant="body1"
-                    color="#333"
-                    mb={3}
-                    sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
+                    sx={{ color: "#333", fontSize: "20px" }}
                   >
                     {module.description}
                   </Typography>
-                  <Box component="ul" sx={{ pl: { xs: 2, sm: 3 }, mb: 4 }}>
-                    {module.content.map((item, i) => (
-                      <Box
-                        component="li"
+
+                  <Box component="ul" sx={{ mt: 2 }}>
+                    {module.content.map((point, i) => (
+                      <Typography
                         key={i}
-                        sx={{ fontSize: { xs: 14, sm: 16, md: 18 }, mb: 2 }}
+                        component="li"
+                        sx={{ fontSize: "18px", color: "#444", mb: 1 }}
                       >
-                        {item}
-                      </Box>
+                        {point}
+                      </Typography>
                     ))}
                   </Box>
-                </Box>
+                </CardContent>
 
-                {/* Right Section - Image */}
-                <motion.div
-                  initial={{ opacity: 0, x: 10 }} // Reduce movement on mobile
-                  animate={
-                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }
-                  }
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  viewport={{ once: true, amount: 0.2 }} // Improved viewport settings
-                  style={{
+                {/* Module Image (Right Side - Full Image) */}
+                <Box
+                  sx={{
                     flex: 1,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     width: "100%",
+                    height: "100%",
+                    minHeight: "550px", // Ensures equal height
                   }}
                 >
                   <img
@@ -380,19 +410,243 @@ const Modules = () => {
                     alt={module.title}
                     style={{
                       width: "100%",
-                      maxWidth: "750px",
-                      height: "auto",
-                      borderRadius: "20px",
+                      maxWidth: "600px", // Increased size
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "0 15px 15px 0",
                     }}
                   />
-                </motion.div>
-              </Box>
+                </Box>
+              </Card>
             </motion.div>
-          </Container>
-        );
-      })}
+          );
+        })}
+      </Container>
     </Box>
   );
 };
 
 export default Modules;
+
+// import React, { useRef } from "react";
+// import { Container, Typography, Box, Button } from "@mui/material";
+// import { motion, useInView } from "framer-motion";
+// import riskImage from "../../assets/modules/risk.png"; // Ensure correct path
+// import riskIcon from "../../assets/modules/i1.png"; // Ensure correct path
+// import privacy from "../../assets/privacy.jpg";
+
+// const Modules = () => {
+//   const refs = useRef([]); // Initialize refs array
+
+//   return (
+//     <Box sx={{ bgcolor: "#ffffff", pb: { xs: 5, md: 10 } }}>
+//       <Box
+//         sx={{
+//           width: "100%",
+//           height: "auto",
+//           backgroundImage: `url(${privacy})`,
+//           backgroundSize: "cover",
+//           backgroundPosition: "center",
+//           position: "relative",
+//           textAlign: "center",
+//           px: { xs: 2, sm: 4, md: 6 },
+//           py: 5,
+//           "::before": {
+//             content: '""',
+//             position: "absolute",
+//             top: 0,
+//             left: 0,
+//             width: "100%",
+//             height: "100%",
+//             backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
+//             zIndex: 1,
+//           },
+//         }}
+//       >
+//         <Box
+//           sx={{
+//             position: "relative",
+//             zIndex: 2,
+//             color: "#ffffff",
+//             textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)", // Subtle text shadow
+//           }}
+//         >
+//           <Typography
+//             fontSize={{ xs: 20, sm: 28, md: 40 }}
+//             fontWeight="bold"
+//             px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
+//           >
+//             <Box component="span" color="#96e0cc">
+//               17 Comprehensive Modules
+//             </Box>{" "}
+//             to cover Every
+//             <Box component="span" color="#68b9ba">
+//               {" "}
+//               Aspect of Health & Safety Management
+//             </Box>
+//           </Typography>
+
+//           <Typography
+//             fontSize={{ xs: 14, sm: 18, md: 24 }}
+//             fontWeight="bold"
+//             px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
+//             mt={2}
+//           >
+//             Step into the future with DocRide—the smart, efficient way to
+//             safeguard your workplace from Health and Safety Risks.
+//           </Typography>
+
+//           <Button
+//             variant="contained"
+//             sx={{
+//               mt: 3,
+//               backgroundColor: "#E25E3E",
+//               color: "#ffffff",
+//               fontWeight: "bold",
+//               textTransform: "none",
+//               px: 4,
+//               py: 2,
+//               "&:hover": {
+//                 backgroundColor: "#c94b32",
+//               },
+//             }}
+//           >
+//             Learn More
+//           </Button>
+//         </Box>
+//       </Box>
+
+//       {/* Dynamic Animated Sections */}
+//       {moduleData.map((module, index) => {
+//         const ref = useRef(null);
+//         refs.current[index] = ref;
+//         const isInView = useInView(ref, { once: false, margin: "-300px" });
+
+//         return (
+//           <Container
+//             key={index}
+//             maxWidth="xl"
+//             sx={{
+//               px: { xs: 2, sm: 4, md: 6, lg: "20px" },
+//               py: { xs: 4, sm: 6, md: 8 },
+//             }}
+//           >
+//             <motion.div
+//               ref={ref}
+//               initial={{ opacity: 0, x: -10 }} // Reduce movement on mobile
+//               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+//               transition={{ duration: 0.3, ease: "easeOut" }}
+//               viewport={{ once: true, amount: 0.2 }} // Adjusted viewport settings
+//             >
+//               <Box
+//                 sx={{
+//                   display: "flex",
+//                   backgroundColor: "transparent",
+//                   backgroundImage:
+//                     "linear-gradient(180deg,rgba(155, 215, 199, 0.43) 0%, #FFFFFF 100%)",
+//                   borderRadius: "20px",
+//                   flexDirection: { xs: "column", md: "row" },
+//                   alignItems: "center",
+//                   justifyContent: "space-between",
+//                   gap: { xs: 3, md: 2 },
+//                   p: { xs: 5, md: 5 },
+//                   textAlign: "left",
+//                   zIndex: 2,
+//                 }}
+//               >
+//                 {/* Left Section */}
+//                 <Box sx={{ flex: 1, maxWidth: { xs: "100%", md: "600px" } }}>
+//                   <Box display="flex" alignItems="center" gap={2} mb={2}>
+//                     <img
+//                       src={module.icon}
+//                       alt="Module Icon"
+//                       width={150}
+//                       height={150}
+//                     />
+
+//                     {/* Title with Orange Line Underneath */}
+//                     <Box>
+//                       <Typography
+//                         variant="h4"
+//                         fontWeight="bold"
+//                         color="#1E626C"
+//                         gutterBottom
+//                         sx={{
+//                           fontSize: { xs: 24, sm: 28, md: 36 },
+//                           display: "block", // ✅ Ensures it takes full width
+//                         }}
+//                       >
+//                         {module.title}
+//                       </Typography>
+
+//                       {/* Orange Line Directly Under the Title */}
+//                       <Box
+//                         sx={{
+//                           width: "160px",
+//                           height: "4px",
+//                           bgcolor: "#E25E3E",
+//                           mt: 1, // ✅ Adds space between title and line
+//                         }}
+//                       />
+//                     </Box>
+//                   </Box>
+
+//                   <Typography
+//                     variant="body1"
+//                     color="#333"
+//                     mb={3}
+//                     sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
+//                   >
+//                     {module.description}
+//                   </Typography>
+
+//                   <Box component="ul" sx={{ pl: { xs: 2, sm: 3 }, mb: 4 }}>
+//                     {module.content.map((item, i) => (
+//                       <Box
+//                         component="li"
+//                         key={i}
+//                         sx={{ fontSize: { xs: 14, sm: 16, md: 18 }, mb: 2 }}
+//                       >
+//                         {item}
+//                       </Box>
+//                     ))}
+//                   </Box>
+//                 </Box>
+
+//                 {/* Right Section - Image */}
+//                 <motion.div
+//                   initial={{ opacity: 0, x: 10 }} // Reduce movement on mobile
+//                   animate={
+//                     isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }
+//                   }
+//                   transition={{ duration: 0.6, ease: "easeOut" }}
+//                   viewport={{ once: true, amount: 0.2 }} // Improved viewport settings
+//                   style={{
+//                     flex: 1,
+//                     display: "flex",
+//                     justifyContent: "center",
+//                     alignItems: "center",
+//                     width: "100%",
+//                   }}
+//                 >
+//                   <img
+//                     src={module.image}
+//                     alt={module.title}
+//                     style={{
+//                       width: "100%",
+//                       maxWidth: "750px",
+//                       height: "auto",
+//                       borderRadius: "20px",
+//                     }}
+//                   />
+//                 </motion.div>
+//               </Box>
+//             </motion.div>
+//           </Container>
+//         );
+//       })}
+//     </Box>
+//   );
+// };
+
+// export default Modules;

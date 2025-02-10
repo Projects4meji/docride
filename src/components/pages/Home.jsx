@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -8,7 +8,12 @@ import {
   Card,
   CardContent,
   Box,
+  IconButton,
+  Avatar,
+  Fade,
 } from "@mui/material";
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import { useDrag } from "@use-gesture/react";
 
 // Image Imports
 import Slide1 from "../../assets/Slide1.jpg";
@@ -30,14 +35,103 @@ const slides = [Slide1, Slide2, Slide3];
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const slideCount = slides.length;
+  const intervalRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [fadeIn, setFadeIn] = useState(true);
+  const [hoverIndex, setHoverIndex] = useState(null);
+
+  const handlePrev = () => {
+    setFadeIn(false); // Trigger fade out
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+      );
+      setFadeIn(true); // Trigger fade in after change
+    }, 300); // Delay to match animation timing
+  };
+
+  const handleNext = () => {
+    setFadeIn(false);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+      );
+      setFadeIn(true);
+    }, 300);
+  };
 
   // Auto-slide every 3 seconds (fast transition)
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 3000); // Fast effect
-    return () => clearInterval(interval);
+    startAutoSlide();
+    return () => clearInterval(intervalRef.current);
   }, []);
+
+  const startAutoSlide = () => {
+    clearInterval(intervalRef.current); // Ensure only one interval runs
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slideCount);
+    }, 3000);
+  };
+
+  // Handle swipe gestures
+  const bind = useDrag(
+    ({ movement: [mx], down, swipe: [swipeX], velocity }) => {
+      if (!down && velocity > 0.2) {
+        if (swipeX === 1) {
+          goToPrevSlide(); // ✅ Swiping Right (→) moves to Previous slide
+        } else if (swipeX === -1) {
+          goToNextSlide(); // ✅ Swiping Left (←) moves to Next slide
+        }
+      }
+    },
+    { axis: "lock" } // ✅ Prevents diagonal movement
+  );
+
+  // ✅ Move to the next slide
+  const goToNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slideCount);
+    restartAutoSlide();
+  };
+
+  // ✅ Move to the previous slide
+  const goToPrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
+    restartAutoSlide();
+  };
+
+  // ✅ Restart auto-slide after manual swipe
+  const restartAutoSlide = () => {
+    clearInterval(intervalRef.current);
+    startAutoSlide();
+  };
+
+  const testimonials = [
+    {
+      text: "DocRide simplifies compliance while ensuring accuracy and efficiency.",
+      name: "Chartered Fellow of IOSH",
+      position: "Industry Expert",
+      photo: "https://via.placeholder.com/80", // Replace with actual image
+    },
+    {
+      text: "DocRide transformed the way we handle health & safety management, reducing our workload significantly.",
+      name: "John Smith",
+      position: "Health & Safety Manager",
+      photo: "https://via.placeholder.com/80", // Replace with actual image
+    },
+    {
+      text: "Since implementing DocRide, we have streamlined risk assessments and compliance, making audits stress-free.",
+      name: "Jane Doe",
+      position: "Operations Director",
+      photo: "https://via.placeholder.com/80", // Replace with actual image
+    },
+    {
+      text: "An intuitive platform that delivers both flexibility and control, crucial for managing safety at scale.",
+      name: "Michael Brown",
+      position: "EHS Specialist",
+      photo: "https://via.placeholder.com/80", // Replace with actual image
+    },
+  ];
 
   const features = [
     {
@@ -94,8 +188,6 @@ const Home = () => {
     },
   ];
 
-  const [hoverIndex, setHoverIndex] = useState(null);
-
   return (
     <Box sx={{ width: "100vw", overflow: "hidden" }}>
       <Box sx={{ bgcolor: "#032C34", borderRadius: "0 0 50px 50px" }}>
@@ -117,30 +209,28 @@ const Home = () => {
             sx={{
               textAlign: { xs: "center", lg: "left" },
               px: { xs: 2, sm: 4, md: 6, lg: "80px" },
-              mt: { xs: 4, md: 0 },
+              mt: { xs: 4, md: 4 },
             }}
           >
             <Typography
-              fontWeight={800}
+              fontWeight={700}
               sx={{
+
                 color: "#FFFFFF",
                 lineHeight: 1.2,
-                fontSize: { xs: "24px", sm: "28px", md: "40px", lg: "62px" }, // ✅ More responsive scaling
+                fontSize: { xs: "30px", sm: "28px", md: "30px", lg: "40px" }, // ✅ More responsive scaling
               }}
             >
-              <span style={{ color: "#96e0cc", fontWeight: 900 }}>
+              <span style={{ color: "#96e0cc", fontWeight: 700 }}>
                 Develop and Deploy{" "}
               </span>
-              Your <br />
-              ISO 45001 compliant{" "}
-              <span style={{ color: "#68b9ba", fontWeight: 900 }}>
+              Your ISO 45001 compliant{" "}
+              <span style={{ color: "#68b9ba", fontWeight: 700 }}>
                 Health &
               </span>{" "}
-              <br />
-              <span style={{ color: "#68b9ba", fontWeight: 900 }}>
+              <span style={{ color: "#68b9ba", fontWeight: 700 }}>
                 Safety Management System
               </span>{" "}
-              <br />
               with 10X Efficiency.
             </Typography>
 
@@ -149,8 +239,9 @@ const Home = () => {
               color="#68B9BABA"
               sx={{
                 mt: 3,
-                fontWeight: "bold",
-                fontSize: { xs: "14px", sm: "16px", md: "18px", lg: "20px" }, // ✅ Ensure responsiveness
+                fontWeight: "medium",
+                fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                display: { xs: "none", sm: "none", md: "block" },
               }}
             >
               More than 90% of SMEs can operationalize their health and safety
@@ -161,7 +252,7 @@ const Home = () => {
             <Box
               sx={{
                 display: "flex",
-                flexDirection: { xs: "column", sm: "row" }, // ✅ Stacks on mobile, row on larger screens
+                flexDirection: { xs: "column", sm: "row" }, //Stacks on mobile, row on larger screens
                 alignItems: "center",
                 justifyContent: {
                   xs: "center",
@@ -172,7 +263,7 @@ const Home = () => {
                 mt: 3,
               }}
             >
-              {/* ✅ "Start Your Free Trial Now" Button - Always Visible */}
+              {/* "Start Your Free Trial Now" Button - Always Visible */}
               <Button
                 variant="contained"
                 sx={{
@@ -180,7 +271,6 @@ const Home = () => {
                   borderRadius: "30px",
                   padding: { xs: "8px 20px", sm: "10px 25px" },
                   fontSize: { xs: "14px", sm: "16px" },
-                  fontWeight: "bold",
                   textTransform: "none",
                   border: "2px solid #2C8A7A",
                   transition: "all 0.9s ease-in-out",
@@ -194,7 +284,7 @@ const Home = () => {
                 Start Your Free Trial Now
               </Button>
 
-              {/* ✅ "See DocRide in Action" Button - Hides only on xs screens */}
+              {/* "See DocRide in Action" Button - Hides only on xs screens */}
               <Button
                 variant="outlined"
                 sx={{
@@ -233,7 +323,7 @@ const Home = () => {
               sx={{
                 position: "relative",
                 width: "100%",
-                maxWidth: { xs: "95%", sm: "80%", md: "700px" }, // ✅ Responsive width
+                maxWidth: { xs: "90%", sm: "80%", md: "700px" }, // ✅ Responsive width
                 height: { xs: "200px", sm: "350px", md: "400px" }, // ✅ Dynamic height
                 borderRadius: "20px",
                 overflow: "hidden",
@@ -241,22 +331,25 @@ const Home = () => {
                 backgroundColor: "#fff",
               }}
             >
-              {/* Slider Container */}
               <Box
+                {...bind()} // ✅ Attach swipe gestures correctly
                 sx={{
                   display: "flex",
                   width: "100%",
                   height: "100%",
                   overflow: "hidden",
+                  touchAction: "none", // ✅ Prevents scrolling conflicts
+                  pointerEvents: "auto", // ✅ Ensure swipe gestures are detected
+                  cursor: "grab", // ✅ Visual feedback for swipe support
                 }}
               >
-                {/* Slide Wrapper - Ensures slides stay in a row */}
+                {/* ✅ Slide Wrapper */}
                 <Box
                   sx={{
                     display: "flex",
-                    width: `${slides.length * 100}%`, // ✅ Ensures slides take full width
-                    transition: "transform 0.8s ease-in-out",
-                    transform: `translateX(-${currentSlide * 100}%)`, // ✅ Moves one slide at a time
+                    width: `${slides.length * 100}%`,
+                    transition: "transform 0.5s ease-in-out",
+                    transform: `translateX(-${currentSlide * 100}%)`,
                   }}
                 >
                   {slides.map((image, index) => (
@@ -271,6 +364,7 @@ const Home = () => {
                         flexShrink: 0,
                         objectFit: "cover",
                         borderRadius: "10px",
+                        pointerEvents: "none",
                       }}
                     />
                   ))}
@@ -300,6 +394,7 @@ const Home = () => {
               sx={{
                 color: "#1E626C",
                 mb: 4,
+                px: 8,
                 fontSize: { xs: "28px", sm: "32px", md: "36px", lg: "41px" }, // ✅ Responsive Font Size
               }}
             >
@@ -347,9 +442,7 @@ const Home = () => {
             zIndex: 1,
           }}
         >
-          <Typography fontWeight="bold" sx={{ color: "#6DB9A0" }}>
-            DOCRIDE BENEFITS
-          </Typography>
+          <Typography sx={{ color: "#6DB9A0" }}>DOCRIDE BENEFITS</Typography>
 
           <Typography
             fontWeight="bold"
@@ -373,14 +466,11 @@ const Home = () => {
               lineHeight: "28px",
             }}
           >
-            Introducing DocRide: Your Complete Health and Safety Management
-            System. Say goodbye to complex health and safety management system
-            setups – with DocRide, all your health and safety management system
-            is ready to go. From risk assessments to inspections and incident
-            reporting, everything’s covered. Just assign user roles for various
-            health and safety processes and rest assured you’re following best
-            practices. DocRide strikes the perfect balance between flexibility
-            and simplicity, ensuring ease of use without sacrificing
+            Introducing DocRide – your all-in-one Health & Safety Management
+            System. Simplify compliance with ready-to-use tools for risk
+            assessments, inspections, and incident reporting. Assign user roles,
+            follow best practices, and stay compliant with ease. DocRide
+            delivers flexibility and simplicity without compromising
             functionality.
           </Typography>
 
@@ -394,15 +484,11 @@ const Home = () => {
               lineHeight: "28px",
             }}
           >
-            DocRide seamlessly integrates health and safety management system
-            processes, saving you from the need to reinvent the wheel by
-            designing your own H&S management system from scratch. From risk
-            assessments to resource requests and inspections, each step flows
-            logically into the next. For example, risk assessments dictate
-            necessary control measures, which are then easily requested through
-            the Resources tab. Inspections, in turn, address these control
-            requirements, ensuring proactive safety measures. Nonconformities
-            and corrective actions are linked, simplifying compliance.
+            DocRide streamlines health and safety management, eliminating the
+            need to build a system from scratch. Risk assessments drive control
+            measures, which can be requested through the Resources tab.
+            Inspections verify compliance, and linked nonconformities ensure
+            proactive safety and simplified compliance.
           </Typography>
           <Typography
             textAlign="center"
@@ -418,7 +504,7 @@ const Home = () => {
             interconnected, providing clear performance visibility.
           </Typography>
 
-          {/* ✅ Small DocRide Logo */}
+          {/* Small DocRide Logo */}
           <Box
             component="img"
             src={DocRideLogo}
@@ -432,7 +518,7 @@ const Home = () => {
             }}
           />
 
-          {/* ✅ Features Section with Responsive Grid */}
+          {/* Features Section with Responsive Grid */}
           <Box
             sx={{
               width: "100%",
@@ -458,7 +544,7 @@ const Home = () => {
               Here are some standout features
             </Typography>
 
-            {/* ✅ Responsive Features Grid */}
+            {/* Responsive Features Grid */}
             <Grid
               container
               rowSpacing={4}
@@ -477,34 +563,38 @@ const Home = () => {
                         borderRadius: "15px",
                         boxShadow: 3,
                         transition: "height 0.6s ease-in-out",
-                        height: isHovered ? "auto" : "180px",
+                        height: isHovered
+                          ? "auto"
+                          : { xs: "140px", sm: "160px", md: "180px" },
                         overflow: "hidden",
                         background:
                           index % 2 === 1
                             ? "linear-gradient(273deg, #51ABA6 0%, #79D2BD 100%)"
                             : "#F7FCF8",
                         color: index % 2 === 1 ? "#fff" : "black",
-                        width: "100%", // ✅ Full width on xs/sm, auto on larger
-                        maxWidth: "360px",
+                        width: { xs: "90%", sm: "80%", md: "100%" },
+                        maxWidth: { xs: "250px", sm: "280px", md: "360px" },
                         margin: "auto",
-                        paddingBottom: isHovered ? "20px" : "30px",
+                        paddingBottom: isHovered
+                          ? "15px"
+                          : { xs: "10px", sm: "20px", md: "30px" },
                       }}
                     >
                       <Box
                         sx={{
                           display: "flex",
                           justifyContent: "left",
-                          pt: 3,
+                          pt: { xs: 1.5, sm: 2, md: 3 }, // Smaller padding for small screens
                           pb: 1,
-                          pl: 4,
+                          pl: { xs: 2, sm: 3, md: 4 },
                         }}
                       >
                         <img
                           src={feature.image}
                           alt={feature.title}
                           style={{
-                            width: "70px",
-                            height: "70px",
+                            width: "50px", // ✅ Smaller icon for small screens
+                            height: "50px",
                             objectFit: "cover",
                             borderRadius: "20%",
                           }}
@@ -515,12 +605,12 @@ const Home = () => {
                         sx={{
                           textAlign: "left",
                           transition: "all 0.5s ease-in-out",
-                          px: 4,
-                          pb: isHovered ? 4 : 2,
+                          px: { xs: 3, sm: 4 },
+                          pb: isHovered ? 3 : 2,
                         }}
                       >
                         <Typography
-                          fontSize="16px"
+                          fontSize={{ xs: "13px", sm: "14px", md: "16px" }} // ✅ Smaller font for small screens
                           fontWeight="bold"
                           sx={{
                             mb: 1,
@@ -548,7 +638,11 @@ const Home = () => {
                               <Typography
                                 key={i}
                                 component="li"
-                                fontSize="14px"
+                                fontSize={{
+                                  xs: "11px",
+                                  sm: "13px",
+                                  md: "14px",
+                                }} // ✅ Adjusted bullet point size
                               >
                                 {point}
                               </Typography>
@@ -563,7 +657,7 @@ const Home = () => {
             </Grid>
             <Box
               component={Link}
-              to="/features"
+              to="/modules"
               sx={{
                 mt: { xs: 10, sm: 12, md: 15, lg: 20 }, // ✅ Adjusts spacing for different screens
                 px: { xs: "20px", sm: "30px", md: "40px" }, // ✅ Adjusts padding
@@ -586,7 +680,7 @@ const Home = () => {
                 },
               }}
             >
-              VIEW ALL FEATURES
+              VIEW OUR MODULES
             </Box>
           </Box>
         </Box>
@@ -597,7 +691,6 @@ const Home = () => {
             width: "100%",
             textAlign: "center",
             py: { xs: 5, md: 10 }, // Adjust padding based on screen size
-            mt: { xs: 5, md: 10 }, // Adjust margin top
           }}
         >
           <Typography
@@ -617,7 +710,7 @@ const Home = () => {
             align="center"
             color="#FF0000"
             sx={{
-              fontSize: { xs: "1rem", md: "1.2rem" }, // Adjust font size for small screens
+              fontSize: { xs: "1rem", md: "1.2rem" },
               mb: { xs: 3, md: 4 },
             }}
           >
@@ -680,6 +773,157 @@ const Home = () => {
           </Grid>
         </Box>
 
+        {/* Testimonial */}
+        <Box
+          sx={{
+            width: "100%",
+            bgcolor: "#F8F8F8",
+            py: { xs: 6, sm: 8, md: 10 },
+            px: { xs: 3, sm: 5, md: 8, lg: 12 },
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
+          {/* ✅ Responsive Headline */}
+          <Typography
+            variant="h4"
+            sx={{
+              color: "#1E626C",
+              mb: { xs: 4, md: 6 },
+              fontWeight: "bold",
+              fontSize: { xs: "24px", sm: "28px", md: "32px" },
+            }}
+          >
+            What Industry Experts and Customers Are Saying
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+              width: "100%",
+              maxWidth: { xs: "100%", sm: "700px", md: "800px" },
+            }}
+          >
+            {/* Left Navigation Arrow */}
+            <IconButton
+              onClick={handlePrev}
+              sx={{
+                position: "absolute",
+                left: { xs: "10px", md: "-50px" },
+                bgcolor: "#E25E3E",
+                color: "#ffffff",
+                "&:hover": { bgcolor: "#B84A2F" },
+                width: { xs: "30px", md: "40px" },
+                height: { xs: "30px", md: "40px" },
+                display: { xs: "none", sm: "flex" },
+              }}
+            >
+              <ArrowBackIos sx={{ fontSize: { xs: "14px", md: "18px" } }} />
+            </IconButton>
+
+            {/* Testimonial Card with Smooth Fade Effect */}
+            <Fade in={fadeIn} timeout={300}>
+              <Box
+                sx={{
+                  textAlign: "center",
+                  maxWidth: { xs: "90%", md: "650px" },
+                }}
+              >
+                {/* Profile Image with Circular Frame */}
+                <Avatar
+                  src={testimonials[currentIndex].photo}
+                  alt={testimonials[currentIndex].name}
+                  sx={{
+                    width: { xs: 90, sm: 110, md: 120 },
+                    height: { xs: 90, sm: 110, md: 120 },
+                    border: "4px solid #E25E3E",
+                    mx: "auto",
+                    mb: { xs: 2, md: 3 },
+                  }}
+                />
+
+                {/* Quote Text */}
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "#333",
+                    fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                    fontStyle: "italic",
+                    px: { xs: 2, sm: 4 },
+                  }}
+                >
+                  "{testimonials[currentIndex].text}"
+                </Typography>
+
+                {/* Client Name - Bold */}
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: "#1E626C",
+                    fontWeight: "bold",
+                    mt: 2,
+                    fontSize: { xs: "16px", sm: "18px", md: "20px" },
+                  }}
+                >
+                  {testimonials[currentIndex].name}
+                </Typography>
+
+                {/* Client Position */}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#72B7A4",
+                    fontSize: { xs: "12px", sm: "14px", md: "16px" },
+                    mt: 0.5,
+                  }}
+                >
+                  {testimonials[currentIndex].position}
+                </Typography>
+              </Box>
+            </Fade>
+
+            {/* Right Navigation Arrow */}
+            <IconButton
+              onClick={handleNext}
+              sx={{
+                position: "absolute",
+                right: { xs: "10px", md: "-50px" },
+                bgcolor: "#E25E3E",
+                color: "#ffffff",
+                "&:hover": { bgcolor: "#B84A2F" },
+                width: { xs: "30px", md: "40px" },
+                height: { xs: "30px", md: "40px" },
+                display: { xs: "none", sm: "flex" },
+              }}
+            >
+              <ArrowForwardIos sx={{ fontSize: { xs: "14px", md: "18px" } }} />
+            </IconButton>
+          </Box>
+
+          {/* ✅ Responsive Dots Indicator */}
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+            {testimonials.map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  width: { xs: "8px", sm: "10px" },
+                  height: { xs: "8px", sm: "10px" },
+                  bgcolor: index === currentIndex ? "#E25E3E" : "#d3d3d3",
+                  borderRadius: "50%",
+                  mx: 0.8,
+                  transition: "background-color 0.3s",
+                }}
+              />
+            ))}
+          </Box>
+        </Box>
+
         {/* Sales Partner Section */}
         <Container
           maxWidth="xl"
@@ -703,7 +947,10 @@ const Home = () => {
             <Typography
               variant="h4"
               fontWeight={700}
-              sx={{ mb: 2, fontSize: "42px" }}
+              sx={{
+                mb: 2,
+                fontSize: { xs: "24px", sm: "32px", md: "42px" }, // ✅ Responsive font sizes
+              }}
             >
               Sell <span style={{ color: "#72B7A4" }}>DocRide</span> to your
               customers in your region and earn
@@ -712,17 +959,20 @@ const Home = () => {
 
           {/* Become Our Sales Partner Section */}
           <Container maxWidth="xl">
-            <Grid container spacing={6} alignItems="center">
+            <Grid
+              container
+              spacing={{ xs: 3, md: 6 }}
+              alignItems="center"
+              sx={{ px: { xs: 2, sm: 4, md: 6 }, py: { xs: 4, sm: 6, md: 8 } }}
+            >
               {/* Left Side - Text Content */}
               <Grid item xs={12} md={6}>
                 <Typography
-                  fontWeight="bold"
                   sx={{
                     color: "#C83607",
                     mb: 2,
-                    stroke: "#000",
-                    fontSize: "40px",
-                    textAlign: "left",
+                    fontSize: { xs: "28px", sm: "32px", md: "40px" }, // Responsive Font Size
+                    textAlign: { xs: "center", md: "left" }, // Center text on small screens
                   }}
                 >
                   Become Our Sales Partner
@@ -731,9 +981,10 @@ const Home = () => {
                   sx={{
                     color: "#080E06",
                     mb: 3,
-                    fontSize: "20px",
-                    textAlign: "left",
-                    mr: "100px",
+                    fontSize: { xs: "16px", sm: "18px", md: "20px" }, // Responsive Font Size
+                    textAlign: { xs: "center", md: "left" }, // Center on small screens
+                    maxWidth: { md: "500px" }, // Limit width on larger screens
+                    mx: { xs: "auto", md: "0" }, // Center text on small screens
                   }}
                 >
                   We are a business outside of the UK. Can we use DocRide for
@@ -741,41 +992,64 @@ const Home = () => {
                 </Typography>
 
                 {/* Contact Button */}
-                <Button
-                  variant="contained"
+                <Box
                   sx={{
-                    textAlign: "left",
-                    bgcolor: "transparent",
-                    color: "#73C7AD",
-                    textTransform: "none",
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                    borderRadius: "30px",
-                    border: "1px solid #73C7AD",
-                    py: "10px",
-                    px: "20px",
-                    "&:hover": {
-                      background: "linear-gradient(to right, #66C2A5, #2C8A7A)",
-                      color: "#ffffff",
-                    },
+                    display: "flex",
+                    justifyContent: { xs: "center", md: "left" },
                   }}
-                  component="a"
-                  href="mailto:partnership@docride.co.uk"
                 >
-                  partnership@docride.co.uk
-                </Button>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      bgcolor: "transparent",
+                      color: "#73C7AD",
+                      textTransform: "none",
+                      fontSize: { xs: "14px", sm: "16px" },
+                      fontWeight: "bold",
+                      borderRadius: "30px",
+                      border: "1px solid #73C7AD",
+                      py: "10px",
+                      px: "20px",
+                      "&:hover": {
+                        background:
+                          "linear-gradient(to right, #66C2A5, #2C8A7A)",
+                        color: "#ffffff",
+                      },
+                    }}
+                    component="a"
+                    href="mailto:partnership@docride.co.uk"
+                  >
+                    partnership@docride.co.uk
+                  </Button>
+                </Box>
               </Grid>
 
-              {/* Right Side - Image */}
-              <Grid item xs={12} md={6}>
-                <Box sx={{ textAlign: "center" }}>
+              {/* Right Side - Image (Hidden on Small Screens) */}
+              <Grid
+                item
+                xs={12}
+                md={6}
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  justifyContent: "center",
+                  p: 0, // ✅ Remove any padding
+                  m: 0,
+                }}
+              >
+                <Box
+                  sx={{
+                    maxWidth: "100%",
+                    textAlign: "center",
+                  }}
+                >
                   <img
                     src={Sales}
                     alt="Sales Partner"
                     style={{
                       width: "100%",
-                      maxHeight: "400px",
-                      borderRadius: "8px",
+                      maxWidth: "900px", // Restrict width for better responsiveness
+                      maxHeight: "600px",
+                      borderRadius: "50px",
                       objectFit: "cover",
                     }}
                   />

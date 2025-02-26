@@ -11,6 +11,8 @@ import FAQ from "./components/pages/FAQ";
 import Policy from "./components/pages/Policy";
 import Modules from "./components/pages/Modules";
 import Blogs from "./components/pages/Blogs";
+import FAQDetail from "./components/pages/FAQDetail";
+import IndivBlog from "./components/pages/IndivBlog";
 
 // Custom Theme
 const theme = createTheme({
@@ -39,10 +41,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blogs />} />
+          <Route path="/blog/:id" element={<IndivBlog />} />
           <Route path="/features" element={<Features />} />
           <Route path="/modules" element={<Modules />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/questions" element={<FAQ />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/faq/:categoryId" element={<FAQDetail />} />
           <Route path="/policy" element={<Policy />} />
         </Routes>
         <Footer />

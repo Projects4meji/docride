@@ -259,7 +259,7 @@ const Modules = () => {
           }}
         >
           <Typography
-            fontSize={{ xs: 20, sm: 28, md: 40 }}
+            fontSize={{ xs: 18, sm: 24, md: 34 }}
             fontWeight="bold"
             px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
           >
@@ -274,7 +274,7 @@ const Modules = () => {
           </Typography>
 
           <Typography
-            fontSize={{ xs: 14, sm: 18, md: 24 }}
+            fontSize={{ xs: 14, sm: 16, md: 22 }}
             fontWeight="bold"
             px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
             mt={2}
@@ -291,8 +291,9 @@ const Modules = () => {
               color: "#ffffff",
               fontWeight: "bold",
               textTransform: "none",
-              px: 4,
-              py: 2,
+              px: { xs: 3, sm: 4 },
+              py: { xs: 1, sm: 2 },
+              fontSize: { xs: "14px", sm: "16px" },
               "&:hover": {
                 backgroundColor: "#c94b32",
               },
@@ -328,12 +329,41 @@ const Modules = () => {
                   alignItems: "center",
                   justifyContent: "space-between",
                   maxWidth: "100%",
-                  minHeight: "550px", // Increased height to match image
+                  minHeight: { xs: "auto", md: "550px" }, // Responsive height
                   overflow: "hidden",
                   mb: 4,
                 }}
               >
-                {/* Module Content (Left Side) */}
+                {/* Module Image (On Small Screens: Image on Top, Content Below) */}
+                <Box
+                  sx={{
+                    flex: 1,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                    minHeight: { xs: "250px", md: "550px" }, // Ensures equal height
+                    order: { xs: 1, md: 2 }, // Switches order on small screens
+                  }}
+                >
+                  <img
+                    src={module.image}
+                    alt={module.title}
+                    style={{
+                      width: "100%",
+                      maxWidth: "600px", // Increased size
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: {
+                        xs: "15px 15px 0 0",
+                        md: "0 15px 15px 0",
+                      },
+                    }}
+                  />
+                </Box>
+
+                {/* Module Content */}
                 <CardContent
                   sx={{
                     flex: 1,
@@ -344,14 +374,15 @@ const Modules = () => {
                     flexDirection: "column",
                     justifyContent: "center",
                     height: "100%", // Ensure same height
+                    order: { xs: 2, md: 1 }, // Switches order on small screens
                   }}
                 >
                   <Box display="flex" alignItems="center" gap={2} mb={2}>
                     <img
                       src={module.icon}
                       alt="Module Icon"
-                      width={100}
-                      height={100}
+                      width={60}
+                      height={60}
                     />
                     <Box>
                       <Typography
@@ -367,7 +398,7 @@ const Modules = () => {
                           width: "100px",
                           height: "4px",
                           bgcolor: "#E25E3E",
-                          mt: 1, // ✅ Adds space between title and line
+                          mt: 1,
                         }}
                       />
                     </Box>
@@ -375,7 +406,7 @@ const Modules = () => {
 
                   <Typography
                     variant="body1"
-                    sx={{ color: "#333", fontSize: "20px" }}
+                    sx={{ color: "#333", fontSize: "16px" }}
                   >
                     {module.description}
                   </Typography>
@@ -385,38 +416,13 @@ const Modules = () => {
                       <Typography
                         key={i}
                         component="li"
-                        sx={{ fontSize: "18px", color: "#444", mb: 1 }}
+                        sx={{ fontSize: "14px", color: "#444", mb: 1 }}
                       >
                         {point}
                       </Typography>
                     ))}
                   </Box>
                 </CardContent>
-
-                {/* Module Image (Right Side - Full Image) */}
-                <Box
-                  sx={{
-                    flex: 1,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100%",
-                    minHeight: "550px", // Ensures equal height
-                  }}
-                >
-                  <img
-                    src={module.image}
-                    alt={module.title}
-                    style={{
-                      width: "100%",
-                      maxWidth: "600px", // Increased size
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "0 15px 15px 0",
-                    }}
-                  />
-                </Box>
               </Card>
             </motion.div>
           );

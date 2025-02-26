@@ -138,7 +138,7 @@ const Navbar = () => {
               { name: "Features", path: "/features" },
               { name: "Modules", path: "/modules" },
               { name: "Partner Program", path: "/partner" },
-              { name: "FAQ", path: "/questions" },
+              { name: "FAQ", path: "/faq" },
               { name: "Contact Us", path: "/contact" },
             ].map((item, index) => (
               <Button
@@ -226,7 +226,7 @@ const Navbar = () => {
             { name: "Features", path: "/features" },
             { name: "Modules", path: "/modules" },
             { name: "Partner Program", path: "/partner" },
-            { name: "FAQ", path: "/questions" },
+            { name: "FAQ", path: "/faq" },
             { name: "Contact Us", path: "/contact" },
           ].map((item, index) => (
             <ListItem

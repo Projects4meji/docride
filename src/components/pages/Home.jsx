@@ -461,7 +461,7 @@ const Home = () => {
             sx={{
               color: "#000000",
               mb: 2,
-              px: { xs: 2, sm: 6, md: 10, lg: "380px" }, // ✅ Adjust width for readability
+              px: { xs: 2, sm: 6, md: 10, lg: "380px" }, // Adjust width for readability
               fontSize: { xs: "15px", sm: "15px" },
               lineHeight: "28px",
             }}

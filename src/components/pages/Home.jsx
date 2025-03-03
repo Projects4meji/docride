@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -11,35 +11,47 @@ import {
   IconButton,
   Avatar,
   Fade,
+  Dialog,
+  DialogContent,
 } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { useDrag } from "@use-gesture/react";
+import PricingPlans from "../headers/Pricing";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Image Imports
-import Slide1 from "../../assets/Slide1.jpg";
-import Slide2 from "../../assets/Slide2.png";
-import Slide3 from "../../assets/Slide3.png";
-import Video from "../../assets/VideoThumbnail.jpg";
+import Slide1 from "../../assets/home/Slide1.jpg";
+import Slide2 from "../../assets/home/Slide2.png";
+import Slide3 from "../../assets/home/Slide3.png";
+import Video from "../../assets/home/VideoThumbnail.jpg";
 import DocRideLogo from "../../assets/DRLogo.png";
-import world from "../../assets/world.jpg";
-import Sales from "../../assets/partners.jpg";
-import f1 from "../../assets/f1.jpg";
-import f2 from "../../assets/f2.jpg";
-import f3 from "../../assets/f3.jpg";
-import f4 from "../../assets/f4.jpg";
-import f5 from "../../assets/f5.jpg";
-import f6 from "../../assets/f6.jpg";
+import world from "../../assets/home/world.jpg";
+import Sales from "../../assets/home/partners.jpg";
+import f1 from "../../assets/home/f1.jpg";
+import f2 from "../../assets/home/f2.jpg";
+import f3 from "../../assets/home/f3.jpg";
+import f4 from "../../assets/home/f4.jpg";
+import f5 from "../../assets/home/f5.jpg";
+import f6 from "../../assets/home/f6.jpg";
 
 // ✅ Fixed Slides Array
 const slides = [Slide1, Slide2, Slide3];
 
 const Home = () => {
+  const [open, setOpen] = useState(false);
+  const [selectedFeature, setSelectedFeature] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideCount = slides.length;
   const intervalRef = useRef(null);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [fadeIn, setFadeIn] = useState(true);
-  const [hoverIndex, setHoverIndex] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
+  const [maxHeight, setMaxHeight] = useState(0);
+  const cardRefs = useRef([]);
+
+  const toggleExpand = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
 
   const handlePrev = () => {
     setFadeIn(false); // Trigger fade out
@@ -133,60 +145,89 @@ const Home = () => {
     },
   ];
 
-  const features = [
-    {
-      image: f1,
-      title: "Tailored User Management",
-      bulletPoints: [
-        "Define roles and access levels based on responsibilities.",
-        "Site-specific permissions for centralized or decentralized management.",
-        "Tailored dashboards enhance clarity for every user.",
-      ],
-    },
-    {
-      image: f2,
-      title: "Scalable for Businesses of All Sizes",
-      bulletPoints: [
-        "From SMEs to large organizations, scale effortlessly.",
-        "Manage single or multi-site operations with site-specific access controls.",
-      ],
-    },
-    {
-      image: f3,
-      title: "User-Friendly Design",
-      bulletPoints: [
-        "Intuitive workflows and pre-designed forms for efficiency.",
-        "Role-specific dashboards show only relevant tasks.",
-        "Notifications ensure no critical tasks are missed.",
-      ],
-    },
-    {
-      image: f4,
-      title: "Access from Anywhere Anytime",
-      bulletPoints: [
-        "Cloud-based platform works on any device with internet.",
-        "Automate approvals, assign actions and track compliance on the go.",
-      ],
-    },
-    {
-      image: f5,
-      title: "Effortless Legal Compliance",
-      bulletPoints: [
-        "AI identifies business-specific OHS legal requirements.",
-        "You can assign roles and track actions for compliance.",
-        "Monitor real-time progress on risk controls and compliance status.",
-      ],
-    },
-    {
-      image: f6,
-      title: "ISO 45001 Conformance Made Simple",
-      bulletPoints: [
-        "Pre-designed workflows aligned with ISO 45001:2018 requirements.",
-        "Optimized for efficiency without extensive documentation burdens.",
-        "90% of SMEs can develop and deploy in less than 3 hours.",
-      ],
-    },
-  ];
+  const features = useMemo(
+    () => [
+      {
+        image: f1,
+        title: "Tailored User Management",
+        bulletPoints: [
+          "Define roles and access levels based on responsibilities.",
+          "Site-specific permissions for centralized or decentralized management.",
+          "Tailored dashboards enhance clarity for every user.",
+        ],
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      },
+      {
+        image: f2,
+        title: "Scalable for Businesses of All Sizes",
+        bulletPoints: [
+          "From SMEs to large organizations, scale effortlessly.",
+          "Manage single or multi-site operations with site-specific access controls.",
+        ],
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      },
+      {
+        image: f3,
+        title: "User-Friendly Design",
+        bulletPoints: [
+          "Intuitive workflows and pre-designed forms for efficiency.",
+          "Role-specific dashboards show only relevant tasks.",
+          "Notifications ensure no critical tasks are missed.",
+        ],
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      },
+      {
+        image: f4,
+        title: "Access from Anywhere Anytime",
+        bulletPoints: [
+          "Cloud-based platform works on any device with internet.",
+          "Automate approvals, assign actions and track compliance on the go.",
+        ],
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      },
+      {
+        image: f5,
+        title: "Effortless Legal Compliance",
+        bulletPoints: [
+          "AI identifies business-specific OHS legal requirements.",
+          "You can assign roles and track actions for compliance.",
+          "Monitor real-time progress on risk controls and compliance status.",
+        ],
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      },
+      {
+        image: f6,
+        title: "ISO 45001 Conformance Made Simple",
+        bulletPoints: [
+          "Pre-designed workflows aligned with ISO 45001:2018 requirements.",
+          "Optimized for efficiency without extensive documentation burdens.",
+          "90% of SMEs can develop and deploy in less than 3 hours.",
+        ],
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      },
+    ],
+    [] // Empty dependency array ensures `features` remains stable
+  );
+
+  useEffect(() => {
+    if (cardRefs.current.length > 0) {
+      const heights = cardRefs.current.map((ref) =>
+        ref ? ref.offsetHeight : 0
+      );
+      setMaxHeight(Math.max(...heights));
+    }
+  }, [features]);
+
+  const handleOpen = (feature) => {
+    setSelectedFeature(feature);
+    setOpen(true);
+  };
+
+  // Function to close modal
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedFeature(null);
+  };
 
   return (
     <Box sx={{ width: "100vw", overflow: "hidden" }}>
@@ -215,7 +256,6 @@ const Home = () => {
             <Typography
               fontWeight={700}
               sx={{
-
                 color: "#FFFFFF",
                 lineHeight: 1.2,
                 fontSize: { xs: "30px", sm: "28px", md: "30px", lg: "40px" }, // ✅ More responsive scaling
@@ -552,21 +592,14 @@ const Home = () => {
               justifyContent="center"
             >
               {features.map((feature, index) => {
-                const isHovered = hoverIndex === index;
-
+                const isExpanded = expandedIndex === index;
                 return (
                   <Grid item xs={12} sm={6} md={4} key={index}>
                     <Card
-                      onMouseEnter={() => setHoverIndex(index)}
-                      onMouseLeave={() => setHoverIndex(null)}
+                      ref={(el) => (cardRefs.current[index] = el)}
                       sx={{
                         borderRadius: "15px",
                         boxShadow: 3,
-                        transition: "height 0.6s ease-in-out",
-                        height: isHovered
-                          ? "auto"
-                          : { xs: "140px", sm: "160px", md: "180px" },
-                        overflow: "hidden",
                         background:
                           index % 2 === 1
                             ? "linear-gradient(273deg, #51ABA6 0%, #79D2BD 100%)"
@@ -575,16 +608,18 @@ const Home = () => {
                         width: { xs: "90%", sm: "80%", md: "100%" },
                         maxWidth: { xs: "250px", sm: "280px", md: "360px" },
                         margin: "auto",
-                        paddingBottom: isHovered
-                          ? "15px"
-                          : { xs: "10px", sm: "20px", md: "30px" },
+                        paddingBottom: "15px",
+                        minHeight: `${maxHeight}px`, // Set uniform height for all cards
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between", // Ensures button stays at bottom
                       }}
                     >
                       <Box
                         sx={{
                           display: "flex",
                           justifyContent: "left",
-                          pt: { xs: 1.5, sm: 2, md: 3 }, // Smaller padding for small screens
+                          pt: { xs: 1.5, sm: 2, md: 3 },
                           pb: 1,
                           pl: { xs: 2, sm: 3, md: 4 },
                         }}
@@ -593,7 +628,7 @@ const Home = () => {
                           src={feature.image}
                           alt={feature.title}
                           style={{
-                            width: "50px", // ✅ Smaller icon for small screens
+                            width: "50px",
                             height: "50px",
                             objectFit: "cover",
                             borderRadius: "20%",
@@ -604,13 +639,12 @@ const Home = () => {
                       <CardContent
                         sx={{
                           textAlign: "left",
-                          transition: "all 0.5s ease-in-out",
                           px: { xs: 3, sm: 4 },
-                          pb: isHovered ? 3 : 2,
+                          flex: "1 1 auto",
                         }}
                       >
                         <Typography
-                          fontSize={{ xs: "13px", sm: "14px", md: "16px" }} // ✅ Smaller font for small screens
+                          fontSize={{ xs: "13px", sm: "14px", md: "16px" }}
                           fontWeight="bold"
                           sx={{
                             mb: 1,
@@ -620,16 +654,11 @@ const Home = () => {
                           {feature.title}
                         </Typography>
 
-                        {/* ✅ Responsive Bullet Points */}
+                        {/* Bullet Points (Always Visible) */}
                         {feature.bulletPoints && (
                           <Box
                             component="ul"
                             sx={{
-                              opacity: isHovered ? 1 : 0,
-                              transition:
-                                "opacity 0.3s ease-in-out, max-height 0.6s ease-in-out",
-                              maxHeight: isHovered ? "150px" : "1px",
-                              overflow: "hidden",
                               paddingLeft: "16px",
                               margin: "0px",
                             }}
@@ -642,7 +671,7 @@ const Home = () => {
                                   xs: "11px",
                                   sm: "13px",
                                   md: "14px",
-                                }} // ✅ Adjusted bullet point size
+                                }}
                               >
                                 {point}
                               </Typography>
@@ -650,11 +679,69 @@ const Home = () => {
                           </Box>
                         )}
                       </CardContent>
+
+                      {/* Show More Button */}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          pb: 2,
+                        }}
+                      >
+                        <Button
+                          variant="text"
+                          sx={{
+                            textTransform: "none",
+                            fontSize: { xs: "12px", sm: "13px" },
+                            color: index % 2 === 1 ? "white" : "#36767E",
+                          }}
+                          onClick={() => handleOpen(feature)}
+                        >
+                          Show More
+                        </Button>
+                      </Box>
                     </Card>
                   </Grid>
                 );
               })}
+              {/* Modal Popup */}
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                maxWidth="md"
+                fullWidth
+                sx={{
+                  "& .MuiPaper-root": {
+                    borderRadius: "30px", // Rounded corners
+                    background:
+                      "linear-gradient(180deg, #73C7AD 0%, #3A7B81 100%)", // Gradient background
+                    color: "white",
+                  },
+                }}
+              >
+                <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
+                  <IconButton onClick={handleClose} sx={{ color: "white" }}>
+                    <CloseIcon />
+                  </IconButton>
+                </Box>
+                <DialogContent>
+                  {selectedFeature && (
+                    <Box sx={{ display: "flex", justifyContent: "center" }}>
+                      <iframe
+                        width="100%"
+                        height="400"
+                        src={selectedFeature.videoUrl}
+                        title={selectedFeature.title}
+                        frameBorder="0"
+                        allowFullScreen
+                        style={{ borderRadius: "20px" }}
+                      ></iframe>
+                    </Box>
+                  )}
+                </DialogContent>
+              </Dialog>
             </Grid>
+
             <Box
               component={Link}
               to="/modules"
@@ -686,6 +773,7 @@ const Home = () => {
         </Box>
 
         {/* Pricing Plan */}
+
         <Box
           sx={{
             width: "100%",
@@ -693,84 +781,7 @@ const Home = () => {
             py: { xs: 5, md: 10 }, // Adjust padding based on screen size
           }}
         >
-          <Typography
-            variant="h4"
-            color="#1E626C"
-            align="center"
-            sx={{
-              fontSize: { xs: "1.8rem", md: "2.5rem" },
-              fontWeight: "bold",
-            }}
-            gutterBottom
-          >
-            Our Pricing Plans
-          </Typography>
-          <Typography
-            variant="body1"
-            align="center"
-            color="#FF0000"
-            sx={{
-              fontSize: { xs: "1rem", md: "1.2rem" },
-              mb: { xs: 3, md: 4 },
-            }}
-          >
-            Choose a plan that fits your learning needs.
-          </Typography>
-
-          <Grid container spacing={3} justifyContent="center">
-            <Grid item xs={12} sm={8} md={4}>
-              <Card
-                sx={{
-                  textAlign: "center",
-                  borderRadius: "12px",
-                  boxShadow: 3,
-                  p: 3,
-                }}
-              >
-                <CardContent>
-                  <Typography
-                    variant="h6"
-                    color="primary"
-                    sx={{
-                      fontSize: { xs: "1.2rem", md: "1.5rem" },
-                      fontWeight: "bold",
-                    }}
-                  >
-                    COMING SOON
-                  </Typography>
-
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    sx={{ my: 2, fontSize: { xs: "0.9rem", md: "1rem" } }}
-                  >
-                    Exciting plans coming your way soon. Stay tuned!
-                  </Typography>
-
-                  <ul style={{ listStyle: "none", padding: 0 }}>
-                    <li style={{ marginBottom: "8px" }}>
-                      ✔ New Learning Features
-                    </li>
-                    <li style={{ marginBottom: "8px" }}>✔ Affordable Plans</li>
-                    <li style={{ marginBottom: "8px" }}>✔ Exclusive Content</li>
-                  </ul>
-
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{
-                      mt: 2,
-                      fontSize: { xs: "0.9rem", md: "1rem" },
-                      px: { xs: 2, md: 3 },
-                      py: { xs: 1, md: 1.2 },
-                    }}
-                  >
-                    Learn More
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          <PricingPlans />
         </Box>
 
         {/* Testimonial */}

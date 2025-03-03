@@ -18,9 +18,11 @@ import { motion } from "framer-motion";
 import { ExpandMore, Search } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import bgimage from "../../assets/bgimage.jpg";
+import getst from "../../assets/faq/getst.jpg";
 import account from "../../assets/faq/account.jpg";
 import audit from "../../assets/faq/audit.jpg";
 import payment from "../../assets/faq/payment.png";
+import follow from "../../assets/faq/folup.jpg";
 
 const faqData = [
   {
@@ -81,10 +83,20 @@ const categories = [
   },
 ];
 
+const categoryColors = [
+  "linear-gradient(180deg, #FFFFFF 0%, rgba(155, 215, 199, 0.43) 100%)", // Original (Greenish)
+  "linear-gradient(180deg, #FFFFFF 0%, rgba(173, 216, 230, 0.5) 100%)", // Light Blue
+  "linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 204, 0.6) 100%)", // Light Yellow
+  "linear-gradient(180deg, #FFFFFF 0%, rgba(186, 85, 211, 0.5) 100%)", // Purple
+  "linear-gradient(180deg, #FFFFFF 0%, rgba(144, 238, 144, 0.5) 100%)", // Light Green
+];
+
 const categoryImages = {
+  "Getting Started": getst,
   "My Account": account,
   Audit: audit,
   Payment: payment,
+  "Follow up": follow,
   // Add more category images here
 };
 
@@ -202,19 +214,30 @@ const FAQ = () => {
         <Grid
           container
           spacing={{ xs: 2, sm: 3, md: 4 }}
-          sx={{ mt: { xs: 2, sm: 3, md: 4 } }}
+          sx={{
+            mt: { xs: 2, sm: 3, md: 4 },
+            justifyContent: { xs: "center", md: "flex-start" }, // Center on small screens
+          }}
         >
           {categories.map((category, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              key={index}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.3 }}>
                 <Card
                   sx={{
+                    background: categoryColors[index],
                     cursor: "pointer",
-                    bgcolor: "#F8F9FA",
                     transition: "all 0.3s ease",
                     "&:hover": { bgcolor: "#D1E7E0" },
                     borderRadius: "12px",
                     boxShadow: 2,
+                    maxWidth: 300, // Ensuring consistent width
                   }}
                   onClick={() =>
                     navigate(
@@ -228,19 +251,19 @@ const FAQ = () => {
                   <Box
                     sx={{
                       width: "100%",
-                      height: { xs: "80px", sm: "100px" }, // Ensure consistent height
+                      height: { xs: "80px", sm: "130px" },
                       overflow: "hidden",
                       borderTopLeftRadius: "12px",
                       borderTopRightRadius: "12px",
                     }}
                   >
                     <img
-                      src={categoryImages[category.title] || account} // Default image fallback
+                      src={categoryImages[category.title] || account}
                       alt={category.title}
                       style={{
                         width: "100%",
                         height: "100%",
-                        objectFit: "cover", // Ensures the image covers the entire area
+                        objectFit: "cover",
                       }}
                     />
                   </Box>

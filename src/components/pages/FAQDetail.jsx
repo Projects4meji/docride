@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate, useParams } from "react-router-dom";
 import bgimage from "../../assets/bgimage.jpg";
+import faqqm from "../../assets/faq/faqqm.png";
 
 const faqCategories = [
   { title: "Getting Started", id: "getting-started" },
@@ -156,8 +157,62 @@ const FAQDetail = () => {
     faqCategories.find((cat) => cat.id === categoryId)?.title || "FAQ";
 
   return (
-    <Box sx={{ bgcolor: "#f5f5f5", pt: 4 }}>
-      <Container maxWidth="xl">
+    <Box
+      sx={{
+        position: "relative",
+      }}
+    >
+      {/* FAQ Header Section */}
+      <Box
+        sx={{
+          bgcolor: "#032C34",
+          color: "#A0D0C5",
+          py: 10,
+          position: "relative",
+          "::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100%",
+            backgroundImage: `url(${bgimage})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            opacity: 0.5,
+            zIndex: 0,
+          },
+        }}
+      >
+        <Container
+          maxWidth="lg"
+          sx={{ position: "relative", zIndex: 1, textAlign: "center" }}
+        >
+          <Typography variant="h3" fontWeight="bold" color="white">
+            FAQ Categories
+          </Typography>
+        </Container>
+      </Box>
+
+      
+      {/* Background Image */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: `url(${faqqm})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: "20%",
+          zIndex: 0,
+        }}
+      />
+      <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, pt: 6 }}>
         <Grid container spacing={2}>
           {/* Sidebar - Responsive for Mobile & Large Screens */}
           <Grid item xs={12} md={2}>
@@ -192,7 +247,7 @@ const FAQDetail = () => {
               sx={{
                 display: { xs: "none", md: "block" }, // Hide sidebar on small screens
                 height: "70vh",
-                bgcolor: "white",
+                background:"linear-gradient(180deg, #1B988F 0%, #0C5E5E 100%)",
                 borderRadius: "30px",
                 boxShadow: 1,
                 p: 2,
@@ -205,7 +260,7 @@ const FAQDetail = () => {
                   cursor: "pointer",
                   mb: 2,
                   fontWeight: "bold",
-                  color: "#007b7f",
+                  color: "#ffffff",
                 }}
                 onClick={() => navigate("/faq")}
               >
@@ -219,12 +274,12 @@ const FAQDetail = () => {
                     fontSize: "16px",
                     py: "12px",
                     cursor: "pointer",
-                    color: categoryId === cat.id ? "#007b7f" : "black",
+                    color: categoryId === cat.id ? "#96E0CC" : "#ffffff",
                     fontWeight: categoryId === cat.id ? "bold" : "normal",
                     textDecoration:
                       categoryId === cat.id ? "underline" : "none",
                     transition: "all 0.3s ease-in-out",
-                    "&:hover": { color: "#007b7f" },
+                    "&:hover": { color: "#96E0CC" },
                   }}
                   onClick={() => navigate(`/faq/${cat.id}`)}
                 >
@@ -302,6 +357,8 @@ const FAQDetail = () => {
       {/* Contact Section */}
       <Box
         sx={{
+          position: "relative",
+          zIndex: 1,
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",

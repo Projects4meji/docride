@@ -120,13 +120,13 @@ const IndivBlog = () => {
         sx={{
           bgcolor: "#1E626B",
           width: "100%",
-          minHeight: { xs: "40vh", md: "50vh" }, // Adjust height dynamically
+          minHeight: { xs: "40vh", md: "50vh" },
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          textAlign: "center", // Centers text for smaller screens
-          px: { xs: 3, sm: 6, md: 10 }, // Responsive padding
+          textAlign: "center",
+          px: { xs: 3, sm: 6, md: 10 },
           position: "relative",
         }}
       >
@@ -386,7 +386,7 @@ const IndivBlog = () => {
               sx={{
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
+
                 display: "block",
                 borderRadius: "10px",
               }}

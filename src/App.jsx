@@ -13,6 +13,7 @@ import Modules from "./components/pages/Modules";
 import Blogs from "./components/pages/Blogs";
 import FAQDetail from "./components/pages/FAQDetail";
 import IndivBlog from "./components/pages/IndivBlog";
+import About from "./components/pages/About";
 
 // Custom Theme
 const theme = createTheme({
@@ -40,6 +41,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blogs />} />
           <Route path="/blog/:id" element={<IndivBlog />} />
           <Route path="/features" element={<Features />} />

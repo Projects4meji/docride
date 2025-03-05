@@ -4,9 +4,9 @@ import {
   Container,
   Grid,
   Typography,
-  Link,
   IconButton,
   Button,
+  Link,
   Divider,
 } from "@mui/material";
 import {
@@ -17,6 +17,7 @@ import {
   Email,
   Place,
 } from "@mui/icons-material";
+import { Link as RouterLink } from "react-router-dom"; // ✅ Import from React Router
 import bgimage from "../../assets/bgimage.jpg";
 import Logo from "../../assets/logo.png"; // Use actual logo path
 
@@ -121,6 +122,8 @@ const Footer = () => {
                       borderColor: "#73C7AD",
                     },
                   }}
+                  onMouseOver={(e) => (e.target.style.color = "#73C7AD")}
+                  onMouseOut={(e) => (e.target.style.color = "#ffffff")}
                 >
                   info@docride.co.uk
                 </Link>
@@ -164,6 +167,10 @@ const Footer = () => {
                             color: "#ffffff",
                             "&:hover": { color: "#73C7AD" },
                           }}
+                          onMouseOver={(e) =>
+                            (e.target.style.color = "#73C7AD")
+                          }
+                          onMouseOut={(e) => (e.target.style.color = "#ffffff")}
                         >
                           {item.label}
                         </Link>
@@ -198,6 +205,10 @@ const Footer = () => {
                             color: "#ffffff",
                             "&:hover": { color: "#73C7AD" },
                           }}
+                          onMouseOver={(e) =>
+                            (e.target.style.color = "#73C7AD")
+                          }
+                          onMouseOut={(e) => (e.target.style.color = "#ffffff")}
                         >
                           {item.label}
                         </Link>
@@ -261,6 +272,8 @@ const Footer = () => {
               underline="none"
               color="#00b1ff"
               sx={{ "&:hover": { color: "#ffffff" } }}
+              onMouseOver={(e) => (e.target.style.color = "#73C7AD")}
+              onMouseOut={(e) => (e.target.style.color = "#ffffff")}
             >
               SymCloud.net
             </Link>
@@ -293,19 +306,22 @@ const Footer = () => {
         <Box sx={{ display: "flex", justifyContent: "center", gap: 3 }}>
           {[
             { label: "Privacy Policy", link: "/policy" },
-            { label: "Cookie Policy", link: "/cookie-policy" },
-            { label: "Fee Refund Policy", link: "/fee-refund-policy" },
+            { label: "Pricing Policy", link: "/pricepolicy" },
+            { label: "User Agreement", link: "/agreement" },
           ].map((item, index) => (
             <Typography key={index} variant="body2">
               <Link
-                href={item.link} // ✅ Use React Router Link if applicable
-                underline="none"
-                sx={{
+                component={RouterLink}
+                to={item.link} // ✅ Use 'to' instead of 'href'
+                style={{
                   color: "#ffffff",
-                  "&:hover": { color: "#73C7AD" },
+                  textDecoration: "none",
+                  cursor: "pointer",
                 }}
+                onMouseOver={(e) => (e.target.style.color = "#73C7AD")}
+                onMouseOut={(e) => (e.target.style.color = "#ffffff")}
               >
-                {item.label} {/* ✅ Using label instead of name */}
+                {item.label}
               </Link>
             </Typography>
           ))}

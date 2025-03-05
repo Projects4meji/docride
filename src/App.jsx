@@ -8,12 +8,15 @@ import Home from "./components/pages/Home";
 import Features from "./components/pages/Features";
 import Contact from "./components/pages/Contact";
 import FAQ from "./components/pages/FAQ";
-import Policy from "./components/pages/Policy";
+import Policy from "./components/Policies/Policy";
 import Modules from "./components/pages/Modules";
 import Blogs from "./components/pages/Blogs";
 import FAQDetail from "./components/pages/FAQDetail";
 import IndivBlog from "./components/pages/IndivBlog";
 import About from "./components/pages/About";
+import PricingPlans from "./components/pages/Pricing";
+import PricePolicy from "./components/Policies/PricePolicy";
+import UserAgreement from "./components/Policies/UserAgreement";
 
 // Custom Theme
 const theme = createTheme({
@@ -47,9 +50,13 @@ function App() {
           <Route path="/features" element={<Features />} />
           <Route path="/modules" element={<Modules />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/pricing" element={<PricingPlans />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/faq/:categoryId" element={<FAQDetail />} />
           <Route path="/policy" element={<Policy />} />
+          <Route path="/pricepolicy" element={<PricePolicy />} />
+          <Route path="/agreement" element={<UserAgreement />} />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
         <Footer />
       </Router>

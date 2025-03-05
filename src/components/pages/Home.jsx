@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { useDrag } from "@use-gesture/react";
-import PricingPlans from "../headers/Pricing";
+import PricingPlans from "./Pricing";
 import CloseIcon from "@mui/icons-material/Close";
 
 // Image Imports
@@ -772,18 +772,6 @@ const Home = () => {
           </Box>
         </Box>
 
-        {/* Pricing Plan */}
-
-        <Box
-          sx={{
-            width: "100%",
-            textAlign: "center",
-            py: { xs: 5, md: 10 }, // Adjust padding based on screen size
-          }}
-        >
-          <PricingPlans />
-        </Box>
-
         {/* Testimonial */}
         <Box
           sx={{
@@ -791,6 +779,7 @@ const Home = () => {
             bgcolor: "#F8F8F8",
             py: { xs: 6, sm: 8, md: 10 },
             px: { xs: 3, sm: 5, md: 8, lg: 12 },
+            mt: 14,
             textAlign: "center",
             display: "flex",
             flexDirection: "column",

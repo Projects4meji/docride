@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "#032C34", width: "100vw", top: 0 }}
+      sx={{ backgroundColor: "#032C34", width: "100%", top: 0 }}
     >
       {/* Top Bar with Contact Info */}
       <Box
@@ -45,7 +45,7 @@ const Navbar = () => {
           py: "10px",
           backgroundColor: "#042E36",
           color: "#6DB9A0",
-          fontSize: { xs:"12px", sm:"14px" },
+          fontSize: { xs: "12px", sm: "14px" },
         }}
       >
         <Box
@@ -137,7 +137,7 @@ const Navbar = () => {
               { name: "About us", path: "/about" },
               { name: "Features", path: "/features" },
               { name: "Modules", path: "/modules" },
-              { name: "Partner Program", path: "/partner" },
+              { name: "Pricing", path: "/pricing" },
               { name: "FAQ", path: "/faq" },
               { name: "Contact Us", path: "/contact" },
             ].map((item, index) => (
@@ -225,7 +225,7 @@ const Navbar = () => {
             { name: "About us", path: "/about" },
             { name: "Features", path: "/features" },
             { name: "Modules", path: "/modules" },
-            { name: "Partner Program", path: "/partner" },
+            { name: "Pricing", path: "/pricing" },
             { name: "FAQ", path: "/faq" },
             { name: "Contact Us", path: "/contact" },
           ].map((item, index) => (

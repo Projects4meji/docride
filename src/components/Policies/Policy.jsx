@@ -1,38 +1,76 @@
-import React from "react";
-import { Typography, Box, Link } from "@mui/material";
-import privacy from "../../assets/privacy.jpg";
+import React, { useEffect } from "react";
+import { Typography, Box, Link, Container } from "@mui/material";
+import privacy from "../../assets/priv.jpg";
 
 const Policy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // ✅ Scroll to top when component mounts
+  }, []);
+
   return (
     <Box sx={{ pb: 8, bgcolor: "#ffffff" }}>
       <Box
         sx={{
-          width: "100%",
-          height: { xs: "120px", sm: "150px", md: "200px" }, // Responsive height
-          backgroundImage: `url(${privacy})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          px: { xs: 2, sm: 4, md: 6 },
+          bgcolor: "#032C34",
+          color: "#A0D0C5",
+          py: { xs: 6, sm: 8, md: 12 }, // ✅ Adjusts padding dynamically
+          mb: { xs: 4, sm: 5, md: 6 }, // ✅ Adjusts margin-bottom dynamically
+          position: "relative",
+
+          // ✅ Background Image Layer
+          "::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url(${privacy})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: { xs: "center", md: "left" }, // ✅ Center image for mobile
+            opacity: 1,
+            zIndex: 0,
+          },
+
+          // ✅ Color Overlay Layer
+          "::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#2E8C7B", // ✅ Overlay with transparency
+            opacity: 0.5,
+            zIndex: 0.5,
+          },
         }}
       >
-        <Typography
-          fontSize={{ xs: 24, sm: 32, md: 50 }}
-          color="#ffffff"
-          textAlign="center"
+        <Container
+          maxWidth="lg"
+          sx={{
+            position: "relative",
+            zIndex: 1,
+            textAlign: "center",
+            px: { xs: 2, sm: 4, md: 6 }, // ✅ Ensures text stays within safe margins
+          }}
         >
-          <Box component="span" color="#96e0cc">
-            Privacy Policy
-          </Box>{" "}
-          for{" "}
-          <Box component="span" color="#68b9ba">
-            {" "}
-            LeadQual UK Ltd.
-          </Box>
-        </Typography>
+          <Typography
+            fontSize={{ xs: 24, sm: 32, md: 50 }}
+            color="#ffffff"
+            textAlign="center"
+          >
+            <Box component="span" color="#96e0cc">
+              Privacy Policy
+            </Box>{" "}
+            for{" "}
+            <Box component="span" color="#68b9ba">
+              {" "}
+              LeadQual UK Ltd.
+            </Box>
+          </Typography>
+        </Container>
       </Box>
 
       {/* Header Section */}

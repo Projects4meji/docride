@@ -156,12 +156,13 @@ const Footer = () => {
                   {[
                     { label: "Blogs", link: "/blog" }, // ✅ Add correct path for FAQ page
                     { label: "Modules", link: "/modules" },
-                    { label: "Docride - Features", link: "/features" },
+                    { label: "Benefits", link: "/benefits" },
                   ].map((item, index) => (
                     <Box key={index}>
                       <Typography variant="body2" sx={{ mb: 2 }}>
                         <Link
-                          href={item.link} // ✅ Dynamic link for each item
+                          component={RouterLink}
+                          to={item.link} // ✅ Dynamic link for each item
                           underline="none"
                           sx={{
                             color: "#ffffff",
@@ -192,14 +193,15 @@ const Footer = () => {
                 </Typography>
                 <Box sx={{ mt: 3 }}>
                   {[
-                    { label: "FAQ", link: "/questions" }, // ✅ Add correct path for FAQ page
-                    { label: "Pricing", link: "#" },
-                    { label: "Partner Program", link: "#" },
+                    { label: "FAQ", link: "/faq" }, // ✅ Add correct path for FAQ page
+                    { label: "Pricing", link: "/pricing" },
+                    { label: "Contact Us", link: "/contact" },
                   ].map((item, index) => (
                     <Box key={index}>
                       <Typography variant="body2" sx={{ mb: 2 }}>
                         <Link
-                          href={item.link} // ✅ Dynamic link for each item
+                          component={RouterLink}
+                          to={item.link} // ✅ Dynamic link for each item
                           underline="none"
                           sx={{
                             color: "#ffffff",

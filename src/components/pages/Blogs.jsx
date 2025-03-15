@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
@@ -23,8 +23,24 @@ import Article1 from "../../assets/blogs/AIHealth.jpg";
 import ISO1 from "../../assets/blogs/ISO1.png";
 import ISO2 from "../../assets/blogs/ISO2.png";
 import ISO3 from "../../assets/blogs/ISO3.png";
+import Compliance from "../../assets/blogs/Comchallenge.jpg";
+import Com1 from "../../assets/blogs/Comp1.png";
+import Com2 from "../../assets/blogs/Comp2.jpg";
+import Time from "../../assets/blogs/Time.jpg";
+import T1 from "../../assets/blogs/Time1.jpg";
+import T2 from "../../assets/blogs/Time2.jpg";
+import Testimonial from "../../assets/blogs/Testimonial.png";
+import Tes1 from "../../assets/blogs/Tes1.jpg";
+import Tes2 from "../../assets/blogs/Tes2.jpg";
 
-const blogs = [
+const categories = [
+  "All",
+  "Educational Articles",
+  "Case Studies",
+  "Success Stories",
+];
+
+export const blogs = [
   {
     id: 1,
     author: "David Brown",
@@ -55,9 +71,9 @@ const blogs = [
     date: "17-4-24",
     title: "Highlight businesses using DocRide to solve compliance challenges",
     category: "Case Studies",
-    image: Article1,
-    contentimg1: Ai1,
-    contentimg2: Ai2,
+    image: Compliance,
+    contentimg1: Com1,
+    contentimg2: Com2,
     description:
       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
   },
@@ -67,9 +83,9 @@ const blogs = [
     date: "17-4-24",
     title: "Include measurable outcomes, such as time or cost savings.",
     category: "Case Studies",
-    image: Article1,
-    contentimg1: Ai1,
-    contentimg2: Ai2,
+    image: Time,
+    contentimg1: T1,
+    contentimg2: T2,
     description:
       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
   },
@@ -79,38 +95,35 @@ const blogs = [
     date: "17-4-24",
     title: "Showcase user testimonials and reviews",
     category: "Success Stories",
-    image: Article1,
-    contentimg1: Ai1,
-    contentimg2: Ai2,
+    image: Testimonial,
+    contentimg1: Tes1,
+    contentimg2: Tes2,
     description:
       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
   },
   // Add more blog entries as needed
 ];
 
-const categories = [
-  "All",
-  "Educational Articles",
-  "Case Studies",
-  "Success Stories",
-];
-
 const recentPosts = blogs;
 
 const BlogPage = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Smooth scroll to top when component mounts
+  }, []);
+
   const [page, setPage] = useState(1);
   const blogsPerPage = 3;
-  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Handle category selection
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
-    setPage(1); // Reset pagination when category changes
+    setPage(1); // ✅ Reset pagination when category changes
   };
 
   // Filter blogs based on selected category
   const filteredBlogs =
-    selectedCategory === "All Categories"
+    selectedCategory === "All"
       ? blogs
       : blogs.filter((blog) => blog.category === selectedCategory);
 
@@ -119,7 +132,8 @@ const BlogPage = () => {
     setPage(value);
   };
 
-  const paginatedBlogs = blogs.slice(
+  // Paginate filtered results
+  const paginatedBlogs = filteredBlogs.slice(
     (page - 1) * blogsPerPage,
     page * blogsPerPage
   );
@@ -131,17 +145,17 @@ const BlogPage = () => {
         sx={{
           bgcolor: "#ffffff",
           width: "100%",
-          height: { xs: "40vh", sm: "35vh", md: "30vh" }, // Adjust height for different screens
+          height: { xs: "40vh", sm: "35vh", md: "40vh" },
           backgroundImage: `url(${BlogHeroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "flex",
           flexDirection: "column",
-          alignItems: { xs: "center", md: "flex-start" }, // Center text on mobile, left-align on larger screens
+          alignItems: "center",
           justifyContent: "center",
-          textAlign: { xs: "center", md: "left" },
-          px: { xs: 3, sm: 6, md: 16, lg: 20 }, // Adjust padding for different screen sizes
-          py: { xs: 2, sm: 4 }, // Adds vertical padding for better spacing
+          textAlign: "center",
+          px: { xs: 3, sm: 6, md: 16, lg: 20 },
+          py: { xs: 2, sm: 4 },
         }}
       >
         <Typography
@@ -355,13 +369,24 @@ const BlogPage = () => {
             </List>
 
             <Typography variant="h5" sx={{ fontWeight: "bold", my: 2 }}>
-              Recent Post
+              Recent Posts
             </Typography>
             <List>
               {recentPosts.map((post, index) => (
                 <ListItem
                   key={index}
-                  sx={{ display: "flex", alignItems: "center", gap: 2 }}
+                  component={Link}
+                  to={`/blog/${post.id}`} // ✅ Navigates to the blog page
+                  state={{ blog: post }} // ✅ Passes the entire blog object as state
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    textDecoration: "none",
+                    color: "inherit",
+                    cursor: "pointer",
+                    "&:hover": { color: "#1E626B" },
+                  }}
                 >
                   <motion.div whileHover={{ scale: 1.1 }}>
                     <CardMedia

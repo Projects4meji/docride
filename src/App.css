@@ -48,3 +48,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.react-multi-carousel-arrow {
+  background-color: orange !important; /* Change to your desired color */
+  border-radius: 50%; /* Makes it round */
+}
+
+.react-multi-carousel-arrow:hover {
+  background-color: darkorange !important; /* Darker shade on hover */
+}

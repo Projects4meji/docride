@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
@@ -101,6 +101,10 @@ const categoryImages = {
 };
 
 const FAQ = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Smooth scroll to top when component mounts
+  }, []);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");

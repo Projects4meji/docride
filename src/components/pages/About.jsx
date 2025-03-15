@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Fade } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import PreventiveRisk from "../FlowChart/PreventiveRisk";
+import PreventiveRisk from "../FlowChart/Preventive";
 import ReactiveRisk from "../FlowChart/ReactiveRisk";
 import BlogHeroImage from "../../assets/bgimage.jpg";
 import Aboutimage from "../../assets/about/About.jpg";
@@ -29,22 +29,22 @@ function About() {
     <Box sx={{ bgcolor: "#FFFFFF", pb: 5 }}>
       {/* Hero Section */}
       <Box
-        sx={{
-          bgcolor: "#ffffff",
-          width: "100%",
-          height: { xs: "40vh", sm: "35vh", md: "30vh" },
-          backgroundImage: `url(${BlogHeroImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: { xs: "center", md: "flex-start" },
-          justifyContent: "center",
-          textAlign: { xs: "center", md: "left" },
-          px: { xs: 3, sm: 6, md: 16, lg: 40 },
-          py: { xs: 2, sm: 4 },
-        }}
-      >
+              sx={{
+                bgcolor: "#ffffff",
+                width: "100%",
+                height: { xs: "40vh", sm: "35vh", md: "40vh" },
+                backgroundImage: `url(${BlogHeroImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                px: { xs: 3, sm: 6, md: 16, lg: 20 },
+                py: { xs: 2, sm: 4 },
+              }}
+            >
         <Typography
           variant="h4"
           sx={{

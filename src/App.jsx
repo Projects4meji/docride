@@ -5,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "./components/headers/Navbar";
 import Footer from "./components/headers/Footer";
 import Home from "./components/pages/Home";
-import Features from "./components/pages/Features";
 import Contact from "./components/pages/Contact";
 import FAQ from "./components/pages/FAQ";
 import Policy from "./components/Policies/Policy";
@@ -17,6 +16,7 @@ import About from "./components/pages/About";
 import PricingPlans from "./components/pages/Pricing";
 import PricePolicy from "./components/Policies/PricePolicy";
 import UserAgreement from "./components/Policies/UserAgreement";
+import Benefits from "./components/pages/Benefits";
 
 // Custom Theme
 const theme = createTheme({
@@ -47,7 +47,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blogs />} />
           <Route path="/blog/:id" element={<IndivBlog />} />
-          <Route path="/features" element={<Features />} />
+          <Route path="/benefits" element={<Benefits />} />
           <Route path="/modules" element={<Modules />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/pricing" element={<PricingPlans />} />

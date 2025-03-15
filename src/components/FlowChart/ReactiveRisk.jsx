@@ -76,7 +76,6 @@ const ReactiveRisk = ({ open, handleClose }) => {
             >
               <FlowBox text="Incident is Reported by the user" />
               <Arrow direction="right" />
-
               <FlowBox
                 text="Your decision based on Severity"
                 shape="diamond"

@@ -160,6 +160,7 @@ const FAQDetail = () => {
     <Box
       sx={{
         position: "relative",
+        width: "100vw",
       }}
     >
       {/* FAQ Header Section */}
@@ -195,7 +196,6 @@ const FAQDetail = () => {
         </Container>
       </Box>
 
-      
       {/* Background Image */}
       <Box
         sx={{
@@ -228,14 +228,26 @@ const FAQDetail = () => {
                 value={categoryId}
                 onChange={(e) => navigate(`/faq/${e.target.value}`)}
                 sx={{
-                  bgcolor: "white",
+                  bgcolor: "linear-gradient(180deg, #1B988F 0%, #0C5E5E 100%)",
                   borderRadius: "8px",
                   boxShadow: 1,
                   "& .MuiSelect-select": { py: 1, fontSize: "16px" },
                 }}
               >
                 {faqCategories.map((cat) => (
-                  <MenuItem key={cat.id} value={cat.id}>
+                  <MenuItem
+                    key={cat.id}
+                    value={cat.id}
+                    sx={{
+                      transition: "all 0.3s ease-in-out",
+                      bgcolor:
+                        categoryId === cat.id ? "#96E0CC" : "transparent", // ✅ Selected item background
+                      "&:hover": {
+                        bgcolor: "#96E0CC",
+                        color: "#ffffff" // ✅ Hover effect on mobile
+                      },
+                    }}
+                  >
                     {cat.title}
                   </MenuItem>
                 ))}
@@ -247,7 +259,7 @@ const FAQDetail = () => {
               sx={{
                 display: { xs: "none", md: "block" }, // Hide sidebar on small screens
                 height: "70vh",
-                background:"linear-gradient(180deg, #1B988F 0%, #0C5E5E 100%)",
+                background: "linear-gradient(180deg, #1B988F 0%, #0C5E5E 100%)",
                 borderRadius: "30px",
                 boxShadow: 1,
                 p: 2,

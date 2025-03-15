@@ -1,5 +1,5 @@
 /* eslint-disable no-dupe-keys */
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
 import {
   Facebook,
@@ -8,80 +8,93 @@ import {
   Twitter,
   LinkedIn,
 } from "@mui/icons-material";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams, useLocation, Link } from "react-router-dom";
 import Ai1 from "../../assets/blogs/Ai1.png";
 import Ai2 from "../../assets/blogs/Ai2.png";
 import Article1 from "../../assets/blogs/AIHealth.jpg";
 import ISO1 from "../../assets/blogs/ISO1.png";
 import ISO2 from "../../assets/blogs/ISO2.png";
 import ISO3 from "../../assets/blogs/ISO3.png";
+import Compliance from "../../assets/blogs/Comchallenge.jpg";
+import Com1 from "../../assets/blogs/Comp1.png";
+import Com2 from "../../assets/blogs/Comp2.jpg";
+import Time from "../../assets/blogs/Time.jpg";
+import T1 from "../../assets/blogs/Time1.jpg";
+import T2 from "../../assets/blogs/Time2.jpg";
+import Testimonial from "../../assets/blogs/Testimonial.png";
+import Tes1 from "../../assets/blogs/Tes1.jpg";
+import Tes2 from "../../assets/blogs/Tes2.jpg";
+import { blogs } from "./Blogs";
 
-const blogs = [
-  {
-    id: 1,
-    author: "David Brown",
-    date: "17-4-24",
-    title: "How AI is Transforming Health and Safety Compliance",
-    category: "Educational Articles",
-    image: Article1,
-    contentimg1: Ai1,
-    contentimg2: Ai2,
-    description:
-      "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-  },
-  {
-    id: 2,
-    author: "David Brown",
-    date: "17-4-24",
-    title: "A Step-by-Step Guide to Achieving ISO 45001 Certification",
-    category: "Educational Articles",
-    image: ISO1,
-    contentimg1: ISO2,
-    contentimg2: ISO3,
-    description:
-      "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-  },
-  {
-    id: 3,
-    author: "David Brown",
-    date: "17-4-24",
-    title: "Highlight businesses using DocRide to solve compliance challenges",
-    category: "Case Studies",
-    image: Article1,
-    contentimg1: Ai1,
-    contentimg2: Ai2,
-    description:
-      "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-  },
-  {
-    id: 4,
-    author: "David Brown",
-    date: "17-4-24",
-    title: "Include measurable outcomes, such as time or cost savings.",
-    category: "Case Studies",
-    image: Article1,
-    contentimg1: Ai1,
-    contentimg2: Ai2,
-    description:
-      "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-  },
-  {
-    id: 5,
-    author: "David Brown",
-    date: "17-4-24",
-    title: "Showcase user testimonials and reviews",
-    category: "Success Stories",
-    image: Article1,
-    contentimg1: Ai1,
-    contentimg2: Ai2,
-    description:
-      "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-  },
-  // Add more blog entries as needed
-];
+// const blogs = [
+//   {
+//     id: 1,
+//     author: "David Brown",
+//     date: "17-4-24",
+//     title: "How AI is Transforming Health and Safety Compliance",
+//     category: "Educational Articles",
+//     image: Article1,
+//     contentimg1: Ai1,
+//     contentimg2: Ai2,
+//     description:
+//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+//   },
+//   {
+//     id: 2,
+//     author: "David Brown",
+//     date: "17-4-24",
+//     title: "A Step-by-Step Guide to Achieving ISO 45001 Certification",
+//     category: "Educational Articles",
+//     image: ISO1,
+//     contentimg1: ISO2,
+//     contentimg2: ISO3,
+//     description:
+//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+//   },
+//   {
+//     id: 3,
+//     author: "David Brown",
+//     date: "17-4-24",
+//     title: "Highlight businesses using DocRide to solve compliance challenges",
+//     category: "Case Studies",
+//     image: Compliance,
+//     contentimg1: Com1,
+//     contentimg2: Com2,
+//     description:
+//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+//   },
+//   {
+//     id: 4,
+//     author: "David Brown",
+//     date: "17-4-24",
+//     title: "Include measurable outcomes, such as time or cost savings.",
+//     category: "Case Studies",
+//     image: Time,
+//     contentimg1: T1,
+//     contentimg2: T2,
+//     description:
+//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+//   },
+//   {
+//     id: 5,
+//     author: "David Brown",
+//     date: "17-4-24",
+//     title: "Showcase user testimonials and reviews",
+//     category: "Success Stories",
+//     image: Testimonial,
+//     contentimg1: Tes1,
+//     contentimg2: Tes2,
+//     description:
+//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+//   },
+//   // Add more blog entries as needed
+// ];
 
 const IndivBlog = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Smooth scroll to top when component mounts
+  }, []);
+
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -92,13 +105,16 @@ const IndivBlog = () => {
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
 
-  // Update blog data when ID changes in the URL
+  // Find the new blog based on the updated ID
   useEffect(() => {
-    if (!blogPost) {
-      const foundBlog = blogs.find((blog) => blog.id === parseInt(id, 10));
-      setBlogPost(foundBlog || null);
+    const foundBlog = blogs.find((blog) => blog.id === parseInt(id, 10));
+
+    if (foundBlog) {
+      setBlogPost(foundBlog);
+    } else {
+      setBlogPost(null);
     }
-  }, [id, blogPost]);
+  }, [id]); // ✅ Ensures blog updates when the URL ID changes
 
   if (!blogPost) {
     return (
@@ -338,70 +354,154 @@ const IndivBlog = () => {
         >
           Attracting good money and achieving financial success is within your
           reach. With our innovative solutions and expert guidance, we empower
-          you to unlock your creative business potential and thrive in today&apos;s
-          competitive landscape.
+          you to unlock your creative business potential and thrive in
+          today&apos;s competitive landscape.
         </Typography>
 
-        {/* Image Row */}
+        {/* Image & Text Layout */}
         <Box
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", md: "row" },
+            flexDirection: "column",
             gap: 3,
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          {/* Left Image with Right-to-Left Hover Overlay */}
+          {/* Image Row (Side by Side on md and above) */}
           <Box
             sx={{
-              width: { xs: "100%", md: "48%" },
-              height: "auto",
-              borderRadius: "10px",
-              boxShadow: 3,
-              overflow: "hidden",
-              position: "relative",
-              "&:hover::after": {
-                animation: "moveOverlayLeft 1s ease-in-out",
-              },
-              "::after": {
-                content: '""',
-                position: "absolute",
-                top: 0,
-                left: "100%",
-                width: "100%",
-                height: "100%",
-                background: "rgba(30, 98, 107, 0.3)",
-                transition: "left 0.5s ease-in-out",
-              },
-              "&:hover::after": {
-                left: "0%",
-              },
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" }, // ✅ Stack on xs, side by side on md+
+              gap: 3,
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
+            {/* Left Image (Appears First on xs, Normal on md+) */}
             <Box
-              component="img"
-              src={blogPost.contentimg1}
-              alt="AIimage"
               sx={{
-                width: "100%",
-                height: "100%",
-
-                display: "block",
+                width: { xs: "100%", md: "48%" },
+                height: { xs: "auto", md: "300px" },
                 borderRadius: "10px",
+                boxShadow: 3,
+                overflow: "hidden",
+                position: "relative",
+                order: { xs: 1, md: 0 }, // ✅ Order 1 on xs, default on md+
+                "&:hover::after": {
+                  animation: "moveOverlayLeft 1s ease-in-out",
+                },
+                "::after": {
+                  content: '""',
+                  position: "absolute",
+                  top: 0,
+                  left: "100%",
+                  width: "100%",
+                  height: "100%",
+                  background: "rgba(30, 98, 107, 0.3)",
+                  transition: "left 0.5s ease-in-out",
+                },
+                "&:hover::after": {
+                  left: "0%",
+                },
               }}
-            />
+            >
+              <Box
+                component="img"
+                src={blogPost.contentimg1}
+                alt="AIimage"
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                  borderRadius: "10px",
+                }}
+              />
+            </Box>
+
+            {/* Right Image (Appears Third on xs, Hidden on sm and below) */}
+            <Box
+              sx={{
+                width: { xs: "100%", md: "48%" },
+                height: { xs: "auto", md: "300px" },
+                borderRadius: "10px",
+                boxShadow: 3,
+                overflow: "hidden",
+                position: "relative",
+                order: { xs: 3, md: 0 }, // ✅ Order 3 on xs, default on md+
+                display: { xs: "none", sm: "none", md: "block" }, // ✅ Hide on xs and sm, show on md+
+                "&:hover::after": {
+                  animation: "moveOverlayRight 1s ease-in-out",
+                },
+                "::after": {
+                  content: '""',
+                  position: "absolute",
+                  top: 0,
+                  right: "100%",
+                  width: "100%",
+                  height: "100%",
+                  background: "rgba(30, 98, 107, 0.3)",
+                  transition: "right 0.5s ease-in-out",
+                },
+                "&:hover::after": {
+                  right: "0%",
+                },
+              }}
+            >
+              <Box
+                component="img"
+                src={blogPost.contentimg2}
+                alt="AIimage"
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                  borderRadius: "10px",
+                }}
+              />
+            </Box>
           </Box>
 
-          {/* Right Image with Left-to-Right Hover Overlay */}
+          {/* Text Content (Appears Second on xs, Below Images on md+) */}
+          <Box
+            sx={{
+              width: "100%",
+              textAlign: "left",
+              order: { xs: 2, md: 0 }, // ✅ Order 2 on xs, default on md+
+              mt: { xs: 2, md: 4 }, // ✅ Add spacing below images
+            }}
+          >
+            <Typography
+              variant="body1"
+              sx={{
+                lineHeight: 1.8,
+                fontSize: { xs: "16px", sm: "18px" },
+                color: "#484747",
+              }}
+            >
+              Vivamus aliquam quam mollis massa condimentum tempus. Maecenas
+              sollicitudin felis sit amet sem mattis laoreet. Cras lacinia ac
+              nisl non commodo. Fusce tincidunt laoreet elementum. In vel
+              gravida arcu. Orci varius natoque penatibus et magnis dis
+              parturient montes, nascetur ridiculus mus. Mauris vestibulum arcu
+              ut vestibulum porttitor.
+            </Typography>
+          </Box>
+
+          {/* Right Image (Appears Third on xs, Hidden on md+) */}
           <Box
             sx={{
               width: { xs: "100%", md: "48%" },
-              height: "auto",
+              height: { xs: "auto", md: "300px" },
               borderRadius: "10px",
               boxShadow: 3,
               overflow: "hidden",
               position: "relative",
+              order: { xs: 3, md: 0 }, // ✅ Order 3 on xs, default on md+
+              display: { xs: "block", md: "none" }, // ✅ Hide on md and above
               "&:hover::after": {
                 animation: "moveOverlayRight 1s ease-in-out",
               },
@@ -414,7 +514,7 @@ const IndivBlog = () => {
                 height: "100%",
                 background: "rgba(30, 98, 107, 0.3)",
                 transition: "right 0.5s ease-in-out",
-              }, 
+              },
               "&:hover::after": {
                 right: "0%",
               },
@@ -434,24 +534,6 @@ const IndivBlog = () => {
             />
           </Box>
         </Box>
-
-        {/* Blog Main Content */}
-        <Typography
-          variant="body1"
-          sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "16px", sm: "18px" },
-            color: "#484747",
-            mt: 4,
-          }}
-        >
-          Vivamus aliquam quam mollis massa condimentum tempus. Maecenas
-          sollicitudin felis sit amet sem mattis laoreet. Cras lacinia ac nisl
-          non commodo. Fusce tincidunt laoreet elementum. In vel gravida arcu.
-          Orci varius natoque penatibus et magnis dis parturient montes,
-          nascetur ridiculus mus. Mauris vestibulum arcu ut vestibulum
-          porttitor.
-        </Typography>
 
         <Typography
           variant="h6"
@@ -647,28 +729,30 @@ const IndivBlog = () => {
             }}
           />
 
-          {/* Navigation Links */}
+          {/* ✅ Next & Previous Navigation */}
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "center",
-              flexDirection: "row",
-              gap: { xs: 2, sm: 0 },
-              my: 4,
-              color: "#1976D2",
-              fontSize: "16px",
-              fontWeight: "bold",
-              cursor: "pointer",
+              alignItems: "center", // ✅ Ensures vertical centering
+              my: 3,
             }}
           >
             {blogPost.id > 1 ? (
-              <Box
-                sx={{ "&:hover": { textDecoration: "underline" } }}
-                onClick={() => navigate(`/blog/${blogPost.id - 1}`)}
+              <Button
+                variant="text"
+                onClick={() => {
+                  navigate(`/blog/${blogPost.id - 1}`);
+                  window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Scroll to top
+                }}
+                sx={{
+                  fontWeight: "bold",
+                  color: "#6BBBBB",
+                  "&:hover": { textDecoration: "underline" },
+                }}
               >
                 ← Previous Blog
-              </Box>
+              </Button>
             ) : (
               <Box sx={{ opacity: 0.5, pointerEvents: "none" }}>
                 ← Previous Blog
@@ -676,12 +760,20 @@ const IndivBlog = () => {
             )}
 
             {blogPost.id < blogs.length ? (
-              <Box
-                sx={{ "&:hover": { textDecoration: "underline" } }}
-                onClick={() => navigate(`/blog/${blogPost.id + 1}`)}
+              <Button
+                variant="text"
+                onClick={() => {
+                  navigate(`/blog/${blogPost.id + 1}`);
+                  window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Scroll to top
+                }}
+                sx={{
+                  fontWeight: "bold",
+                  color: "#6BBBBB",
+                  "&:hover": { textDecoration: "underline" },
+                }}
               >
                 Next Blog →
-              </Box>
+              </Button>
             ) : (
               <Box sx={{ opacity: 0.5, pointerEvents: "none" }}>
                 Next Blog →

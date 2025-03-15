@@ -4,7 +4,7 @@ import privacy from "../../assets/privacy.jpg";
 
 const UserAgreement = () => {
   useEffect(() => {
-    window.scrollTo(0, 0); // ✅ Scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Smooth scroll to top when component mounts
   }, []);
 
   return (

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
   Typography,
+  Link,
   Grid,
   Table,
   TableBody,
@@ -11,7 +12,6 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Link,
   Button,
   useMediaQuery,
   Card,
@@ -19,8 +19,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { Check as CheckIcon } from "@mui/icons-material";
-import bgimage from "../../assets/bgimage.jpg";
+import { Close as CloseIcon } from "@mui/icons-material";
 import price from "../../assets/price2.jpg";
+import { Link as RouterLink } from "react-router-dom";
 
 const pricingPlans = [
   {
@@ -30,15 +31,15 @@ const pricingPlans = [
       "✔",
       "Unlimited",
       "1",
-      "-",
-      "-",
-      "-",
+      "✖",
+      "✖",
+      "✖",
       "Email/Chat Support",
       "Complimentary 5 GB",
       "10000",
       "Complimentary 10 GB",
       "100,00 Tokens",
-      "-",
+      "✖",
     ],
   },
   {
@@ -152,6 +153,10 @@ const featuresList = [
 ];
 
 const PricingPlans = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Smooth scroll to top when component mounts
+  }, []);
+
   const isMobile = useMediaQuery("(max-width: 1200px)");
   const [hoveredColumn, setHoveredColumn] = useState(null);
 
@@ -161,9 +166,10 @@ const PricingPlans = () => {
         pb: { xs: 4, sm: 6, md: 8 },
         bgcolor: "white",
         textAlign: "center",
+        width: "100vw",
       }}
     >
-      {/* FAQ Header Section */}
+      {/* Pricing Header Section */}
       <Box
         sx={{
           bgcolor: "#032C34",
@@ -253,10 +259,6 @@ const PricingPlans = () => {
             maxWidth: { md: "70%", lg: "90%" },
             mx: "auto",
             borderRadius: 2,
-            boxShadow: "0px 0px 15px 2px rgba(255, 165, 0, 0.8)",
-
-            /* ✅ Enables vertical scrolling only when screen width is small */
-
             overflowY: { xs: "auto", sm: "auto" },
             position: "relative",
           }}
@@ -268,15 +270,36 @@ const PricingPlans = () => {
               mx: "auto",
               borderRadius: 2,
               background: "linear-gradient(to bottom, #ffffff, #2C8A7A)",
+              overflowX: "auto",
+              paddingTop: 2,
             }}
           >
             <Table
               sx={{
                 backgroundColor: "linear-gradient(to right, #66C2A5, #2C8A7A)",
+                minWidth: 900,
+                borderCollapse: "separate", // ✅ Required for spacing effect
+                borderSpacing: "10px 0px", // ✅ Adds gap ONLY between columns
               }}
             >
               {/* Table Header */}
-              <TableHead>
+              <TableHead
+                sx={{
+                  position: "relative", // Ensures proper layering
+                  zIndex: 2,
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: "-10px", // Lifts shadow above the table
+                    left: 0,
+                    width: "100%",
+                    height: "10px", // Adjust height if needed
+                    background: "transparent",
+                    borderTopLeftRadius: "30px",
+                    borderTopRightRadius: "30px",
+                  },
+                }}
+              >
                 <TableRow>
                   <TableCell></TableCell>
                   {pricingPlans.map((plan, index) => (
@@ -291,10 +314,16 @@ const PricingPlans = () => {
                         borderRadius: "30px 30px 0px 0px",
                         fontWeight: "bold",
                         py: 3,
-                        transition: "background-color 0.3s ease",
-                        width: 400, // Consistent width
-                        minWidth: 400,
+                        transition:
+                          "background-color 0.3s ease, box-shadow 0.3s ease",
+                        width: "20%",
+                        minWidth: 170,
                         maxWidth: 200,
+
+                        /* ✅ Box Shadow & Margin for Column Spacing */
+                        boxShadow:
+                          "3px 0px 0px rgba(255, 165, 0, 0.5), -3px 0px 0px rgba(255, 165, 0, 0.5), 0px -3px 0px rgba(255, 165, 0, 0.5)",
+                        margin: "0px 15px", // ✅ Adds spacing between columns
                       }}
                       onMouseEnter={() => setHoveredColumn(index)}
                       onMouseLeave={() => setHoveredColumn(null)}
@@ -315,7 +344,16 @@ const PricingPlans = () => {
               <TableBody>
                 {featuresList.map((feature, index) => (
                   <TableRow key={index}>
-                    <TableCell sx={{ fontWeight: "bold", py: 1.5 }}>
+                    {/* Feature Name with More Space */}
+                    <TableCell
+                      sx={{
+                        fontWeight: "bold",
+                        py: 1.5,
+                        width: "20%",
+                        minWidth: 250,
+                        maxWidth: 300,
+                      }}
+                    >
                       {feature}
                     </TableCell>
 
@@ -331,20 +369,38 @@ const PricingPlans = () => {
                               ? "white"
                               : "text.primary",
                           py: 1.5,
-                          transition: "background-color 0.3s ease",
+                          transition:
+                            "background-color 0.3s ease, box-shadow 0.3s ease",
                           borderRadius:
                             index === featuresList.length - 1
                               ? "0px 0px 30px 30px"
                               : "0px",
-                          width: 200,
-                          minWidth: 200,
-                          maxWidth: 200,
+                          width: "15%",
+                          minWidth: 140,
+                          maxWidth: 170,
+
+                          /* ✅ Box Shadow & Margin for Column Spacing */
+                          boxShadow: `3px 0px 0px rgba(255, 165, 0, 0.5), -3px 0px 0px rgba(255, 165, 0, 0.5)
+                            ${
+                              index === featuresList.length - 1
+                                ? ", 0px 3px 5px rgba(255, 165, 0, 0.5)"
+                                : ""
+                            }`, // ✅ Adds bottom shadow ONLY to last row
+                          margin: "0px 15px", // ✅ Adds spacing between columns
                         }}
                         onMouseEnter={() => setHoveredColumn(planIndex)}
                         onMouseLeave={() => setHoveredColumn(null)}
                       >
                         {plan.features[index] === "✔" ? (
-                          <CheckIcon color="success" fontSize="large" />
+                          <CheckIcon
+                            fontSize="large"
+                            sx={{ color: "#1E626C" }}
+                          />
+                        ) : plan.features[index] === "✖" ? ( // Use "✖" or another condition for a cross
+                          <CloseIcon
+                            fontSize="large"
+                            sx={{ color: "#FF0000" }}
+                          />
                         ) : (
                           <Typography variant="body2">
                             {plan.features[index]}
@@ -372,7 +428,7 @@ const PricingPlans = () => {
                   </TableRow>
                 ))}
 
-                {/* Get Started Button Row (No Hover Effect) */}
+                {/* Get Started Button Row (✅ Bottom Shadow Applied Here) */}
                 <TableRow>
                   <TableCell></TableCell>
                   {pricingPlans.map((plan, index) => (
@@ -381,9 +437,10 @@ const PricingPlans = () => {
                       align="center"
                       sx={{
                         py: 2,
-                        width: 200,
-                        minWidth: 200,
-                        maxWidth: 200,
+                        width: "20%",
+                        minWidth: 140,
+                        maxWidth: 170,
+                        margin: "0px 15px", // ✅ Adds spacing between columns
                       }}
                     >
                       <Button
@@ -429,12 +486,16 @@ const PricingPlans = () => {
                 boxShadow: "0px 0px 15px 2px rgba(255, 165, 0, 0.8)",
                 borderRadius: 3,
                 backgroundColor: "#fff",
-                width: "100%", // ✅ Ensures the card uses full available width
-                maxWidth: "400px", // ✅ Restrict maximum width for better layout
+                width: "100%",
+                maxWidth: "400px",
                 textAlign: "center",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center", // ✅ Center everything inside the card
+                alignItems: "center",
+                transition: "background-color 0.3s ease",
+                "&:hover": {
+                  background: "#55AFA8",
+                },
               }}
             >
               <CardContent sx={{ pb: 2, width: "100%" }}>
@@ -469,6 +530,8 @@ const PricingPlans = () => {
                       <Typography fontWeight="bold">{feature}</Typography>
                       {plan.features[featureIndex] === "✔" ? (
                         <CheckIcon color="success" />
+                      ) : plan.features[featureIndex] === "✖" ? (
+                        <CloseIcon fontSize="small" sx={{ color: "#FF0000" }} />
                       ) : (
                         <Typography variant="body2">
                           {plan.features[featureIndex]}
@@ -559,7 +622,8 @@ const PricingPlans = () => {
           {" "}
           {/* ✅ Centers link */}
           <Link
-            href="/pricepolicy"
+            component={RouterLink}
+            to="/pricepolicy"
             sx={{
               fontWeight: "bold",
               color: "#1976d2",

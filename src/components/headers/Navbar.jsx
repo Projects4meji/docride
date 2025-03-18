@@ -22,7 +22,7 @@ import {
 import { Facebook, YouTube, LinkedIn } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo/Blogo.png";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -116,7 +116,21 @@ const Navbar = () => {
         {/* Logo */}
         <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <Link to="/">
-            <img src={logo} alt="DocRide Logo" style={{ height: "80px" }} />
+            <Box
+              component="img"
+              src={logo}
+              alt="DocRide Logo"
+              sx={{
+                width: {
+                  xs: "180px", // Small screens
+                  sm: "180px", // Tablets
+                  md: "180px", // Medium screens
+                  lg: "250px", // Large screens
+                  xl: "280px", // Extra large screens
+                },
+                height: "auto", // Maintain aspect ratio
+              }}
+            />
           </Link>
         </Box>
 

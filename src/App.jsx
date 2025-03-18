@@ -17,6 +17,7 @@ import PricingPlans from "./components/pages/Pricing";
 import PricePolicy from "./components/Policies/PricePolicy";
 import UserAgreement from "./components/Policies/UserAgreement";
 import Benefits from "./components/pages/Benefits";
+import PaymentInfo from "./components/pages/PaymentInfo";
 
 // Custom Theme
 const theme = createTheme({
@@ -51,6 +52,7 @@ function App() {
           <Route path="/modules" element={<Modules />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/pricing" element={<PricingPlans />} />
+          <Route path="/payment" element={<PaymentInfo />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/faq/:categoryId" element={<FAQDetail />} />
           <Route path="/policy" element={<Policy />} />

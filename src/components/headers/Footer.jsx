@@ -19,7 +19,8 @@ import {
 } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router-dom"; // ✅ Import from React Router
 import bgimage from "../../assets/bgimage.jpg";
-import Logo from "../../assets/logo.png"; // Use actual logo path
+
+import Logo from "../../assets/logo/Nlogo.png";
 
 const Footer = () => {
   return (

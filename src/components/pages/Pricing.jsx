@@ -4,7 +4,6 @@ import {
   Container,
   Typography,
   Link,
-  Grid,
   Table,
   TableBody,
   TableCell,
@@ -16,12 +15,14 @@ import {
   useMediaQuery,
   Card,
   CardContent,
-  useTheme,
+  Divider,
 } from "@mui/material";
 import { Check as CheckIcon } from "@mui/icons-material";
 import { Close as CloseIcon } from "@mui/icons-material";
 import price from "../../assets/price2.jpg";
 import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const pricingPlans = [
   {
@@ -39,7 +40,7 @@ const pricingPlans = [
       "10000",
       "Complimentary 10 GB",
       "100,00 Tokens",
-      "✖",
+      "✔",
     ],
   },
   {
@@ -57,7 +58,7 @@ const pricingPlans = [
       "500K per month",
       "50 GB per month",
       "Free 0.5 Million tokens per month",
-      "✔",
+      "✖",
     ],
     content: [
       " ",
@@ -88,7 +89,7 @@ const pricingPlans = [
       "1 Million per month",
       "100 GB per month",
       "Free 0.5 Million tokens per month",
-      "✔",
+      "✖",
     ],
     content: [
       " ",
@@ -119,7 +120,7 @@ const pricingPlans = [
       "10 Million per month",
       "500 GB per month",
       "Free 2 Million tokens per month",
-      "✔",
+      "✖",
     ],
     content: [
       " ",
@@ -137,7 +138,7 @@ const pricingPlans = [
   },
 ];
 
-const featuresList = [
+export const featuresList = [
   "All Software Features",
   "User Accounts",
   "Admin Accounts",
@@ -149,7 +150,7 @@ const featuresList = [
   "Number of Data Requests (API Calls) from the Servers",
   "Data upload/download",
   "AI Prompts",
-  "No Ads",
+  "Ads",
 ];
 
 const PricingPlans = () => {
@@ -159,6 +160,8 @@ const PricingPlans = () => {
 
   const isMobile = useMediaQuery("(max-width: 1200px)");
   const [hoveredColumn, setHoveredColumn] = useState(null);
+  const navigate = useNavigate();
+
 
   return (
     <Box
@@ -278,8 +281,8 @@ const PricingPlans = () => {
               sx={{
                 backgroundColor: "linear-gradient(to right, #66C2A5, #2C8A7A)",
                 minWidth: 900,
-                borderCollapse: "separate", // ✅ Required for spacing effect
-                borderSpacing: "10px 0px", // ✅ Adds gap ONLY between columns
+                borderCollapse: "separate",
+                borderSpacing: "10px 0px",
               }}
             >
               {/* Table Header */}
@@ -436,7 +439,8 @@ const PricingPlans = () => {
                       key={index}
                       align="center"
                       sx={{
-                        py: 2,
+                        pt: 4,
+                        pb: 2,
                         width: "20%",
                         minWidth: 140,
                         maxWidth: 170,
@@ -446,6 +450,9 @@ const PricingPlans = () => {
                       <Button
                         variant="contained"
                         color="primary"
+                        onClick={() =>
+                          navigate("/payment", { state: { plan } })
+                        } // ✅ Added navigate here
                         sx={{
                           borderRadius: 3,
                           background:
@@ -467,7 +474,7 @@ const PricingPlans = () => {
         </Box>
       )}
 
-      {/* ✅ Mobile View (Cards) */}
+      {/* Mobile View (Cards) */}
       {isMobile && (
         <Box
           sx={{
@@ -476,7 +483,7 @@ const PricingPlans = () => {
             gap: 5,
             px: 8,
             textAlign: "center",
-            alignItems: "center", // ✅ Ensures all cards are centered
+            alignItems: "center",
           }}
         >
           {pricingPlans.map((plan, index) => (
@@ -492,9 +499,15 @@ const PricingPlans = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                transition: "background-color 0.3s ease",
+                transition: "background-color 0.3s ease, color 0.3s ease",
                 "&:hover": {
-                  background: "#55AFA8",
+                  backgroundColor: "#55AFA8",
+                  "& .MuiTypography-root": {
+                    color: "#fff !important",
+                  },
+                },
+                "& .MuiTypography-root": {
+                  color: "#000",
                 },
               }}
             >
@@ -505,8 +518,10 @@ const PricingPlans = () => {
                 <Typography
                   variant="h4"
                   fontWeight="bold"
-                  color="#3A7B81"
-                  sx={{ mt: 1 }}
+                  sx={{
+                    mt: 1,
+                    color: "#3A7B81",
+                  }}
                 >
                   {plan.price}
                 </Typography>
@@ -514,15 +529,27 @@ const PricingPlans = () => {
                   {index === 0 ? "for 1 Month" : "Per month"}
                 </Typography>
 
-                {/* ✅ Centered Features */}
+                {/* Divider under price */}
+                <Divider
+                  sx={{
+                    my: 2,
+                    bgcolor: "#FF9500",
+                    height: "3px",
+                    borderRadius: "10px",
+                    width: "60%",
+                    mx: "auto",
+                  }}
+                />
+
+                {/* Centered Features */}
                 <Box
                   sx={{
                     mt: 2,
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center", // ✅ Centers feature list
+                    alignItems: "center",
                     textAlign: "center",
-                    gap: 1, // Adds spacing between features
+                    gap: 1,
                   }}
                 >
                   {featuresList.map((feature, featureIndex) => (
@@ -545,23 +572,34 @@ const PricingPlans = () => {
                           sx={{
                             fontSize: "0.75rem",
                             display: "block",
-                            mt: 0.5,
                           }}
                         >
                           {plan.content[featureIndex]}
                         </Typography>
                       )}
+
+                      {/* Divider after each feature + content */}
+                      <Divider
+                        sx={{
+                          mt: 2,
+                          bgcolor: "#E0E0E0",
+                          height: "1px",
+                          width: "100%",
+                          mx: "auto",
+                          borderRadius: "10px",
+                        }}
+                      />
                     </Box>
                   ))}
                 </Box>
 
-                {/* ✅ Centered Get Started Button */}
+                {/* Get Started Button */}
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
                   <Button
                     variant="contained"
                     color="primary"
                     sx={{
-                      width: "70%", // ✅ Adjust width for better responsiveness
+                      width: "70%",
                       borderRadius: 3,
                       background:
                         "linear-gradient(180deg, #73C7AD 0%, #3A7B81 100%)",
@@ -580,6 +618,7 @@ const PricingPlans = () => {
         </Box>
       )}
 
+      {/* Policy Link Section */}
       <Container
         maxWidth="lg"
         sx={{ pt: { xs: 4, sm: 5, md: 6 }, px: { xs: 2, sm: 4, md: 6 } }}
@@ -589,10 +628,10 @@ const PricingPlans = () => {
           component="h1"
           sx={{
             fontWeight: "bold",
-            mb: { xs: 2, sm: 3 }, // Responsive margin
+            mb: { xs: 2, sm: 3 },
             color: "#1E626C",
-            fontSize: { xs: "24px", sm: "32px", md: "40px" }, // ✅ Responsive font size
-            textAlign: "center", // ✅ Center align for better readability on small screens
+            fontSize: { xs: "24px", sm: "32px", md: "40px" },
+            textAlign: "center",
           }}
         >
           Fair, Transparent, and Flexible Pricing
@@ -601,13 +640,13 @@ const PricingPlans = () => {
         <Typography
           variant="body1"
           sx={{
-            mb: { xs: 3, sm: 4 }, // Responsive margin bottom
+            mb: { xs: 3, sm: 4 },
             color: "#555",
             lineHeight: 1.6,
-            fontSize: { xs: "14px", sm: "16px", md: "18px" }, // ✅ Adjust text size for small screens
-            maxWidth: "800px", // ✅ Limits width for readability
-            mx: "auto", // ✅ Centers text block
-            textAlign: "center", // ✅ Center align on mobile
+            fontSize: { xs: "14px", sm: "16px", md: "18px" },
+            maxWidth: "800px",
+            mx: "auto",
+            textAlign: "center",
           }}
         >
           At DocRide, we aim to provide a fair, transparent, and flexible
@@ -628,7 +667,7 @@ const PricingPlans = () => {
               fontWeight: "bold",
               color: "#1976d2",
               textDecoration: "none",
-              fontSize: { xs: "14px", sm: "16px" }, // ✅ Responsive link size
+              fontSize: { xs: "14px", sm: "16px" },
               "&:hover": {
                 textDecoration: "underline",
                 color: "#1E626C",

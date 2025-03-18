@@ -20,17 +20,16 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import { useDrag } from "@use-gesture/react";
-import PricingPlans from "./Pricing";
 import CloseIcon from "@mui/icons-material/Close";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 // Image Imports
+import Logo from "../../assets/logo/LogoIcon.png";
 import Slide1 from "../../assets/home/Slide1.jpg";
 import Slide2 from "../../assets/home/Slide2.png";
 import Slide3 from "../../assets/home/Slide3.png";
-import Video from "../../assets/home/VideoThumbnail.jpg";
 import CardBack from "../../assets/neuron.jpg";
-import DocRideLogo from "../../assets/DRLogo.png";
+import DocRideLogo from "../../assets/logo/LogoIcon1.png";
 import world from "../../assets/home/world.jpg";
 import Sales from "../../assets/home/partners.jpg";
 import test from "../../assets/test2.jpg";
@@ -923,7 +922,7 @@ const Home = () => {
             {/* Small DocRide Logo */}
             <Box
               component="img"
-              src={DocRideLogo}
+              src={Logo}
               alt="DocRide Logo"
               sx={{
                 pt: "45px",

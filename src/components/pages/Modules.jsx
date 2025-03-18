@@ -1,13 +1,17 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Container,
   Typography,
   Box,
   Button,
   Grid,
+  IconButton,
   Card,
   CardContent,
+  Dialog,
+  DialogContent,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { motion, useInView } from "framer-motion";
 import AssetIcon from "../../assets/icons/AssetIcon.png";
 import AuditIcon from "../../assets/icons/AuditIcon.png";
@@ -58,6 +62,17 @@ const moduleData = [
     icon: OHSIcon,
     image: Ohs,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Legal Compliance",
@@ -71,6 +86,17 @@ const moduleData = [
     icon: LegIcon,
     image: Legal,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Risk Assessments",
@@ -86,6 +112,17 @@ const moduleData = [
     icon: RiskIcon,
     image: Risk,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Safe Systems of Work (SSOW)",
@@ -100,6 +137,17 @@ const moduleData = [
     icon: SafeIcon,
     image: SSOW,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Inspections",
@@ -114,6 +162,17 @@ const moduleData = [
     icon: InspectIcon,
     image: Inspect,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Observations/NCRs",
@@ -127,6 +186,17 @@ const moduleData = [
     icon: ObserveIcon,
     image: NCR,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Corrective Actions",
@@ -140,6 +210,17 @@ const moduleData = [
     icon: CorrectIcon,
     image: Correct,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Emergency Preparedness and Response",
@@ -153,6 +234,17 @@ const moduleData = [
     icon: EMIcon,
     image: EPR,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Incident Reporting",
@@ -166,6 +258,17 @@ const moduleData = [
     icon: IncidentIcon,
     image: Incident,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Incident Investigation",
@@ -178,6 +281,17 @@ const moduleData = [
     icon: InvestIcon,
     image: Investigation,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Permit to Work (PTW)",
@@ -190,6 +304,17 @@ const moduleData = [
     icon: WPIcon,
     image: PTW,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Assets and Calibration",
@@ -202,6 +327,17 @@ const moduleData = [
     icon: AssetIcon,
     image: AC,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Resources Request",
@@ -214,6 +350,17 @@ const moduleData = [
     icon: ResourceIcon,
     image: RR,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Internal Audits",
@@ -227,6 +374,17 @@ const moduleData = [
     icon: AuditIcon,
     image: IA,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Tasks and Reminders",
@@ -239,6 +397,17 @@ const moduleData = [
     icon: RemindIcon,
     image: TR,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Employees Management",
@@ -255,6 +424,17 @@ const moduleData = [
     icon: EmployeeIcon,
     image: EM,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
   {
     title: "Communication",
@@ -267,6 +447,17 @@ const moduleData = [
     icon: ChatIcon,
     image: Commun,
     bgcolor: "linear-gradient(67deg, #3BA69B 40%, #A1C661 100%)",
+    videoEmbed: (
+      <iframe
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        width="100%"
+        height="600"
+        frameBorder="0"
+        allowFullScreen
+        style={{ borderRadius: "15px", display: "block" }}
+      ></iframe>
+    ),
   },
 ];
 
@@ -276,6 +467,19 @@ const Modules = () => {
   }, []);
 
   const refs = useRef([]); // Initialize refs array
+  const [open, setOpen] = useState(false);
+  const [selectedFeature, setSelectedFeature] = useState(null);
+
+  const handleOpen = (feature) => {
+    setSelectedFeature(feature);
+    setOpen(true);
+  };
+
+  // Function to close modal
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedFeature(null);
+  };
 
   return (
     <Box sx={{ bgcolor: "#ffffff", pb: { xs: 5, md: 10 } }}>
@@ -507,237 +711,115 @@ const Modules = () => {
                       </Typography>
                     ))}
                   </Box>
+
+                  {/* Show More Button */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      pb: 2,
+                    }}
+                  >
+                    <Button
+                      variant="text"
+                      sx={{
+                        textTransform: "none",
+                        fontSize: { xs: "12px", sm: "13px" },
+                        fontWeight: "bold",
+                        color: "#36767E",
+                      }}
+                      onClick={() => handleOpen(module)}
+                    >
+                      Watch Video
+                    </Button>
+                  </Box>
                 </CardContent>
               </Card>
             </motion.div>
           );
         })}
+
+        {/* Modal Popup */}
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          fullWidth
+          maxWidth="md"
+          sx={{
+            "& .MuiPaper-root": {
+              borderRadius: "20px",
+              background: "linear-gradient(180deg, #73C7AD 0%, #3A7B81 100%)",
+              color: "white",
+              width: "100%",
+            },
+          }}
+        >
+          {/* Close Button */}
+          <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
+            <IconButton onClick={handleClose} sx={{ color: "white" }}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+
+          {/* Modal Content */}
+          <DialogContent
+            sx={{
+              px: { xs: 2, sm: 3, md: 4 },
+              pb: { xs: 2, sm: 3 },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: { xs: "16px", md: "32px" },
+                fontWeight: "bold",
+                mb: { xs: 2, md: 4 },
+              }}
+            >
+              {selectedFeature?.title}
+            </Typography>
+            {selectedFeature && (
+              <Box
+                sx={{
+                  width: "100%",
+                  maxWidth: {
+                    xs: "90vw",
+                    sm: "80vw",
+                    md: "70vw",
+                    lg: "60vw",
+                  },
+                  position: "relative",
+                  paddingBottom: "56.25%", // Aspect ratio 16:9
+                  overflow: "hidden",
+                  borderRadius: "15px",
+                  boxShadow: 3,
+                  background: "#EDF7F5",
+                }}
+              >
+                {/* Responsive iframe inside Box */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {selectedFeature.videoEmbed}
+                </Box>
+              </Box>
+            )}
+          </DialogContent>
+        </Dialog>
       </Container>
     </Box>
   );
 };
 
 export default Modules;
-
-// import React, { useRef } from "react";
-// import { Container, Typography, Box, Button } from "@mui/material";
-// import { motion, useInView } from "framer-motion";
-// import riskImage from "../../assets/modules/risk.png"; // Ensure correct path
-// import riskIcon from "../../assets/modules/i1.png"; // Ensure correct path
-// import privacy from "../../assets/privacy.jpg";
-
-// const Modules = () => {
-//   const refs = useRef([]); // Initialize refs array
-
-//   return (
-//     <Box sx={{ bgcolor: "#ffffff", pb: { xs: 5, md: 10 } }}>
-//       <Box
-//         sx={{
-//           width: "100%",
-//           height: "auto",
-//           backgroundImage: `url(${privacy})`,
-//           backgroundSize: "cover",
-//           backgroundPosition: "center",
-//           position: "relative",
-//           textAlign: "center",
-//           px: { xs: 2, sm: 4, md: 6 },
-//           py: 5,
-//           "::before": {
-//             content: '""',
-//             position: "absolute",
-//             top: 0,
-//             left: 0,
-//             width: "100%",
-//             height: "100%",
-//             backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
-//             zIndex: 1,
-//           },
-//         }}
-//       >
-//         <Box
-//           sx={{
-//             position: "relative",
-//             zIndex: 2,
-//             color: "#ffffff",
-//             textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)", // Subtle text shadow
-//           }}
-//         >
-//           <Typography
-//             fontSize={{ xs: 20, sm: 28, md: 40 }}
-//             fontWeight="bold"
-//             px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
-//           >
-//             <Box component="span" color="#96e0cc">
-//               17 Comprehensive Modules
-//             </Box>{" "}
-//             to cover Every
-//             <Box component="span" color="#68b9ba">
-//               {" "}
-//               Aspect of Health & Safety Management
-//             </Box>
-//           </Typography>
-
-//           <Typography
-//             fontSize={{ xs: 14, sm: 18, md: 24 }}
-//             fontWeight="bold"
-//             px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
-//             mt={2}
-//           >
-//             Step into the future with DocRide—the smart, efficient way to
-//             safeguard your workplace from Health and Safety Risks.
-//           </Typography>
-
-//           <Button
-//             variant="contained"
-//             sx={{
-//               mt: 3,
-//               backgroundColor: "#E25E3E",
-//               color: "#ffffff",
-//               fontWeight: "bold",
-//               textTransform: "none",
-//               px: 4,
-//               py: 2,
-//               "&:hover": {
-//                 backgroundColor: "#c94b32",
-//               },
-//             }}
-//           >
-//             Learn More
-//           </Button>
-//         </Box>
-//       </Box>
-
-//       {/* Dynamic Animated Sections */}
-//       {moduleData.map((module, index) => {
-//         const ref = useRef(null);
-//         refs.current[index] = ref;
-//         const isInView = useInView(ref, { once: false, margin: "-300px" });
-
-//         return (
-//           <Container
-//             key={index}
-//             maxWidth="xl"
-//             sx={{
-//               px: { xs: 2, sm: 4, md: 6, lg: "20px" },
-//               py: { xs: 4, sm: 6, md: 8 },
-//             }}
-//           >
-//             <motion.div
-//               ref={ref}
-//               initial={{ opacity: 0, x: -10 }} // Reduce movement on mobile
-//               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-//               transition={{ duration: 0.3, ease: "easeOut" }}
-//               viewport={{ once: true, amount: 0.2 }} // Adjusted viewport settings
-//             >
-//               <Box
-//                 sx={{
-//                   display: "flex",
-//                   backgroundColor: "transparent",
-//                   backgroundImage:
-//                     "linear-gradient(180deg,rgba(155, 215, 199, 0.43) 0%, #FFFFFF 100%)",
-//                   borderRadius: "20px",
-//                   flexDirection: { xs: "column", md: "row" },
-//                   alignItems: "center",
-//                   justifyContent: "space-between",
-//                   gap: { xs: 3, md: 2 },
-//                   p: { xs: 5, md: 5 },
-//                   textAlign: "left",
-//                   zIndex: 2,
-//                 }}
-//               >
-//                 {/* Left Section */}
-//                 <Box sx={{ flex: 1, maxWidth: { xs: "100%", md: "600px" } }}>
-//                   <Box display="flex" alignItems="center" gap={2} mb={2}>
-//                     <img
-//                       src={module.icon}
-//                       alt="Module Icon"
-//                       width={150}
-//                       height={150}
-//                     />
-
-//                     {/* Title with Orange Line Underneath */}
-//                     <Box>
-//                       <Typography
-//                         variant="h4"
-//                         fontWeight="bold"
-//                         color="#1E626C"
-//                         gutterBottom
-//                         sx={{
-//                           fontSize: { xs: 24, sm: 28, md: 36 },
-//                           display: "block", // ✅ Ensures it takes full width
-//                         }}
-//                       >
-//                         {module.title}
-//                       </Typography>
-
-//                       {/* Orange Line Directly Under the Title */}
-//                       <Box
-//                         sx={{
-//                           width: "160px",
-//                           height: "4px",
-//                           bgcolor: "#E25E3E",
-//                           mt: 1, // ✅ Adds space between title and line
-//                         }}
-//                       />
-//                     </Box>
-//                   </Box>
-
-//                   <Typography
-//                     variant="body1"
-//                     color="#333"
-//                     mb={3}
-//                     sx={{ fontSize: { xs: 14, sm: 16, md: 18 } }}
-//                   >
-//                     {module.description}
-//                   </Typography>
-
-//                   <Box component="ul" sx={{ pl: { xs: 2, sm: 3 }, mb: 4 }}>
-//                     {module.content.map((item, i) => (
-//                       <Box
-//                         component="li"
-//                         key={i}
-//                         sx={{ fontSize: { xs: 14, sm: 16, md: 18 }, mb: 2 }}
-//                       >
-//                         {item}
-//                       </Box>
-//                     ))}
-//                   </Box>
-//                 </Box>
-
-//                 {/* Right Section - Image */}
-//                 <motion.div
-//                   initial={{ opacity: 0, x: 10 }} // Reduce movement on mobile
-//                   animate={
-//                     isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }
-//                   }
-//                   transition={{ duration: 0.6, ease: "easeOut" }}
-//                   viewport={{ once: true, amount: 0.2 }} // Improved viewport settings
-//                   style={{
-//                     flex: 1,
-//                     display: "flex",
-//                     justifyContent: "center",
-//                     alignItems: "center",
-//                     width: "100%",
-//                   }}
-//                 >
-//                   <img
-//                     src={module.image}
-//                     alt={module.title}
-//                     style={{
-//                       width: "100%",
-//                       maxWidth: "750px",
-//                       height: "auto",
-//                       borderRadius: "20px",
-//                     }}
-//                   />
-//                 </motion.div>
-//               </Box>
-//             </motion.div>
-//           </Container>
-//         );
-//       })}
-//     </Box>
-//   );
-// };
-
-// export default Modules;

@@ -4,15 +4,15 @@ import {
   Container,
   Typography,
   Grid,
-  Button,
   Divider,
   Modal,
   IconButton,
+  Fade,
 } from "@mui/material";
-import { Fade } from "@mui/material";
+import { ZoomIn as ZoomInIcon } from "@mui/icons-material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";
-import PreventiveRisk from "../FlowChart/Preventive";
-import ReactiveRisk from "../FlowChart/ReactiveRisk";
 import BlogHeroImage from "../../assets/bgimage.jpg";
 import Aboutimage from "../../assets/about/About.jpg";
 import SafetyImage from "../../assets/about/S&H.png";
@@ -20,31 +20,48 @@ import FlowImage from "../../assets/about/Flow.png";
 import AiImage from "../../assets/blogs/Ai1.png";
 import StatsBgImage from "../../assets/privacy.jpg";
 import bgimg from "../../assets/about/Im1.jpg";
+import PFC from "../../assets/Charts/PFF.png";
+import RRC from "../../assets/Charts/RRF.png";
+import CEOStoryCarousel from "./CEOCarousel";
 
 function About() {
-  const [openModal, setOpenModal] = useState(false);
-  const [openReactive, setOpenReactive] = useState(false);
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [openReactiveModal, setOpenReactiveModal] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handlePrev = () => {
+    setActiveIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prevIndex) => (prevIndex === 1 ? 0 : 1));
+  };
+
+  const handleOpenImageModal = () => setOpenImageModal(true);
+  const handleCloseImageModal = () => setOpenImageModal(false);
+  const handleOpenReactiveModal = () => setOpenReactiveModal(true);
+  const handleCloseReactiveModal = () => setOpenReactiveModal(false);
 
   return (
     <Box sx={{ bgcolor: "#FFFFFF", pb: 5 }}>
       {/* Hero Section */}
       <Box
-              sx={{
-                bgcolor: "#ffffff",
-                width: "100%",
-                height: { xs: "40vh", sm: "35vh", md: "40vh" },
-                backgroundImage: `url(${BlogHeroImage})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                px: { xs: 3, sm: 6, md: 16, lg: 20 },
-                py: { xs: 2, sm: 4 },
-              }}
-            >
+        sx={{
+          bgcolor: "#ffffff",
+          width: "100%",
+          height: { xs: "40vh", sm: "35vh", md: "40vh" },
+          backgroundImage: `url(${BlogHeroImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          px: { xs: 3, sm: 6, md: 16, lg: 20 },
+          py: { xs: 2, sm: 4 },
+        }}
+      >
         <Typography
           variant="h4"
           sx={{
@@ -57,6 +74,14 @@ function About() {
           About Us
         </Typography>
       </Box>
+
+      {/* CEO Section */}
+      <Container maxWidth="xl" sx={{ py: 8, position: "relative" }}>
+        {/* Carousel Content */}
+        <Box>
+          <CEOStoryCarousel/>
+        </Box>
+      </Container>
 
       {/* About Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
@@ -91,7 +116,7 @@ function About() {
               sx={{
                 position: "absolute",
                 top: 130,
-                right: -20,
+                right: -60,
                 width: "70%", // Adjust as needed
                 height: "auto",
                 opacity: 0.4, // 40% opacity
@@ -108,8 +133,8 @@ function About() {
               src={Aboutimage} // About Image
               alt="about"
               sx={{
-                width: "60%",
-                height: "60%",
+                width: "70%",
+                height: "70%",
                 borderRadius: "12px",
                 boxShadow: 2,
                 position: "relative",
@@ -119,7 +144,6 @@ function About() {
           </Grid>
         </Grid>
       </Container>
-
       {/* Why Docride Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Grid
@@ -168,7 +192,6 @@ function About() {
           </Grid>
         </Grid>
       </Container>
-
       {/* ====== New Statistics Section ====== */}
       <Box
         sx={{
@@ -257,7 +280,6 @@ function About() {
           </Grid>
         </Container>
       </Box>
-
       {/* ====== Process Flow Chart Section ====== */}
       <Box
         sx={{
@@ -271,8 +293,8 @@ function About() {
         <Box
           sx={{
             position: "absolute",
-            bottom: 0,
-            right: 0,
+            bottom: { xs: 100, md: -150 },
+            right: { xs: 0, md: 200 },
             width: { xs: "100%", md: "40%" },
             height: "60%",
             backgroundImage: `url(${FlowImage})`,
@@ -332,26 +354,62 @@ function About() {
               control, minimize workplace hazards, and maintain regulatory
               compliance.
             </Typography>
-            <Button
-              onClick={() => setOpenModal(true)}
-              variant="contained"
+
+            {/* Image with hover effect */}
+            <Box
               sx={{
+                display: "flex", // ✅ Flex container
+                justifyContent: { xs: "left", md: "center" }, // ✅ Center horizontally
                 mt: 2,
-                background: "linear-gradient(to right, #73C7AD, #3A7B81)",
-                color: "white",
-                borderRadius: "30px",
-                px: 4,
-                py: 1,
-                textTransform: "none",
-                fontSize: "16px",
-                fontWeight: "bold",
-                "&:hover": {
-                  backgroundColor: "#177E74",
-                },
               }}
             >
-              View Model
-            </Button>
+              <Box
+                sx={{
+                  position: "relative",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  boxShadow: 3,
+                  width: "70%", // Image width relative to container
+                  "&:hover .overlay": {
+                    opacity: 1,
+                  },
+                }}
+                onClick={handleOpenImageModal}
+              >
+                <Box
+                  component="img"
+                  src={PFC}
+                  alt="Preventive Risk Control Model"
+                  sx={{
+                    width: "100%", // Full width of the parent Box
+                    height: "auto",
+                    display: "block",
+                    objectFit: "cover",
+                  }}
+                />
+
+                {/* Overlay for zoom icon */}
+                <Box
+                  className="overlay"
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    bgcolor: "rgba(0,0,0,0.4)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    opacity: 0,
+                    transition: "opacity 0.3s ease-in-out",
+                  }}
+                >
+                  <ZoomInIcon sx={{ color: "white", fontSize: 40 }} />
+                </Box>
+              </Box>
+            </Box>
           </Box>
 
           {/* Reactive Risk Control Model */}
@@ -375,143 +433,167 @@ function About() {
               audits ensure the effectiveness of the reactive controls,
               enhancing workplace safety and compliance.
             </Typography>
-            <Button
-              onClick={() => setOpenReactive(true)}
-              variant="contained"
+            {/* Image with hover effect */}
+            <Box
               sx={{
-                mt: 2,
-                background: "linear-gradient(to right, #73C7AD, #3A7B81)",
-                color: "white",
-                borderRadius: "30px",
-                px: 4,
-                py: 1,
-                textTransform: "none",
-                fontSize: "16px",
-                fontWeight: "bold",
-                "&:hover": {
-                  backgroundColor: "#177E74",
+                display: "flex",
+                justifyContent: {
+                  xs: "left",
+                  sm: "left",
+                  md: "center",
                 },
+                mt: 2,
               }}
             >
-              View Model
-            </Button>
-          </Box>
-        </Container>
-
-        {/* Preventive Risk Modal */}
-        <Modal
-          open={openModal}
-          onClose={() => setOpenModal(false)}
-          aria-labelledby="flowchart-modal"
-          aria-describedby="flowchart-description"
-          closeAfterTransition
-        >
-          <Fade in={openModal} timeout={300}>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: { xs: "90%", sm: "75%", md: "80%" },
-                maxHeight: "85vh",
-                bgcolor: "white",
-                boxShadow: 24,
-                p: 3,
-                borderRadius: "12px",
-                outline: "none",
-                backgroundImage: `url(${bgimg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {/* Close Button */}
-              <IconButton
-                onClick={() => setOpenModal(false)}
-                sx={{
-                  position: "absolute",
-                  top: 10,
-                  right: 10,
-                  color: "#FF9500",
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-
-              {/* Scrollable Content Inside Modal */}
               <Box
                 sx={{
-                  overflowY: "auto",
-                  maxHeight: "75vh",
-                  padding: 2,
+                  position: "relative",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  boxShadow: 3,
+                  width: {
+                    xs: "90%", // Wider image on small screens
+                    sm: "80%",
+                    md: "70%", // Standard width on medium and above
+                  },
+                  "&:hover .overlay": {
+                    opacity: 1,
+                  },
                 }}
+                onClick={handleOpenReactiveModal}
               >
-                <PreventiveRisk />{" "}
-                {/* ✅ This now stays contained inside the modal */}
-              </Box>
-            </Box>
-          </Fade>
-        </Modal>
-
-        {/* ✅ Reactive Risk Control Modal */}
-        <Modal
-          open={openReactive}
-          onClose={() => setOpenReactive(false)}
-          closeAfterTransition
-        >
-          <Fade in={openReactive} timeout={300}>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: { xs: "90%", sm: "75%", md: "50%" },
-                maxHeight: "85vh",
-                bgcolor: "white",
-                boxShadow: 24,
-                p: 3,
-                borderRadius: "12px",
-                outline: "none",
-                backgroundImage: `url(${bgimg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <IconButton
-                onClick={() => setOpenReactive(false)}
-                sx={{
-                  position: "absolute",
-                  top: 10,
-                  right: 10,
-                  color: "#FF9500",
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-
-              <Box
-                sx={{
-                  overflowY: "auto",
-                  maxHeight: "75vh",
-                  padding: 2,
-                }}
-              >
-                <ReactiveRisk
-                  open={openReactive}
-                  handleClose={() => setOpenReactive(false)}
+                <Box
+                  component="img"
+                  src={RRC}
+                  alt="Reactive Risk Control Model"
+                  sx={{
+                    width: "100%",
+                    height: "auto",
+                    display: "block",
+                    objectFit: "cover",
+                  }}
                 />
-                {/* ✅ This will now render properly */}
+
+                {/* Overlay for zoom icon */}
+                <Box
+                  className="overlay"
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    bgcolor: "rgba(0,0,0,0.4)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    opacity: 0,
+                    transition: "opacity 0.3s ease-in-out",
+                  }}
+                >
+                  <ZoomInIcon sx={{ color: "white", fontSize: 40 }} />
+                </Box>
               </Box>
             </Box>
-          </Fade>
-        </Modal>
+          </Box>
+
+          {/* Modal for Preventive fullscreen image */}
+          <Modal
+            open={openImageModal}
+            onClose={handleCloseImageModal}
+            closeAfterTransition
+          >
+            <Fade in={openImageModal}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: { xs: "90%", sm: "80%", md: "70%" },
+                  maxHeight: "90vh", // ✅ Restrict height to 90% of viewport
+                  bgcolor: "background.paper",
+                  borderRadius: "12px",
+                  boxShadow: 24,
+                  p: 2,
+                  outline: "none",
+                  overflow: "auto", // ✅ Make content scrollable if needed
+                }}
+              >
+                <IconButton
+                  onClick={handleCloseImageModal}
+                  sx={{
+                    position: "absolute",
+                    top: 8,
+                    right: 8,
+                    color: "#FF9500",
+                    zIndex: 1, // Ensure close button stays above image
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+
+                <Box
+                  component="img"
+                  src={PFC}
+                  alt="Preventive Risk Control Model"
+                  sx={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "8px",
+                  }}
+                />
+              </Box>
+            </Fade>
+          </Modal>
+
+          {/* Modal for Reactive fullscreen RRF image */}
+          <Modal
+            open={openReactiveModal}
+            onClose={handleCloseReactiveModal}
+            closeAfterTransition
+          >
+            <Fade in={openReactiveModal}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: { xs: "90%", sm: "80%", md: "70%" },
+                  bgcolor: "background.paper",
+                  borderRadius: "12px",
+                  boxShadow: 24,
+                  p: 2,
+                  outline: "none",
+                }}
+              >
+                <IconButton
+                  onClick={handleCloseReactiveModal}
+                  sx={{
+                    position: "absolute",
+                    top: 8,
+                    right: 8,
+                    color: "#FF9500",
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+                <Box
+                  component="img"
+                  src={RRC}
+                  alt="Reactive Risk Control Model"
+                  sx={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "8px",
+                  }}
+                />
+              </Box>
+            </Fade>
+          </Modal>
+        </Container>
       </Box>
     </Box>
   );

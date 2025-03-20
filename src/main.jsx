@@ -8,6 +8,8 @@ import "@fontsource/outfit";
 import "@fontsource/outfit/700.css"; 
 import "@fontsource/outfit/900.css";
 
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider theme={theme}>

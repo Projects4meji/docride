@@ -153,6 +153,7 @@ const PaymentInfo = () => {
                   transform: "scale(1.05)",
                 },
               }}
+              onClick={() => navigate("/checkout", { state: { plan } })}
             >
               Proceed to Checkout
             </Button>

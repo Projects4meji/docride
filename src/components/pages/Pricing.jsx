@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 const pricingPlans = [
   {
     name: "Test Drive",
+    key: "test_drive",
     price: "Free",
     features: [
       "✔",
@@ -45,6 +46,7 @@ const pricingPlans = [
   },
   {
     name: "Budget",
+    key: "budget",
     price: "£50",
     features: [
       "✔",
@@ -76,6 +78,7 @@ const pricingPlans = [
   },
   {
     name: "Economy",
+    key: "economy",
     price: "£100",
     features: [
       "✔",
@@ -107,6 +110,7 @@ const pricingPlans = [
   },
   {
     name: "Standard",
+    key: "standard",
     price: "£300",
     features: [
       "✔",

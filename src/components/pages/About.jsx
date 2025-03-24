@@ -10,8 +10,6 @@ import {
   Fade,
 } from "@mui/material";
 import { ZoomIn as ZoomInIcon } from "@mui/icons-material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";
 import BlogHeroImage from "../../assets/bgimage.jpg";
 import Aboutimage from "../../assets/about/About.jpg";
@@ -19,23 +17,15 @@ import SafetyImage from "../../assets/about/S&H.png";
 import FlowImage from "../../assets/about/Flow.png";
 import AiImage from "../../assets/blogs/Ai1.png";
 import StatsBgImage from "../../assets/privacy.jpg";
-import bgimg from "../../assets/about/Im1.jpg";
 import PFC from "../../assets/Charts/PFF.png";
 import RRC from "../../assets/Charts/RRF.png";
-import CEOStoryCarousel from "./CEOCarousel";
+import yourImage from "../../assets/about/Future.jpg";
+import CEOStory from "../Content/CEOStory";
+import FutureGoals from "../Content/FutureGoals";
 
 function About() {
   const [openImageModal, setOpenImageModal] = useState(false);
   const [openReactiveModal, setOpenReactiveModal] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handlePrev = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
-  };
-
-  const handleNext = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 1 ? 0 : 1));
-  };
 
   const handleOpenImageModal = () => setOpenImageModal(true);
   const handleCloseImageModal = () => setOpenImageModal(false);
@@ -43,7 +33,7 @@ function About() {
   const handleCloseReactiveModal = () => setOpenReactiveModal(false);
 
   return (
-    <Box sx={{ bgcolor: "#FFFFFF", pb: 5 }}>
+    <Box sx={{ bgcolor: "#FFFFFF" }}>
       {/* Hero Section */}
       <Box
         sx={{
@@ -79,7 +69,7 @@ function About() {
       <Container maxWidth="xl" sx={{ py: 8, position: "relative" }}>
         {/* Carousel Content */}
         <Box>
-          <CEOStoryCarousel/>
+          <CEOStory />
         </Box>
       </Container>
 
@@ -96,7 +86,7 @@ function About() {
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "#484747", fontSize: "16px", lineHeight: 1.8 }}
+              sx={{ color: "#484747", fontSize: "18px", lineHeight: 1.8 }}
             >
               Introducing DocRide: Your Complete Health and Safety Management
               System. Say goodbye to complex health and safety management system
@@ -116,7 +106,7 @@ function About() {
               sx={{
                 position: "absolute",
                 top: 130,
-                right: -60,
+                right: { xs: 0, lg: -60 },
                 width: "70%", // Adjust as needed
                 height: "auto",
                 opacity: 0.4, // 40% opacity
@@ -176,7 +166,7 @@ function About() {
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "#484747", fontSize: "16px", lineHeight: 1.8 }}
+              sx={{ color: "#484747", fontSize: "18px", lineHeight: 1.8 }}
             >
               DocRide seamlessly integrates health and safety management system
               processes, saving you from the need to reinvent the wheel by
@@ -293,14 +283,14 @@ function About() {
         <Box
           sx={{
             position: "absolute",
-            bottom: { xs: 100, md: -150 },
-            right: { xs: 0, md: 200 },
+            bottom: { xs: 100, md: 150 },
+            right: { xs: 0, md: 20 },
             width: { xs: "100%", md: "40%" },
-            height: "60%",
+            height: "40%",
             backgroundImage: `url(${FlowImage})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "contain",
-            opacity: 0.4, // 40% opacity
+            opacity: 0.2, // 40% opacity
             zIndex: 1,
           }}
         />
@@ -329,7 +319,13 @@ function About() {
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "#484747", mt: 1, mb: 2, lineHeight: 1.8 }}
+              sx={{
+                color: "#484747",
+                mt: 1,
+                mb: 2,
+                lineHeight: 1.8,
+                fontSize: "18px",
+              }}
             >
               It is a structured framework designed to streamline occupational
               health and safety (OHS) risk management through AI-powered
@@ -340,7 +336,7 @@ function About() {
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "#484747", lineHeight: 1.8 }}
+              sx={{ color: "#484747", lineHeight: 1.8, fontSize: "18px" }}
             >
               At its core, the model utilizes AI to generate applicable OHS
               legal requirements, identify hazards, assess risks, and suggest
@@ -423,10 +419,16 @@ function About() {
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "#484747", mt: 1, mb: 2, lineHeight: 1.8 }}
+              sx={{
+                color: "#484747",
+                mt: 1,
+                mb: 2,
+                lineHeight: 1.8,
+                fontSize: "18px",
+              }}
             >
-              It focuses on managing workplace incidents after they occur. It
-              starts with incident reporting, followed by a severity-based
+              It focuses on managing workplace incidents after they occur.
+              Starting with incident reporting, followed by a severity-based
               decision—either no action, an investigation, or corrective
               actions. Investigation findings lead to recommendations, which are
               reviewed and integrated into risk assessments. Finally, internal
@@ -595,6 +597,10 @@ function About() {
           </Modal>
         </Container>
       </Box>
+      {/* ====== Future Goals Section ====== */}
+      {/* Background Image with Opacity */}
+
+      <FutureGoals />
     </Box>
   );
 }

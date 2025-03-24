@@ -115,7 +115,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068867332?h=dcd2565c77"
         width="100%"
         height="600"
         frameBorder="0"
@@ -140,7 +140,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068867583?h=1c2cfba026"
         width="100%"
         height="600"
         frameBorder="0"
@@ -165,7 +165,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068867917?h=b73112691c"
         width="100%"
         height="600"
         frameBorder="0"
@@ -189,7 +189,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068867128?h=26713e33fc"
         width="100%"
         height="600"
         frameBorder="0"
@@ -213,7 +213,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068867745?h=ffe43f38bb"
         width="100%"
         height="600"
         frameBorder="0"
@@ -261,7 +261,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068867807?h=84b461f16c"
         width="100%"
         height="600"
         frameBorder="0"
@@ -330,7 +330,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068891446?h=be55853370"
         width="100%"
         height="600"
         frameBorder="0"
@@ -353,7 +353,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068891391?h=41cec278a8"
         width="100%"
         height="600"
         frameBorder="0"
@@ -377,7 +377,7 @@ const moduleData = [
     videoEmbed: (
       <iframe
         title="vimeo-player"
-        src="https://player.vimeo.com/video/1065442940?h=2b9140976b"
+        src="https://player.vimeo.com/video/1068867679?h=0f58711398"
         width="100%"
         height="600"
         frameBorder="0"

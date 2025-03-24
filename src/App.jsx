@@ -18,7 +18,7 @@ import PricePolicy from "./components/Policies/PricePolicy";
 import UserAgreement from "./components/Policies/UserAgreement";
 import Benefits from "./components/pages/Benefits";
 import PaymentInfo from "./components/pages/PaymentInfo";
-import { CheckoutForm, Return } from "./components/pages/CheckoutForm";
+import Checkout from "./components/pages/Checkout";
 
 // Custom Theme
 const theme = createTheme({
@@ -54,8 +54,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/pricing" element={<PricingPlans />} />
           <Route path="/payment" element={<PaymentInfo />} />
-          <Route path="/checkout" element={<CheckoutForm />} />
-          <Route path="/return" element={<Return />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/faq/:categoryId" element={<FAQDetail />} />
           <Route path="/policy" element={<Policy />} />

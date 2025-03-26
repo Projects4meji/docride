@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8000/api/stripe/", // Your Django backend URL
+  baseURL: "https://backend-docride.onrender.com/api/stripe/", // Your Django backend URL
   headers: {
     "Content-Type": "application/json",
   },

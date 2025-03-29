@@ -11,7 +11,7 @@ import Policy from "./components/Policies/Policy";
 import Modules from "./components/pages/Modules";
 import Blogs from "./components/pages/Blogs";
 import FAQDetail from "./components/pages/FAQDetail";
-import IndivBlog from "./components/pages/IndivBlog";
+import ISO45001 from "./components/Blogs/ISO45001";
 import About from "./components/pages/About";
 import PricingPlans from "./components/pages/Pricing";
 import PricePolicy from "./components/Policies/PricePolicy";
@@ -19,6 +19,9 @@ import UserAgreement from "./components/Policies/UserAgreement";
 import Benefits from "./components/pages/Benefits";
 import PaymentInfo from "./components/pages/PaymentInfo";
 import Checkout from "./components/pages/Checkout";
+import OHSManage from "./components/Blogs/OHSManage";
+import ISOAudit from "./components/Blogs/ISO45001";
+import RIDReport from "./components/Blogs/RIDReport";
 
 // Custom Theme
 const theme = createTheme({
@@ -48,7 +51,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blogs />} />
-          <Route path="/blog/:id" element={<IndivBlog />} />
+          <Route path="/blog/1" element={<OHSManage />} />
+          <Route path="/blog/2" element={<ISO45001 />} />
+          <Route path="/blog/3" element={<RIDReport />} />
           <Route path="/benefits" element={<Benefits />} />
           <Route path="/modules" element={<Modules />} />
           <Route path="/contact" element={<Contact />} />

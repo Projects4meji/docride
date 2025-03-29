@@ -41,30 +41,71 @@ const categories = [
 ];
 
 export const blogs = [
+  // {
+  //   id: 1,
+  //   author: "David Brown",
+  //   date: "17-4-24",
+  //   title: "How AI is Transforming Health and Safety Compliance",
+  //   category: "Educational Articles",
+  //   image: Article1,
+  //   contentimg1: Ai1,
+  //   contentimg2: Ai2,
+  //   description:
+  //     "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+  // },
   {
     id: 1,
     author: "David Brown",
     date: "17-4-24",
-    title: "How AI is Transforming Health and Safety Compliance",
+    title: "Why do we need an OHS management system at all?",
     category: "Educational Articles",
     image: Article1,
     contentimg1: Ai1,
     contentimg2: Ai2,
     description:
-      "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+      "This simple idea is key to workplace safety. For health and safety, it means tracking things like accident…",
+    path: "/blog/1",
   },
   {
     id: 2,
     author: "David Brown",
     date: "17-4-24",
-    title: "A Step-by-Step Guide to Achieving ISO 45001 Certification",
+    title:
+      "Comprehensive Guide to Becoming an Effective and Efficient ISO 45001 Auditor",
     category: "Educational Articles",
     image: ISO1,
     contentimg1: ISO2,
     contentimg2: ISO3,
     description:
-      "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+      "As an auditor, your role is to evaluate the organization’s OH&S management system against ISO 45001…",
+    path: "/blog/2",
   },
+  {
+    id: 3,
+    author: "David Brown",
+    date: "17-4-24",
+    title:
+      "RIDDOR Reporting: Your Guide to Keeping Workplaces Safe (and Avoiding Fines!)",
+    category: "Case Studies",
+    image: Compliance,
+    contentimg1: Com1,
+    contentimg2: Com2,
+    description:
+      "Hey, ever heard of RIDDOR? It might sound like something from a sci-fi flick, but it’s actually a key part of…",
+    path: "/blog/3",
+  },
+  // {
+  //   id: 2,
+  //   author: "David Brown",
+  //   date: "17-4-24",
+  //   title: "A Step-by-Step Guide to Achieving ISO 45001 Certification",
+  //   category: "Educational Articles",
+  //   image: ISO1,
+  //   contentimg1: ISO2,
+  //   contentimg2: ISO3,
+  //   description:
+  //     "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+  // },
   {
     id: 3,
     author: "David Brown",
@@ -76,6 +117,7 @@ export const blogs = [
     contentimg2: Com2,
     description:
       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+    path: "/blog/3",
   },
   {
     id: 4,
@@ -88,6 +130,7 @@ export const blogs = [
     contentimg2: T2,
     description:
       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+    path: "/blog/4",
   },
   {
     id: 5,
@@ -100,6 +143,7 @@ export const blogs = [
     contentimg2: Tes2,
     description:
       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
+    path: "/blog/5",
   },
   // Add more blog entries as needed
 ];
@@ -195,8 +239,7 @@ const BlogPage = () => {
                 <Grid item xs={12} sm={12} key={index}>
                   <Card
                     component={Link}
-                    to={`/blog/${blog.id}`} // Pass the ID in URL
-                    state={{ blog }} // Pass the whole blog object
+                    to={blog.path}
                     sx={{
                       background:
                         "linear-gradient(180deg, #FFFFFF 0%, rgba(155, 215, 199, 0.43) 100%)",

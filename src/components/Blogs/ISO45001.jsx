@@ -8,113 +8,32 @@ import {
   Twitter,
   LinkedIn,
 } from "@mui/icons-material";
-import { useNavigate, useParams, useLocation, Link } from "react-router-dom";
-import Ai1 from "../../assets/blogs/Ai1.png";
-import Ai2 from "../../assets/blogs/Ai2.png";
-import Article1 from "../../assets/blogs/AIHealth.jpg";
-import ISO1 from "../../assets/blogs/ISO1.png";
-import ISO2 from "../../assets/blogs/ISO2.png";
-import ISO3 from "../../assets/blogs/ISO3.png";
-import Compliance from "../../assets/blogs/Comchallenge.jpg";
-import Com1 from "../../assets/blogs/Comp1.png";
-import Com2 from "../../assets/blogs/Comp2.jpg";
-import Time from "../../assets/blogs/Time.jpg";
-import T1 from "../../assets/blogs/Time1.jpg";
-import T2 from "../../assets/blogs/Time2.jpg";
-import Testimonial from "../../assets/blogs/Testimonial.png";
-import Tes1 from "../../assets/blogs/Tes1.jpg";
-import Tes2 from "../../assets/blogs/Tes2.jpg";
-import { blogs } from "./Blogs";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { blogs } from "../pages/Blogs";
 
-// const blogs = [
-//   {
-//     id: 1,
-//     author: "David Brown",
-//     date: "17-4-24",
-//     title: "How AI is Transforming Health and Safety Compliance",
-//     category: "Educational Articles",
-//     image: Article1,
-//     contentimg1: Ai1,
-//     contentimg2: Ai2,
-//     description:
-//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-//   },
-//   {
-//     id: 2,
-//     author: "David Brown",
-//     date: "17-4-24",
-//     title: "A Step-by-Step Guide to Achieving ISO 45001 Certification",
-//     category: "Educational Articles",
-//     image: ISO1,
-//     contentimg1: ISO2,
-//     contentimg2: ISO3,
-//     description:
-//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-//   },
-//   {
-//     id: 3,
-//     author: "David Brown",
-//     date: "17-4-24",
-//     title: "Highlight businesses using DocRide to solve compliance challenges",
-//     category: "Case Studies",
-//     image: Compliance,
-//     contentimg1: Com1,
-//     contentimg2: Com2,
-//     description:
-//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-//   },
-//   {
-//     id: 4,
-//     author: "David Brown",
-//     date: "17-4-24",
-//     title: "Include measurable outcomes, such as time or cost savings.",
-//     category: "Case Studies",
-//     image: Time,
-//     contentimg1: T1,
-//     contentimg2: T2,
-//     description:
-//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-//   },
-//   {
-//     id: 5,
-//     author: "David Brown",
-//     date: "17-4-24",
-//     title: "Showcase user testimonials and reviews",
-//     category: "Success Stories",
-//     image: Testimonial,
-//     contentimg1: Tes1,
-//     contentimg2: Tes2,
-//     description:
-//       "The jobs report soundly beat expectations, with job gains broadly spread across the economy and about 60% higher…",
-//   },
-//   // Add more blog entries as needed
-// ];
 
-const IndivBlog = () => {
+const ISOAudit = () => {
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Smooth scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [blogPost, setBlogPost] = useState(location.state?.blog || null);
+  const [blogPost, setBlogPost] = useState(null);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
 
-  // Find the new blog based on the updated ID
   useEffect(() => {
-    const foundBlog = blogs.find((blog) => blog.id === parseInt(id, 10));
-
+    const foundBlog = blogs.find((blog) => blog.id === 2); // hardcoded ID
     if (foundBlog) {
       setBlogPost(foundBlog);
     } else {
       setBlogPost(null);
     }
-  }, [id]); // ✅ Ensures blog updates when the URL ID changes
+  }, []); // empty dependency array — this runs only once
 
   if (!blogPost) {
     return (
@@ -259,7 +178,7 @@ const IndivBlog = () => {
             mb: 2,
           }}
         >
-          Lorum Ipsum
+          Why should you focus on measuring the effectiveness?
         </Typography>
         <Typography
           variant="body1"
@@ -270,20 +189,15 @@ const IndivBlog = () => {
             mb: 3,
           }}
         >
-          Artificial Intelligence (AI) is revolutionizing health and safety
-          compliance in the workplace. With real-time monitoring, predictive
-          analytics, and automation, AI enhances safety protocols and reduces
-          risks. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-          ut imperdiet ipsum. Ut at ultricies nibh, ac porta ex. Nulla lacinia
-          tincidunt urna elementum rutrum. Morbi condimentum iaculis diam nec
-          consectetur. Maecenas at est eget leo pellentesque imperdiet.
-          Suspendisse a ipsum convallis, semper lectus dignissim, laoreet ante.
-          Ut dui augue, facilisis quis erat sit amet, tempus viverra magna.
-          Pellentesque habitant morbi tristique senectus et netus et malesuada
-          fames ac turpis egestas. Duis vitae commodo sem. Mauris suscipit eu mi
-          sed fermentum.
+          As an auditor, your role is to evaluate the organization’s OH&S
+          management system against ISO 45001 criteria, assessing both
+          conformity (compliance with requirements) and effectiveness
+          (achievement of intended outcomes). Efficiency, a critical aspect,
+          involves evaluating resource use, such as human and material inputs
+          for OHS controls, ensuring sustainability given business revenue
+          constraints. According to recent industry reports, effective auditing
+          can reduce workplace incidents by up to 30%.
         </Typography>
-
         {/* Quote Section */}
         <Box
           sx={{
@@ -329,8 +243,6 @@ const IndivBlog = () => {
             </Typography>
           </Box>
         </Box>
-
-        {/* Blog Title */}
         <Typography
           variant="h6"
           sx={{
@@ -339,9 +251,8 @@ const IndivBlog = () => {
             mb: 1,
           }}
         >
-          Lorum Ipsum
+          Clarifying Audits vs. Inspections: A Core Distinction
         </Typography>
-
         {/* Blog Intro Text */}
         <Typography
           variant="body1"
@@ -352,12 +263,17 @@ const IndivBlog = () => {
             mb: 4,
           }}
         >
-          Attracting good money and achieving financial success is within your
-          reach. With our innovative solutions and expert guidance, we empower
-          you to unlock your creative business potential and thrive in
-          today&apos;s competitive landscape.
+          The distinction between audits and inspections is often muddled. The
+          core difference is simple: inspections measure compliance, while
+          audits measure effectiveness. For example, an inspection might use a
+          checklist to verify risk controls over three months, marking “Yes” or
+          “No” for conformance. If all checks pass, it shows compliance, but if
+          an OHS incident occurs, like a worker injury despite conformance, an
+          audit is needed. Audits dig deeper, assessing why processes failed,
+          such as a risk assessment missing a major hazard, leading to revisions
+          in risk assessments, safe systems of work (SSOW), or inspection
+          checklists.
         </Typography>
-
         {/* Image & Text Layout */}
         <Box
           sx={{
@@ -482,12 +398,15 @@ const IndivBlog = () => {
                 color: "#484747",
               }}
             >
-              Vivamus aliquam quam mollis massa condimentum tempus. Maecenas
-              sollicitudin felis sit amet sem mattis laoreet. Cras lacinia ac
-              nisl non commodo. Fusce tincidunt laoreet elementum. In vel
-              gravida arcu. Orci varius natoque penatibus et magnis dis
-              parturient montes, nascetur ridiculus mus. Mauris vestibulum arcu
-              ut vestibulum porttitor.
+              To illustrate, consider a warehouse where forklifts are used. An
+              inspector might check daily maintenance records, operator safety
+              gear, and clear aisles, concluding compliance if all are
+              satisfactory. However, if a forklift accident happens, an auditor
+              would investigate why the system didn’t prevent it, perhaps
+              finding that operator training was inadequate or maintenance
+              checks missed critical faults. This distinction is crucial for
+              auditors, as inspections are quantitative, ticking boxes, while
+              audits are qualitative, evaluating system performance.
             </Typography>
           </Box>
 
@@ -534,7 +453,6 @@ const IndivBlog = () => {
             />
           </Box>
         </Box>
-
         <Typography
           variant="h6"
           sx={{
@@ -543,7 +461,7 @@ const IndivBlog = () => {
             pt: 4,
           }}
         >
-          Lorum Ipsum
+          Steps to Become an Effective and Efficient Auditor
         </Typography>
         <Typography
           variant="body1"
@@ -554,18 +472,523 @@ const IndivBlog = () => {
             mt: 1,
           }}
         >
-          Artificial Intelligence (AI) is revolutionizing health and safety
-          compliance in the workplace. With real-time monitoring, predictive
-          analytics, and automation, AI enhances safety protocols and reduces
-          risks. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-          ut imperdiet ipsum. Ut at ultricies nibh, ac porta ex. Nulla lacinia
-          tincidunt urna elementum rutrum. Morbi condimentum iaculis diam nec
-          consectetur. Maecenas at est eget leo pellentesque imperdiet.
-          Suspendisse a ipsum convallis, semper lectus dignissim, laoreet ante.
-          Ut dui augue, facilisis quis erat sit amet, tempus viverra magna.
-          Pellentesque habitant morbi tristique senectus et netus et malesuada
-          fames ac turpis egestas. Duis vitae commodo sem. Mauris suscipit eu mi
-          sed fermentum.
+          To excel as an ISO 45001 auditor, follow these steps, each tailored to
+          enhance both effectiveness and efficiency, with practical examples for
+          clarity:
+        </Typography>
+
+        {/* Effective and Efficient Auditor */}
+        <Box sx={{ mt: 4 }}>
+          {/* Step 1 checklist */}
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: "bold",
+              fontSize: { xs: "18px", sm: "20px", md: "22px" },
+              color: "#1E626C",
+              mb: 1,
+            }}
+          >
+            1. Understand the Auditee’s OHS Risk Profile
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "16px", sm: "18px" },
+              color: "#484747",
+              lineHeight: 1.7,
+              mb: 2,
+            }}
+          >
+            Familiarize yourself with the organization’s specific risks to
+            determine procedures, record-keeping, competence requirements, and
+            OHS risk controls, aiming for risks as low as reasonably practicable
+            (ALARP). For instance, a chemical plant faces toxic substance risks,
+            requiring detailed hazard controls, while an office might focus on
+            ergonomic and psychological risks like repetitive strain or stress.
+            This understanding shapes the audit’s depth and focus, ensuring
+            relevance.
+          </Typography>
+
+          {/* Step 2 checklist */}
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: "bold",
+              fontSize: { xs: "18px", sm: "20px", md: "22px" },
+              color: "#1E626C",
+              mb: 1,
+            }}
+          >
+            2. Map the OHS Management System
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "16px", sm: "18px" },
+              color: "#484747",
+              lineHeight: 1.7,
+              mb: 2,
+            }}
+          >
+            Create a mental or visual map of how the organization manages
+            preventive and reactive risk control strategies, ensuring a holistic
+            view:
+          </Typography>
+          {/* Subpoints for Step 2 */}
+          <Box sx={{}}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontWeight: "bold",
+                color: "#3A7B81",
+                fontSize: "18px",
+              }}
+            >
+              ▸ Preventive Strategies
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                ml: 1.5,
+                color: "#555",
+                fontSize: "16px",
+                mb: 3,
+                pl: 1,
+              }}
+            >
+              Assess if all activities are covered in activity-specific risk
+              assessments, if identified hazards reflect actual foreseeable
+              risks, if risks are correctly translated, if controls are
+              adequate, if evidence shows controls are applied, if SSOW or
+              method statements are available for workers and supervisors, if
+              inspections ensure procedure adherence, if observations and
+              non-conformities (NCRs) are identified, and if corrective actions
+              address root causes effectively. For example, verify if a
+              manufacturing plant’s risk assessment for machine operation
+              includes all foreseeable hazards like pinch points and if workers
+              follow SSOW.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontWeight: "bold",
+                color: "#3A7B81",
+                fontSize: "18px",
+              }}
+            >
+              ▸ Reactive Strategies
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                ml: 1.5,
+                color: "#555",
+                fontSize: "16px",
+                mb: 3,
+                pl: 1,
+              }}
+            >
+              Evaluate systems for reporting and recording OHS incidents (e.g.,
+              near misses, unsafe acts, conditions, dangerous occurrences) and
+              dealing with them (e.g., incident investigations, corrective
+              actions). Review incident reports qualitatively, assessing
+              findings, root causes, and recommendations against incident
+              significance. For instance, if a near miss involved a forklift,
+              check if the investigation identified operator training gaps and
+              if corrective actions prevent recurrence.
+            </Typography>
+          </Box>
+
+          {/* Step 3 checklist */}
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: "bold",
+              fontSize: { xs: "18px", sm: "20px", md: "22px" },
+              color: "#1E626C",
+              mb: 1,
+            }}
+          >
+            3. Design a Checklist for Efficiency and Effectiveness
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "16px", sm: "18px" },
+              color: "#484747",
+              lineHeight: 1.7,
+              mb: 2,
+            }}
+          >
+            Use a structured checklist to guide your audit, ensuring you cover
+            all necessary areas efficiently. The checklist should include:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              color: "#555",
+              lineHeight: 1.7,
+              mb: 3,
+              pl: 3,
+            }}
+          >
+            <strong>Criteria:</strong> Clause No., Look In (Document or
+            Process), Look For, Specific Questions to Elicit Objective Evidence.
+          </Typography>
+          <Box sx={{ mb: 3 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontWeight: "bold",
+                color: "#2E8C7B",
+                fontSize: "18px",
+                mb: 1,
+              }}
+            >
+              ▸ Example for Preventive Strategies:
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: "#555", lineHeight: 1.7, pl: 3 }}
+            >
+              <strong>Criteria:</strong> Risk Assessments (Clause 6)
+              <br />
+              <strong>Look In:</strong> Risk assessment documents, employee
+              interviews
+              <br />
+              <strong>Look For:</strong> Comprehensive hazard identification,
+              accurate risk evaluation, appropriate controls
+              <br />
+              <strong>Specific Questions:</strong> How are risk assessments
+              conducted? Who is involved? Can you show me a sample for a
+              high-risk activity? How are controls implemented and monitored?
+            </Typography>
+          </Box>
+          <Box sx={{ mb: 3 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontWeight: "bold",
+                color: "#2E8C7B",
+                fontSize: "18px",
+                mb: 1,
+              }}
+            >
+              ▸ Example for Reacttive Strategies:
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: "#555", lineHeight: 1.7, pl: 3 }}
+            >
+              <strong>Criteria:</strong> Incident Reporting and Investigation
+              (Clause 10)
+              <br />
+              <strong>Look In:</strong> Incident reports, investigation records
+              <br />
+              <strong>Look For:</strong> Timely reporting, thorough
+              investigations, effective corrective actions
+              <br />
+              <strong>Specific Questions:</strong> What is the process for
+              reporting incidents? Can I see some incident reports and
+              investigations? How are corrective actions tracked?
+            </Typography>
+          </Box>
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "16px", sm: "18px" },
+              color: "#484747",
+              lineHeight: 1.7,
+              mb: 2,
+            }}
+          >
+            This checklist ensures you elicit objective evidence, making audits
+            efficient and thorough.
+          </Typography>
+
+          {/* Step 4 checklist */}
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: "bold",
+              fontSize: { xs: "18px", sm: "20px", md: "22px" },
+              color: "#1E626C",
+              mb: 1,
+            }}
+          >
+            4. Measure Conformity and Effectiveness:
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: { xs: "16px", sm: "18px" },
+              color: "#484747",
+              lineHeight: 1.7,
+              mb: 2,
+            }}
+          >
+            Conformity is about meeting ISO 45001 requirements, quantifiable
+            through metrics like the number of inspections conducted or NCRs
+            closed. Effectiveness, however, requires qualitative review,
+            focusing on outcomes like incident reduction or system
+            responsiveness. For example, a company may conform by conducting
+            inspections and taking corrective actions, but effectiveness is
+            gauged by reviewing CA records. If an NCR states, “Worker moved
+            under suspended load violating SSOW,” and the root cause is “Worker
+            unaware of SSOW,” but corrective action is just providing the SSOW,
+            it misses the systemic lapse (e.g., inadequate induction training).
+            Audits issue NCRs for missing or incomplete procedures and
+            observations for ineffective processes, ensuring a balanced
+            approach.
+          </Typography>
+        </Box>
+
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: { xs: "22px", sm: "26px", md: "30px" },
+            fontWeight: "bold",
+            pt: 4,
+            mb: 2,
+          }}
+        >
+          Measuring Efficiency and Effectiveness: Why They Matter
+        </Typography>
+        <Box sx={{}}>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Efficiency:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            Refers to optimal resource use for OHS, such as human resources
+            (staff time) and material resources (safety equipment). Inefficient
+            systems can drain resources, impacting the organization’s
+            sustainability, especially given business revenue constraints. For
+            example, if a company spends more on OHS training without improved
+            performance, it’s less efficient. Auditors can review budgets,
+            expenditures, and resource allocation, checking for waste or
+            optimization, like benchmarking against industry standards.
+            Efficiency ensures OHS doesn’t compromise profitability, aligning
+            with business goals.
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Effectiveness:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            The core reason for OHS systems is to protect workers from hazards
+            and risks. Audits measure how well the system achieves this,
+            focusing on qualitative outcomes like incident trends, worker
+            engagement, and system responsiveness. For instance, assess if risk
+            assessments prevent incidents by reviewing incident rates or if
+            corrective actions stop NCR recurrence, ensuring the system evolves.
+            Effectiveness is about outcomes, not just processes, ensuring worker
+            safety is prioritized.
+          </Typography>
+        </Box>
+
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: { xs: "22px", sm: "26px", md: "30px" },
+            fontWeight: "bold",
+            pt: 4,
+            mb: 2,
+          }}
+        >
+          Common Challenges and How to Overcome Them
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            fontSize: { xs: "16px", sm: "18px" },
+            color: "#484747",
+            lineHeight: 1.7,
+            mb: 2,
+          }}
+        >
+          Auditors face pitfalls, but with specific examples, these can be
+          navigated:
+        </Typography>
+        <Box sx={{}}>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Focusing Only on Documentation:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            Don’t just review papers; observe practices. For instance, a
+            documented SSOW for machine guarding is useless if workers bypass
+            guards—observe to verify.
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Lack of Objectivity:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            Stay impartial; don’t let auditee pressure sway you. If they claim
+            all risks are controlled, verify with worker interviews.
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Insufficient Sampling:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            Ensure broad coverage. If auditing a multi-site firm, sample
+            high-risk sites like construction areas, not just offices.
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Not Understanding Context:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            Tailor to the auditee. A chemical plant needs detailed hazard
+            controls, while a retail store focuses on slip risks.F
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Poor Communication:
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            Ask clear questions to gather evidence, like, “How do you ensure
+            workers follow SSOW?” not vague queries like “Is safety good?”
+          </Typography>
+        </Box>
+
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: { xs: "22px", sm: "26px", md: "30px" },
+            fontWeight: "bold",
+            pt: 4,
+            mb: 2,
+          }}
+        >
+          Conclusion
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            fontSize: { xs: "16px", sm: "18px" },
+            color: "#484747",
+            lineHeight: 1.7,
+            mb: 2,
+          }}
+        >
+          Becoming an effective and efficient ISO 45001 auditor requires a deep
+          understanding of the standard, the ability to differentiate between
+          auditing and inspecting, and a systematic approach to evaluating both
+          conformity and effectiveness. By following these steps, using
+          checklists, and overcoming challenges with practical tips, you can
+          ensure your auditing practices are robust, contributing positively to
+          organizational safety and efficiency. This guide is your roadmap to
+          mastering ISO 45001 auditing, ensuring worker protection and business
+          sustainability.
         </Typography>
       </Container>
 
@@ -936,4 +1359,4 @@ const IndivBlog = () => {
   );
 };
 
-export default IndivBlog;
+export default ISOAudit;

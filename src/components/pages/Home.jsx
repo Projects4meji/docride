@@ -44,6 +44,10 @@ import leader from "../../assets/icons/leadership.png";
 const slides = [Slide1, Slide2, Slide3];
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   const [open, setOpen] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);

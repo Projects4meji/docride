@@ -102,7 +102,7 @@ const categoryImages = {
 
 const FAQ = () => {
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ Smooth scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const [searchTerm, setSearchTerm] = useState("");

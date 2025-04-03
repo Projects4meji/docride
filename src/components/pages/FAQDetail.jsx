@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
@@ -150,6 +150,10 @@ const faqData = {
 };
 
 const FAQDetail = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   const { categoryId } = useParams();
   const navigate = useNavigate();
   const faqs = faqData[categoryId] || [];
@@ -244,7 +248,7 @@ const FAQDetail = () => {
                         categoryId === cat.id ? "#96E0CC" : "transparent", // ✅ Selected item background
                       "&:hover": {
                         bgcolor: "#96E0CC",
-                        color: "#ffffff" // ✅ Hover effect on mobile
+                        color: "#ffffff", // ✅ Hover effect on mobile
                       },
                     }}
                   >

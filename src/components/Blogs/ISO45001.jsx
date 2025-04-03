@@ -11,7 +11,6 @@ import {
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { blogs } from "../pages/Blogs";
 
-
 const ISOAudit = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -742,6 +741,61 @@ const ISOAudit = () => {
             observations for ineffective processes, ensuring a balanced
             approach.
           </Typography>
+        </Box>
+
+        {/* Contact Section */}
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 1,
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            borderRadius: "30px",
+            alignItems: "center",
+            justifyContent: "space-around",
+            bgcolor: "#0d474d",
+            color: "white",
+            textAlign: { xs: "center", md: "left" },
+            py: { xs: 4, md: 6 },
+            px: { xs: 2},
+            mt: 4,
+          }}
+        >
+          {/* Text Section */}
+          <Typography
+            sx={{
+              fontSize: { xs: "24px", sm: "30px", md: "40px" },
+              maxWidth: { xs: "100%", md: "60%" },
+              mb: { xs: 3, md: 0 },
+            }}
+          >
+            Develop and Deploy your{" "}
+            <span style={{ color: "#1DA196" }}>ISO 45001</span> compliant{" "}
+            <span style={{ color: "#68B9BA" }}>OHS Management System</span> with 10X speed using AI
+          </Typography>
+
+          {/* Contact Button */}
+          <Button
+            variant="contained"
+            component={Link}
+            to="/"
+            sx={{
+              background: "linear-gradient(to right, #66C2A5, #2C8A7A)",
+              borderRadius: "30px",
+              padding: { xs: "10px 24px", sm: "12px 32px" },
+              fontSize: { xs: "14px", sm: "18px" },
+              textTransform: "none",
+              border: "2px solid #2C8A7A",
+              transition: "all 0.4s ease-in-out",
+              "&:hover": {
+                background: "#032C34",
+                border: "2px solid #2C8A7A",
+                color: "#ffffff",
+              },
+            }}
+          >
+            Let's Go
+          </Button>
         </Box>
 
         <Typography

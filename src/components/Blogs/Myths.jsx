@@ -11,7 +11,7 @@ import {
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { blogs } from "../pages/Blogs";
 
-const OHSManage = () => {
+const Myths = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -26,7 +26,7 @@ const OHSManage = () => {
   const [blogPost, setBlogPost] = useState(null);
 
   useEffect(() => {
-    const foundBlog = blogs.find((blog) => blog.id === 3); // hardcoded ID
+    const foundBlog = blogs.find((blog) => blog.id === 4); // hardcoded ID
     if (foundBlog) {
       setBlogPost(foundBlog);
     } else {
@@ -177,7 +177,8 @@ const OHSManage = () => {
             mb: 2,
           }}
         >
-          Health and Safety Records: Burden or Lifeline?
+          Separating Fact from Fiction
+          <br /> Common Misconceptions About ISO 45001
         </Typography>
         <Typography
           variant="body1"
@@ -188,124 +189,46 @@ const OHSManage = () => {
             mb: 3,
           }}
         >
-          This simple idea is key to workplace safety. For health and safety, it
-          means tracking things like accident rates or safety training to make
-          work safer. But how do you do that? You need an OHS management system.
+          ISO 45001, the international standard for occupational health and
+          safety, often gets a bad rap thanks to swirling myths and
+          misconceptions. Whether you’re a small business owner or manage a
+          sprawling corporation, these misunderstandings can make you hesitant
+          to pursue certification. In this article, I’m diving deep into the
+          myths surrounding ISO 45001, using specific examples to set the record
+          straight. We’re not here to sell you on the benefits; those will come
+          in another piece, but to clear the fog around what this standard
+          really means. Let’s bust some myths and reveal the truth about ISO
+          45001 certification.
         </Typography>
-        {/* Quote Section */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "row", md: "row" },
-            alignItems: "flex-start",
-            gap: 2,
-            mt: 4,
-            mb: 4,
-            pl: { xs: 2, md: 8 },
-          }}
-        >
-          {/* Divider Line */}
-          <Box
-            sx={{
-              width: "3px",
-              height: "auto",
-              minHeight: "60px",
-              bgcolor: "#1E626B",
-              display: { xs: "none", md: "block" },
-            }}
-          />
 
-          {/* Quote Text */}
-          <Box sx={{ maxWidth: "90%" }}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontStyle: "italic",
-                fontSize: { xs: "18px", md: "34px" },
-                lineHeight: 1.6,
-              }}
-            >
-              “ If you can measure it, you can improve it. ”
-            </Typography>
-          </Box>
-        </Box>
-
-        <Typography
-          variant="body1"
-          sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "16px", sm: "18px" },
-            color: "#484747",
-            mb: 3,
-          }}
-        >
-          An OHS management system is a plan that says who does what, when,
-          where, and how to keep workers safe. It’s like a roadmap for safety,
-          covering:
-        </Typography>
-        <Box sx={{ pl: 3, color: "#555" }}>
-          <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
-            <li>
-              <strong>Who:</strong> Top managers set safety goals, safety
-              officers handle daily tasks, and workers follow rules.
-            </li>
-            <li>
-              <strong>What:</strong> Identify hazards, assess risks, put
-              controls in place, and keep improving.
-            </li>
-            <li>
-              <strong>When:</strong> Regular safety checks happen weekly, risk
-              assessments yearly, and training as needed.
-            </li>
-            <li>
-              <strong>Where:</strong> Safety applies everywhere, from factory
-              floors to office desks.
-            </li>
-            <li>
-              <strong>How:</strong> Use inspections, training sessions, and
-              incident reports to manage safety.
-            </li>
-          </ul>
-        </Box>
-
-        <Typography
-          variant="body1"
-          sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "16px", sm: "18px" },
-            color: "#484747",
-            mb: 3,
-          }}
-        >
-          Without this system, safety efforts can be messy and inconsistent,
-          leading to more accidents. For example, a construction site without a
-          system might have random safety talks, resulting in frequent falls.
-          With a system, they’d have clear rules, regular checks, and fewer
-          incidents.
-        </Typography>
         <Typography
           variant="h6"
           sx={{
-            fontSize: { xs: "22px", sm: "26px", md: "30px" },
+            fontSize: { xs: "24px", sm: "28px", md: "32px" },
             fontWeight: "bold",
-            mb: 1,
+            mb: 2,
           }}
         >
-          The Importance of Record-Keeping
+          Clearing Up Common Misconceptions
         </Typography>
-        {/* Blog Intro Text */}
         <Typography
           variant="body1"
           sx={{
             lineHeight: 1.8,
             fontSize: { xs: "16px", sm: "18px" },
             color: "#484747",
-            mb: 2,
+            mb: 3,
           }}
         >
-          Records are the backbone of this system. They help in two ways:
+          Misconceptions about ISO 45001 can stop businesses in their tracks
+          before they even start. From assumptions about cost to confusion over
+          its scope, these myths often exaggerate the challenges of
+          implementation. Below, we tackle the most common ones head-on with
+          real-world examples tailored to ISO 45001, the go-to standard for
+          occupational health and safety.
         </Typography>
         <Box sx={{}}>
+          {/* Myth 1 */}
           <Typography
             variant="body1"
             sx={{
@@ -314,7 +237,7 @@ const OHSManage = () => {
               fontSize: "18px",
             }}
           >
-            ▸ Improving Safety:
+            ▸ Myth 1: ISO 45001 Certification Guarantees Product Safety
           </Typography>
           <Typography
             variant="body2"
@@ -326,11 +249,29 @@ const OHSManage = () => {
               pl: 1,
             }}
           >
-            By keeping records of incidents, inspections, and training,
-            businesses can spot patterns. Say a warehouse notices many slips on
-            wet floors from records; they can fix it with better mats, cutting
-            accidents by 50%.
+            A common misunderstanding is that ISO 45001 certification ensures
+            that the products a company produces are safe for customers. This is
+            not true. ISO 45001 is specifically focused on occupational health
+            and safety, meaning it protects the workers involved in production,
+            not the quality or safety of the products themselves.
           </Typography>
+          <Box sx={{ pl: 1, color: "#555" }}>
+            <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+              <li>
+                <strong>Why it’s false:</strong> ISO 45001 aims to create a safe
+                working environment by addressing workplace hazards such as
+                unsafe machinery, poor ergonomics, or risky procedures. It does
+                not cover product design, manufacturing quality, or consumer
+                safety, which are managed by other standards like ISO 9001 for
+                quality management. The confusion often stems from the word
+                "safety" in the standard’s title, but its scope is limited to
+                the well-being of employees, not the reliability or safety of
+                what they produce.
+              </li>
+            </ul>
+          </Box>
+
+          {/* Myth 2 */}
           <Typography
             variant="body1"
             sx={{
@@ -339,7 +280,8 @@ const OHSManage = () => {
               fontSize: "18px",
             }}
           >
-            ▸ Proving Compliance:
+            ▸ Myth 2: ISO 45001 Will Just Add Documentation Burden with No Real
+            Impact
           </Typography>
           <Typography
             variant="body2"
@@ -351,12 +293,123 @@ const OHSManage = () => {
               pl: 1,
             }}
           >
-            Records like risk assessments and training logs show regulators the
-            business follows laws. During an audit, a manufacturing plant’s
-            records proved they trained workers on machine safety, avoiding
-            fines.
+            Many skeptics claim that ISO 45001 is nothing more than a tedious
+            paperwork exercise with little practical benefit. This is incorrect.
+            The standard does not require excessive documentation—only evidence
+            of conformance, which businesses often already maintain for legal or
+            operational purposes. It provides a structured framework to enhance
+            occupational health and safety management.
           </Typography>
+          <Box sx={{ pl: 1, color: "#555" }}>
+            <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+              <li>
+                <strong>Why it’s false:</strong> ISO 45001 focuses on
+                documenting what is necessary to demonstrate that safety
+                processes are in place and effective, such as risk assessments
+                or incident logs. It does not mandate recording every minor
+                detail. Far from being a pointless burden, the standard
+                organizes existing safety efforts into a systematic approach
+                that helps identify weaknesses, prevent incidents, and improve
+                overall workplace safety. The myth overlooks how this structure
+                adds value by making safety management more efficient and
+                proactive.
+              </li>
+            </ul>
+          </Box>
+
+          {/* Myth 3 */}
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Myth 3: If We Are Certified, We Can Put the ISO Logo on Our
+            Product or Website
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            Many organizations believe that once they achieve ISO certification,
+            they can freely display the ISO logo on their products, website, or
+            marketing materials to showcase their accomplishment. However, this
+            is a common misunderstanding.
+          </Typography>
+          <Box sx={{ pl: 1, color: "#555" }}>
+            <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+              <li>
+                <strong>Why it’s false:</strong> ISO certification demonstrates
+                that an organization meets the requirements of a specific
+                standard, such as ISO 9001 for quality management or ISO 45001
+                for occupational health and safety. However, the ISO logo is a
+                registered trademark, and its use is tightly regulated by ISO
+                itself. Certified organizations are not permitted to use the ISO
+                logo for promotional purposes. Instead, they should use the logo
+                of the certification body that audited and certified them. This
+                ensures transparency about who verified their compliance and
+                protects the credibility of the ISO brand. Unauthorized use of
+                the ISO logo can lead to legal consequences and confusion about
+                the certification process. To correctly communicate their
+                certified status, organizations should consult their
+                certification body for guidance on appropriate branding.
+              </li>
+            </ul>
+          </Box>
+
+          {/* Myth 4 */}
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: "bold",
+              color: "#3A7B81",
+              fontSize: "18px",
+            }}
+          >
+            ▸ Myth 4: ISO 45001 Is Only for Large Organizations
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              ml: 1.5,
+              color: "#555",
+              fontSize: "16px",
+              mb: 3,
+              pl: 1,
+            }}
+          >
+            Some believe that ISO 45001 is exclusively for large corporations
+            with extensive resources and personnel. This is a misconception. The
+            standard is intentionally scalable, making it suitable for
+            organizations of any size, from small businesses to global
+            enterprises.
+          </Typography>
+          <Box sx={{ pl: 1, color: "#555" }}>
+            <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+              <li>
+                <strong>Why it’s false:</strong> ISO 45001 is designed with
+                flexibility in mind, allowing companies to adapt its
+                requirements to their specific scale and risks. It does not
+                demand complex systems or large budgets; instead, it can be
+                implemented with simple, practical measures tailored to an
+                organization’s needs. For instance, a small business might focus
+                on basic safety checks, while a larger firm might integrate more
+                detailed processes. The myth arises from the assumption that
+                international standards are inherently complex, but ISO 45001’s
+                adaptability disproves this.
+              </li>
+            </ul>
+          </Box>
         </Box>
+
         {/* Image & Text Layout */}
         <Box
           sx={{
@@ -470,36 +523,193 @@ const OHSManage = () => {
               width: "100%",
               textAlign: "left",
               order: { xs: 2, md: 0 }, // ✅ Order 2 on xs, default on md+
-              mt: { xs: 2, md: 4 }, // ✅ Add spacing below images
+              mt: { xs: 2}, // ✅ Add spacing below images
             }}
           >
+            {/* Myth 5 */}
             <Typography
               variant="body1"
               sx={{
-                lineHeight: 1.8,
-                fontSize: { xs: "16px", sm: "18px" },
-                color: "#484747",
+                fontWeight: "bold",
+                color: "#3A7B81",
+                fontSize: "18px",
               }}
             >
-              For instance, a plant kept detailed machine maintenance logs and,
-              when a rare failure caused an injury, records showed recent
-              checks, helping identify the issue quickly. Another time, during a
-              legal claim, a construction firm’s incident reports showed
-              proactive safety steps, reducing liability.
+              ▸ Myth 5: Implementing ISO 45001 Is Too Expensive and
+              Time-Consuming
             </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                ml: 1.5,
+                color: "#555",
+                fontSize: "16px",
+                mb: 3,
+                pl: 1,
+              }}
+            >
+              The perception that implementing ISO 45001 requires prohibitive
+              costs and time often deters organizations. While there is an
+              initial investment, this myth exaggerates the effort needed. With
+              strategic planning, implementation can be both affordable and
+              efficient.
+            </Typography>
+            <Box sx={{ pl: 1, color: "#555" }}>
+              <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+                <li>
+                  <strong>Why it’s false:</strong> The costs of ISO 45001—such
+                  as training, audits, or system setup—are manageable when
+                  businesses build on existing safety practices rather than
+                  starting from scratch. The standard encourages using resources
+                  already in place, minimizing additional expenses. Moreover,
+                  the long-term benefits, like reduced accident-related costs,
+                  lower insurance premiums, and improved productivity, often
+                  offset the upfront investment. The myth fails to account for
+                  these practical efficiencies and the value of a safer
+                  workplace over time.
+                </li>
+              </ul>
+            </Box>
+
+            {/* Contact Section */}
+            <Box
+              sx={{
+                position: "relative",
+                zIndex: 1,
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                borderRadius: "30px",
+                alignItems: "center",
+                justifyContent: "space-around",
+                bgcolor: "#0d474d",
+                color: "white",
+                textAlign: { xs: "center", md: "left" },
+                py: { xs: 4, md: 6 },
+                px: { xs: 2 },
+                my: 4,
+              }}
+            >
+              {/* Text Section */}
+              <Typography
+                sx={{
+                  fontSize: { xs: "24px", sm: "30px", md: "40px" },
+                  maxWidth: { xs: "100%", md: "60%" },
+                  mb: { xs: 3, md: 0 },
+                }}
+              >
+                Develop and Deploy your{" "}
+                <span style={{ color: "#1DA196" }}>ISO 45001</span> compliant{" "}
+                <span style={{ color: "#68B9BA" }}>OHS Management System</span>{" "}
+                with 10X speed using AI
+              </Typography>
+
+              {/* Contact Button */}
+              <Button
+                variant="contained"
+                component={Link}
+                to="/"
+                sx={{
+                  background: "linear-gradient(to right, #66C2A5, #2C8A7A)",
+                  borderRadius: "30px",
+                  padding: { xs: "10px 24px", sm: "12px 32px" },
+                  fontSize: { xs: "14px", sm: "18px" },
+                  textTransform: "none",
+                  border: "2px solid #2C8A7A",
+                  transition: "all 0.4s ease-in-out",
+                  "&:hover": {
+                    background: "#032C34",
+                    border: "2px solid #2C8A7A",
+                    color: "#ffffff",
+                  },
+                }}
+              >
+                Let's Go
+              </Button>
+            </Box>
+
+            {/* Myth 6 */}
             <Typography
               variant="body1"
               sx={{
-                lineHeight: 1.8,
-                fontSize: { xs: "16px", sm: "18px" },
-                color: "#484747",
-                mt: 2,
+                fontWeight: "bold",
+                color: "#3A7B81",
+                fontSize: "18px",
               }}
             >
-              In short, an OHS management system is vital to measure and improve
-              safety, and records ensure you can prove it and keep getting
-              better.
+              ▸ Myth 6: Certification Means Perfect Safety Records
             </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                ml: 1.5,
+                color: "#555",
+                fontSize: "16px",
+                mb: 3,
+                pl: 1,
+              }}
+            >
+              Many assume that ISO 45001 certification guarantees a workplace
+              with no accidents or safety incidents. This is not the case. The
+              standard is about establishing a system for managing and improving
+              safety, not achieving an unattainable perfect record.
+            </Typography>
+            <Box sx={{ pl: 1, color: "#555" }}>
+              <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+                <li>
+                  <strong>Why it’s false:</strong> ISO 45001 provides a
+                  framework for identifying hazards, reducing risks, and
+                  responding to incidents effectively, but it does not eliminate
+                  all possibility of accidents. No workplace can be entirely
+                  risk-free due to human error, equipment failure, or unforeseen
+                  events. The standard’s goal is continuous improvement—ensuring
+                  that safety processes evolve and strengthen over time. This
+                  myth misrepresents certification as a promise of perfection,
+                  when it’s really about ongoing risk management and progress.
+                </li>
+              </ul>
+            </Box>
+
+            {/* Myth 7 */}
+            <Typography
+              variant="body1"
+              sx={{
+                fontWeight: "bold",
+                color: "#3A7B81",
+                fontSize: "18px",
+              }}
+            >
+              ▸ Myth 7: You Need to Document Everything to Get Certified
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                ml: 1.5,
+                color: "#555",
+                fontSize: "16px",
+                mb: 3,
+                pl: 1,
+              }}
+            >
+              Fear of overwhelming paperwork fuels the idea that ISO 45001
+              requires documenting every single action or process. In reality,
+              the standard only calls for specific, relevant records, not an
+              exhaustive paper trail.
+            </Typography>
+            <Box sx={{ pl: 1, color: "#555" }}>
+              <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+                <li>
+                  <strong>Why it’s false:</strong> ISO 45001 specifies
+                  documentation that proves the safety management system is
+                  functioning—like training records, audit findings, or risk
+                  evaluations—but leaves flexibility for organizations to
+                  determine what’s essential based on their operations. The
+                  focus is on quality, not quantity, ensuring that records
+                  support effective safety management without unnecessary
+                  excess. The myth exaggerates the requirements, assuming a
+                  bureaucratic overload that the standard deliberately avoids.
+                </li>
+              </ul>
+            </Box>
           </Box>
 
           {/* Right Image (Appears Third on xs, Hidden on md+) */}
@@ -508,6 +718,7 @@ const OHSManage = () => {
               width: { xs: "100%", md: "48%" },
               height: { xs: "auto", md: "300px" },
               borderRadius: "10px",
+              mb:4,
               boxShadow: 3,
               overflow: "hidden",
               position: "relative",
@@ -545,93 +756,89 @@ const OHSManage = () => {
             />
           </Box>
         </Box>
-
-        {/* Contact Section */}
-        <Box
-          sx={{
-            position: "relative",
-            zIndex: 1,
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            borderRadius: "30px",
-            alignItems: "center",
-            justifyContent: "space-around",
-            bgcolor: "#0d474d",
-            color: "white",
-            textAlign: { xs: "center", md: "left" },
-            py: { xs: 4, md: 6 },
-            px: { xs: 2 },
-            mt: 4,
-          }}
-        >
-          {/* Text Section */}
-          <Typography
-            sx={{
-              fontSize: { xs: "24px", sm: "30px", md: "40px" },
-              maxWidth: { xs: "100%", md: "60%" },
-              mb: { xs: 3, md: 0 },
-            }}
-          >
-            Develop and Deploy your{" "}
-            <span style={{ color: "#1DA196" }}>ISO 45001</span> compliant{" "}
-            <span style={{ color: "#68B9BA" }}>OHS Management System</span> with
-            10X speed using AI
-          </Typography>
-
-          {/* Contact Button */}
-          <Button
-            variant="contained"
-            component={Link}
-            to="/"
-            sx={{
-              background: "linear-gradient(to right, #66C2A5, #2C8A7A)",
-              borderRadius: "30px",
-              padding: { xs: "10px 24px", sm: "12px 32px" },
-              fontSize: { xs: "14px", sm: "18px" },
-              textTransform: "none",
-              border: "2px solid #2C8A7A",
-              transition: "all 0.4s ease-in-out",
-              "&:hover": {
-                background: "#032C34",
-                border: "2px solid #2C8A7A",
-                color: "#ffffff",
-              },
-            }}
-          >
-            Let's Go
-          </Button>
-        </Box>
-
-        <Typography
-          variant="h6"
-          sx={{
-            fontSize: { xs: "22px", sm: "26px", md: "30px" },
-            fontWeight: "bold",
-            pt: 4,
-          }}
-        >
-          Comprehensive Guide: The Rationale Behind OHS Management Systems and
-          Record-Keeping
-        </Typography>
+        {/* Myth 8 */}
         <Typography
           variant="body1"
           sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "16px", sm: "18px" },
-            color: "#484747",
-            mt: 1,
+            fontWeight: "bold",
+            color: "#3A7B81",
+            fontSize: "18px",
           }}
         >
-          ISO 45001, developed by the International Organization for
-          Standardization (ISO), is a voluntary standard for occupational health
-          and safety (OH&S) management systems, replacing OHSAS 18001. It aims
-          to reduce workplace injuries and diseases, promoting a safer work
-          environment through a systematic approach. This section provides a
-          detailed exploration of why OHS management systems are necessary, what
-          they entail, and why businesses must retain records, tailored for
-          health and safety professionals, with enhanced clarity, appeal, and
-          engagement, structured logically for ease of use.
+          ▸ Myth 8: ISO 45001 Is Only for High-Risk Industries
         </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            ml: 1.5,
+            color: "#555",
+            fontSize: "16px",
+            mb: 3,
+            pl: 1,
+          }}
+        >
+          This myth suggests that ISO 45001 is relevant only to industries with
+          obvious dangers, like construction or manufacturing. However, the
+          standard applies to any organization, regardless of its risk profile,
+          because workplace hazards exist everywhere.
+        </Typography>
+        <Box sx={{ pl: 1, color: "#555" }}>
+          <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+            <li>
+              <strong>Why it’s false:</strong> ISO 45001 addresses occupational
+              health and safety risks, which are present in all work
+              environments, not just high-risk ones. In addition to physical
+              hazards like heavy machinery, it covers subtler risks such as
+              repetitive strain injuries, workplace stress, or slips and falls,
+              which can occur in offices, retail spaces, or other "low-risk"
+              settings. The standard’s broad applicability ensures that every
+              organization can benefit from a systematic approach to safety,
+              debunking the idea that it’s limited to certain sectors.
+            </li>
+          </ul>
+        </Box>
+
+        {/* Myth 9 */}
+        <Typography
+          variant="body1"
+          sx={{
+            fontWeight: "bold",
+            color: "#3A7B81",
+            fontSize: "18px",
+          }}
+        >
+          ▸ Myth 9: Certification Is a One-Time Event with No Ongoing
+          Requirements
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            ml: 1.5,
+            color: "#555",
+            fontSize: "16px",
+            mb: 3,
+            pl: 1,
+          }}
+        >
+          Some think that once ISO 45001 certification is achieved, the work is
+          done. This is a fantasy. Maintaining certification requires continuous
+          effort, including regular audits and improvements.
+        </Typography>
+        <Box sx={{ pl: 1, color: "#555" }}>
+          <ul style={{ marginTop: 0, paddingLeft: "1.5rem" }}>
+            <li>
+              <strong>Why it’s false:</strong> ISO 45001 is built on the
+              principle of continual improvement, meaning that certification is
+              not a static achievement but an ongoing commitment. Organizations
+              must conduct internal audits, undergo external surveillance
+              audits, and update their safety systems to address new risks or
+              regulatory changes. This ensures that safety remains effective and
+              relevant over time. The myth of a one-time effort ignores the
+              dynamic, living nature of the standard, which drives sustained
+              safety performance.
+            </li>
+          </ul>
+        </Box>
       </Container>
 
       {/* Divider Line */}
@@ -1001,4 +1208,4 @@ const OHSManage = () => {
   );
 };
 
-export default OHSManage;
+export default Myths;

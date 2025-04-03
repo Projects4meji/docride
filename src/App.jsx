@@ -22,6 +22,7 @@ import Checkout from "./components/pages/Checkout";
 import OHSManage from "./components/Blogs/OHSManage";
 import ISOAudit from "./components/Blogs/ISO45001";
 import RIDReport from "./components/Blogs/RIDReport";
+import Myths from "./components/Blogs/Myths";
 
 // Custom Theme
 const theme = createTheme({
@@ -54,6 +55,7 @@ function App() {
           <Route path="/blog/1" element={<OHSManage />} />
           <Route path="/blog/2" element={<ISO45001 />} />
           <Route path="/blog/3" element={<RIDReport />} />
+          <Route path="/blog/4" element={<Myths />} />
           <Route path="/benefits" element={<Benefits />} />
           <Route path="/modules" element={<Modules />} />
           <Route path="/contact" element={<Contact />} />

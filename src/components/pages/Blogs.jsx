@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import {
   Box,
   Container,
@@ -196,274 +197,288 @@ const BlogPage = () => {
   );
 
   return (
-    <Box sx={{ bgcolor: "#F8F8F8", pb: 5 }}>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          bgcolor: "#ffffff",
-          width: "100%",
-          height: { xs: "40vh", sm: "35vh", md: "40vh" },
-          backgroundImage: `url(${BlogHeroImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          px: { xs: 3, sm: 6, md: 16, lg: 20 },
-          py: { xs: 2, sm: 4 },
-        }}
-      >
-        <Typography
-          variant="h4"
+    <>
+      <Helmet>
+        <title>DocRide Blog – ISO 45001 & OHS Management Insights</title>
+        <meta
+          name="description"
+          content="Explore expert-written articles and case studies on ISO 45001, OHS management systems, incident reporting, and workplace safety."
+        />
+        <meta
+          name="keywords"
+          content="ISO 45001, OHS management system, Incident reporting, Incident investigation"
+        />
+      </Helmet>
+
+      <Box sx={{ bgcolor: "#F8F8F8", pb: 5 }}>
+        {/* Hero Section */}
+        <Box
           sx={{
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: { xs: "28px", sm: "32px", md: "40px" }, // Adjust font size dynamically
-            textShadow: "2px 2px 6px rgba(0,0,0,0.3)", // Add a subtle text shadow for better readability
+            bgcolor: "#ffffff",
+            width: "100%",
+            height: { xs: "40vh", sm: "35vh", md: "40vh" },
+            backgroundImage: `url(${BlogHeroImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            px: { xs: 3, sm: 6, md: 16, lg: 20 },
+            py: { xs: 2, sm: 4 },
           }}
         >
-          Blogs
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            color: "#fff",
-            maxWidth: { xs: "90%", sm: "75%", md: "800px" }, // Adjust width based on screen size
-            mt: 1,
-            pl: { xs: 0, md: 4 }, // Remove left padding on smaller screens
-            fontWeight: "400",
-            fontSize: { xs: "16px", sm: "20px", md: "24px" }, // Adjust text size dynamically
-            lineHeight: 1.5, // Improve readability
-          }}
-        >
-          Explore expert insights, real success stories, and industry trends
-          that empower you to stay ahead and make informed decisions.
-        </Typography>
-      </Box>
+          <Typography
+            variant="h4"
+            sx={{
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: { xs: "28px", sm: "32px", md: "40px" }, // Adjust font size dynamically
+              textShadow: "2px 2px 6px rgba(0,0,0,0.3)", // Add a subtle text shadow for better readability
+            }}
+          >
+            Blogs
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: "#fff",
+              maxWidth: { xs: "90%", sm: "75%", md: "800px" }, // Adjust width based on screen size
+              mt: 1,
+              pl: { xs: 0, md: 4 }, // Remove left padding on smaller screens
+              fontWeight: "400",
+              fontSize: { xs: "16px", sm: "20px", md: "24px" }, // Adjust text size dynamically
+              lineHeight: 1.5, // Improve readability
+            }}
+          >
+            Explore expert insights, real success stories, and industry trends
+            that empower you to stay ahead and make informed decisions.
+          </Typography>
+        </Box>
 
-      <Container sx={{ py: 10 }}>
-        {/* Main Blog Section */}
-        <Grid container spacing={4} justifyContent="space-between">
-          <Grid item xs={12} md={8}>
-            <Grid container spacing={4}>
-              {paginatedBlogs.map((blog, index) => (
-                <Grid item xs={12} sm={12} key={index}>
-                  <Card
-                    component={Link}
-                    to={blog.path}
-                    sx={{
-                      background:
-                        "linear-gradient(180deg, #FFFFFF 0%, rgba(155, 215, 199, 0.43) 100%)",
-                      borderRadius: "10px",
-                      boxShadow: 3,
-                      display: "flex",
-                      flexDirection: { xs: "column", md: "row" }, // Stack vertically on small screens
-                      alignItems: "center",
-                      textDecoration: "none",
-                      px: { xs: 2, md: 2 },
-                      cursor: "pointer",
-                      transition: "all 0.3s ease-in-out",
-                      "&:hover": {
-                        boxShadow: 6,
-                        color: "#1E626B",
-                      },
-                    }}
-                  >
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      style={{
-                        flex: { xs: "none", md: 0.4 }, // Full width on small screens, left column on larger screens
-                        width: "100%",
-                      }}
-                    >
-                      <CardMedia
-                        component="img"
-                        sx={{
-                          width: "100%",
-                          height: { xs: "220px", sm: "250px", md: "240px" }, // Adjust height for screens
-                          borderRadius: "10px",
-                          objectFit: "cover",
-                        }}
-                        image={blog.image}
-                        alt={blog.title}
-                      />
-                    </motion.div>
-
-                    <CardContent
+        <Container sx={{ py: 10 }}>
+          {/* Main Blog Section */}
+          <Grid container spacing={4} justifyContent="space-between">
+            <Grid item xs={12} md={8}>
+              <Grid container spacing={4}>
+                {paginatedBlogs.map((blog, index) => (
+                  <Grid item xs={12} sm={12} key={index}>
+                    <Card
+                      component={Link}
+                      to={blog.path}
                       sx={{
-                        flex: { xs: "none", md: "auto" }, // Full width on small screens
+                        background:
+                          "linear-gradient(180deg, #FFFFFF 0%, rgba(155, 215, 199, 0.43) 100%)",
+                        borderRadius: "10px",
+                        boxShadow: 3,
                         display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        textAlign: { xs: "center", md: "left" }, // Center text on small screens
-                        px: { xs: 1, md: 3 }, // Adjust padding for better spacing
-                        pt: 4,
+                        flexDirection: { xs: "column", md: "row" }, // Stack vertically on small screens
+                        alignItems: "center",
+                        textDecoration: "none",
+                        px: { xs: 2, md: 2 },
+                        cursor: "pointer",
+                        transition: "all 0.3s ease-in-out",
+                        "&:hover": {
+                          boxShadow: 6,
+                          color: "#1E626B",
+                        },
                       }}
                     >
-                      <Button
-                        variant="body2"
-                        sx={{
-                          backgroundColor: "#1E626B",
-                          color: "#fff",
-                          borderRadius: "30px",
-                          padding: "5px 10px",
-                          fontSize: "12px",
-                          fontWeight: "bold",
-                          alignSelf: { xs: "center", md: "start" }, // Center button on small screens
-                          mb: 0.5,
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        style={{
+                          flex: { xs: "none", md: 0.4 }, // Full width on small screens, left column on larger screens
+                          width: "100%",
                         }}
                       >
-                        {blog.category}
-                      </Button>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
+                        <CardMedia
+                          component="img"
+                          sx={{
+                            width: "100%",
+                            height: { xs: "220px", sm: "250px", md: "240px" }, // Adjust height for screens
+                            borderRadius: "10px",
+                            objectFit: "cover",
+                          }}
+                          image={blog.image}
+                          alt={blog.title}
+                        />
+                      </motion.div>
+
+                      <CardContent
                         sx={{
-                          mb: 0.5,
-                          fontSize: { xs: "14px", sm: "16px" },
+                          flex: { xs: "none", md: "auto" }, // Full width on small screens
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          textAlign: { xs: "center", md: "left" }, // Center text on small screens
+                          px: { xs: 1, md: 3 }, // Adjust padding for better spacing
+                          pt: 4,
                         }}
                       >
-                        {blog.author} / {blog.date}
-                      </Typography>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          fontWeight: "bold",
-                          mb: 0.5,
-                          fontSize: { xs: "18px", sm: "20px" },
-                        }}
-                      >
-                        {blog.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontSize: { xs: "14px", sm: "16px" },
-                          mb: 0.5,
-                        }}
-                      >
-                        {blog.description}
-                      </Typography>
-                      <Button
-                        variant="text"
-                        sx={{
-                          color: "#E25E3E",
-                          fontWeight: "bold",
-                          alignSelf: { xs: "center", md: "start" }, // Center button on small screens
-                          "&:hover": {
-                            color: "#1E626B",
-                          },
-                        }}
-                      >
-                        READ MORE
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
+                        <Button
+                          variant="body2"
+                          sx={{
+                            backgroundColor: "#1E626B",
+                            color: "#fff",
+                            borderRadius: "30px",
+                            padding: "5px 10px",
+                            fontSize: "12px",
+                            fontWeight: "bold",
+                            alignSelf: { xs: "center", md: "start" }, // Center button on small screens
+                            mb: 0.5,
+                          }}
+                        >
+                          {blog.category}
+                        </Button>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          sx={{
+                            mb: 0.5,
+                            fontSize: { xs: "14px", sm: "16px" },
+                          }}
+                        >
+                          {blog.author} / {blog.date}
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            fontWeight: "bold",
+                            mb: 0.5,
+                            fontSize: { xs: "18px", sm: "20px" },
+                          }}
+                        >
+                          {blog.title}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontSize: { xs: "14px", sm: "16px" },
+                            mb: 0.5,
+                          }}
+                        >
+                          {blog.description}
+                        </Typography>
+                        <Button
+                          variant="text"
+                          sx={{
+                            color: "#E25E3E",
+                            fontWeight: "bold",
+                            alignSelf: { xs: "center", md: "start" }, // Center button on small screens
+                            "&:hover": {
+                              color: "#1E626B",
+                            },
+                          }}
+                        >
+                          READ MORE
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+
+              {/* Pagination Section */}
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+                <Pagination
+                  count={Math.ceil(blogs.length / blogsPerPage)}
+                  page={page}
+                  onChange={handlePageChange}
+                  shape="rounded"
+                  color="primary"
+                  sx={{
+                    "& .MuiPaginationItem-root": {
+                      borderRadius: "50%",
+                      fontWeight: "bold",
+                      color: "#1E626B",
+                      "&.Mui-selected": {
+                        backgroundColor: "#FEC108",
+                        color: "#fff",
+                      },
+                      "&:hover": {
+                        backgroundColor: "#FEC108",
+                        color: "#fff",
+                      },
+                    },
+                  }}
+                />
+              </Box>
             </Grid>
 
-            {/* Pagination Section */}
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-              <Pagination
-                count={Math.ceil(blogs.length / blogsPerPage)}
-                page={page}
-                onChange={handlePageChange}
-                shape="rounded"
-                color="primary"
-                sx={{
-                  "& .MuiPaginationItem-root": {
-                    borderRadius: "50%",
-                    fontWeight: "bold",
-                    color: "#1E626B",
-                    "&.Mui-selected": {
-                      backgroundColor: "#FEC108",
-                      color: "#fff",
-                    },
-                    "&:hover": {
-                      backgroundColor: "#FEC108",
-                      color: "#fff",
-                    },
-                  },
-                }}
+            {/* Sidebar */}
+            <Grid item xs={12} md={4}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                placeholder="Search..."
+                sx={{ mb: 4, backgroundColor: "#fff", borderRadius: "8px" }}
               />
-            </Box>
-          </Grid>
 
-          {/* Sidebar */}
-          <Grid item xs={12} md={4}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              placeholder="Search..."
-              sx={{ mb: 4, backgroundColor: "#fff", borderRadius: "8px" }}
-            />
+              <Typography variant="h5" fontWeight="bold">
+                Category
+              </Typography>
+              <List sx={{ ml: 2, py: 2 }}>
+                {categories.map((category, index) => (
+                  <ListItem
+                    key={index}
+                    disablePadding
+                    sx={{
+                      cursor: "pointer",
+                      fontWeight:
+                        selectedCategory === category ? "bold" : "normal",
+                      color:
+                        selectedCategory === category ? "#1E626B" : "inherit",
+                      "&:hover": { color: "#1E626B" },
+                    }}
+                    onClick={() => handleCategoryClick(category)}
+                  >
+                    <ListItemText primary={category} />
+                  </ListItem>
+                ))}
+              </List>
 
-            <Typography variant="h5" fontWeight="bold">
-              Category
-            </Typography>
-            <List sx={{ ml: 2, py: 2 }}>
-              {categories.map((category, index) => (
-                <ListItem
-                  key={index}
-                  disablePadding
-                  sx={{
-                    cursor: "pointer",
-                    fontWeight:
-                      selectedCategory === category ? "bold" : "normal",
-                    color:
-                      selectedCategory === category ? "#1E626B" : "inherit",
-                    "&:hover": { color: "#1E626B" },
-                  }}
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  <ListItemText primary={category} />
-                </ListItem>
-              ))}
-            </List>
-
-            <Typography variant="h5" sx={{ fontWeight: "bold", my: 2 }}>
-              Recent Posts
-            </Typography>
-            <List>
-              {recentPosts.map((post, index) => (
-                <ListItem
-                  key={index}
-                  component={Link}
-                  to={`/blog/${post.id}`} // ✅ Navigates to the blog page
-                  state={{ blog: post }} // ✅ Passes the entire blog object as state
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    textDecoration: "none",
-                    color: "inherit",
-                    cursor: "pointer",
-                    "&:hover": { color: "#1E626B" },
-                  }}
-                >
-                  <motion.div whileHover={{ scale: 1.1 }}>
-                    <CardMedia
-                      component="img"
-                      sx={{ width: 100, height: 80, borderRadius: "10px" }}
-                      image={post.image}
-                      alt={post.title}
+              <Typography variant="h5" sx={{ fontWeight: "bold", my: 2 }}>
+                Recent Posts
+              </Typography>
+              <List>
+                {recentPosts.map((post, index) => (
+                  <ListItem
+                    key={index}
+                    component={Link}
+                    to={`/blog/${post.id}`} // ✅ Navigates to the blog page
+                    state={{ blog: post }} // ✅ Passes the entire blog object as state
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 2,
+                      textDecoration: "none",
+                      color: "inherit",
+                      cursor: "pointer",
+                      "&:hover": { color: "#1E626B" },
+                    }}
+                  >
+                    <motion.div whileHover={{ scale: 1.1 }}>
+                      <CardMedia
+                        component="img"
+                        sx={{ width: 100, height: 80, borderRadius: "10px" }}
+                        image={post.image}
+                        alt={post.title}
+                      />
+                    </motion.div>
+                    <ListItemText
+                      primary={post.title}
+                      secondary={`${post.date}`}
+                      sx={{ fontSize: "14px", fontWeight: "bold" }}
                     />
-                  </motion.div>
-                  <ListItemText
-                    primary={post.title}
-                    secondary={`${post.date}`}
-                    sx={{ fontSize: "14px", fontWeight: "bold" }}
-                  />
-                </ListItem>
-              ))}
-            </List>
+                  </ListItem>
+                ))}
+              </List>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+    </>
   );
 };
 

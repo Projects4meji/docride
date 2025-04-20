@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, Container, Button, Divider } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Check as CheckIcon } from "@mui/icons-material";
@@ -7,6 +7,9 @@ import { featuresList } from "./Pricing";
 import pay from "../../assets/pay.jpg";
 
 const PaymentInfo = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -71,15 +74,18 @@ const PaymentInfo = () => {
         maxWidth="md"
         sx={{
           textAlign: "center",
-          position: "relative", // To be above the ::before
+          position: "relative",
           zIndex: 1,
         }}
       >
         {/* ✅ White Transparent Background Wrapper */}
         <Box
           sx={{
-            backgroundColor: "rgba(255, 255, 255, 0.7)", // Semi-transparent white
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
             borderRadius: "16px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             padding: { xs: 3, sm: 4, md: 5 },
             boxShadow: 3,
           }}

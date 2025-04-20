@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import {
   Container,
   Typography,
@@ -482,343 +483,360 @@ const Modules = () => {
   };
 
   return (
-    <Box sx={{ bgcolor: "#ffffff", pb: { xs: 5, md: 10 } }}>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          width: "100%",
-          height: "auto",
-          backgroundImage: `url(${privacy})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          position: "relative",
-          textAlign: "center",
-          px: { xs: 2, sm: 4, md: 6 },
-          py: 6,
-          "::before": {
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
-            zIndex: 1,
-          },
-        }}
-      >
+    <>
+      <Helmet>
+        <title>Modules | AI-Based OHS Management System Features</title>
+        <meta
+          name="description"
+          content="Explore DocRide's 17 AI-powered modules for complete OHS management — from incident reporting, legal compliance, permit to work, to risk assessments and emergency response."
+        />
+        <meta
+          name="keywords"
+          content="OHS management system, AI based OHS management, Risk assessment, OHS audit, Incident investigation, Incident reporting, Permit to work, Emergency preparedness response, OHS legal requirements"
+        />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+      
+      <Box sx={{ bgcolor: "#ffffff", pb: { xs: 5, md: 10 } }}>
+        {/* Hero Section */}
         <Box
           sx={{
+            width: "100%",
+            height: "auto",
+            backgroundImage: `url(${privacy})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
             position: "relative",
-            zIndex: 2,
-            color: "#ffffff",
-            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)", // Subtle text shadow
-          }}
-        >
-          <Typography
-            fontSize={{ xs: 18, sm: 24, md: 34 }}
-            fontWeight="bold"
-            px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
-          >
-            <Box component="span" color="#96e0cc">
-              17 Comprehensive Modules
-            </Box>{" "}
-            to cover Every
-            <Box component="span" color="#68b9ba">
-              {" "}
-              Aspect of Health & Safety Management
-            </Box>
-          </Typography>
-
-          <Typography
-            fontSize={{ xs: 14, sm: 16, md: 22 }}
-            fontWeight="bold"
-            px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
-            mt={2}
-          >
-            Step into the future with DocRide—the smart, efficient way to
-            safeguard your workplace from Health and Safety Risks.
-          </Typography>
-
-          <Button
-            variant="contained"
-            sx={{
-              mt: 3,
-              backgroundColor: "#E25E3E",
-              color: "#ffffff",
-              fontWeight: "bold",
-              textTransform: "none",
-              px: { xs: 3, sm: 4 },
-              py: { xs: 1, sm: 2 },
-              fontSize: { xs: "14px", sm: "16px" },
-              "&:hover": {
-                backgroundColor: "#c94b32",
-              },
-            }}
-          >
-            Learn More
-          </Button>
-        </Box>
-      </Box>
-
-      {/* Modules Section */}
-      <Container maxWidth="lg" sx={{ py: 10 }}>
-        {moduleData.map((module, index) => {
-          const ref = useRef(null);
-          const isInView = useInView(ref, { once: false, margin: "-100px" });
-
-          return (
-            <motion.div
-              ref={ref}
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              whileHover={{ y: -8 }} // Moves card slightly up on hover
-              whileTap={{ scale: 0.98 }} // Slight press effect when tapped
-              style={{ width: "100%" }}
-            >
-              <Card
-                sx={{
-                  borderRadius: "15px",
-                  background:
-                    "linear-gradient(180deg, #FFFFFF 0%, rgba(155, 215, 199, 0.43) 100%)",
-                  display: "flex",
-                  flexDirection: { xs: "column", md: "row" },
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  maxWidth: "100%",
-                  minHeight: { xs: "auto", md: "550px" }, // Responsive height
-                  overflow: "hidden",
-                  mb: 4,
-                }}
-              >
-                {/* Module Image (On Small Screens: Image on Top, Content Below) */}
-                <Box
-                  sx={{
-                    flex: 1,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100%",
-                    minHeight: { xs: "250px", md: "550px" }, // Ensures equal height
-                    order: { xs: 1, md: 2 }, // Switches order on small screens
-                  }}
-                >
-                  <img
-                    src={module.image}
-                    alt={module.title}
-                    style={{
-                      width: "100%",
-                      maxWidth: "600px", // Increased size
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "85px",
-                    }}
-                  />
-                </Box>
-
-                {/* Module Content */}
-                <CardContent
-                  sx={{
-                    flex: 1,
-                    textAlign: "left",
-                    px: { xs: 2, sm: 4, md: 5 }, // Adjust padding for different screens
-                    py: { xs: 2, sm: 3, md: 4 },
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    height: "100%", // Ensure same height
-                    order: { xs: 2, md: 1 }, // Switch order on small screens
-                  }}
-                >
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    gap={{ xs: 1.5, sm: 2, md: 3 }}
-                    mb={{ xs: 1, sm: 2 }}
-                  >
-                    {/* Icon Box - Applies Background Color if Needed */}
-                    <Box
-                      sx={{
-                        width: { xs: 60, sm: 70, md: 80 }, // Dynamic icon box size
-                        height: { xs: 60, sm: 70, md: 80 },
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: "12px",
-                        background: module.bgcolor
-                          ? module.bgcolor
-                          : "transparent",
-                      }}
-                    >
-                      <img
-                        src={module.icon}
-                        alt="Module Icon"
-                        width="60%"
-                        height="60%"
-                        style={{ objectFit: "contain" }} // Ensures proper image scaling
-                      />
-                    </Box>
-
-                    <Box>
-                      <Typography
-                        variant="h5"
-                        fontWeight="bold"
-                        sx={{
-                          color: "#1E626C",
-                          fontSize: { xs: "18px", sm: "20px", md: "22px" }, // Responsive font size
-                        }}
-                      >
-                        {module.title}
-                      </Typography>
-                      {/* Orange Line Below the Title */}
-                      <Box
-                        sx={{
-                          width: { xs: "80px", sm: "100px" }, // Adjusts width for smaller screens
-                          height: "4px",
-                          bgcolor: "#E25E3E",
-                          mt: 1,
-                        }}
-                      />
-                    </Box>
-                  </Box>
-
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#333",
-                      fontSize: { xs: "14px", sm: "16px", md: "18px" }, // Dynamic text size
-                      ml: { xs: "8px", sm: "12px" },
-                    }}
-                  >
-                    {module.description}
-                  </Typography>
-
-                  <Box component="ul" sx={{ mt: { xs: 1, sm: 2 } }}>
-                    {module.content.map((point, i) => (
-                      <Typography
-                        key={i}
-                        component="li"
-                        sx={{
-                          fontSize: { xs: "12px", sm: "14px", md: "16px" }, // Ensures text remains readable
-                          color: "#444",
-                          mb: { xs: 0.5, sm: 1 },
-                        }}
-                      >
-                        {point}
-                      </Typography>
-                    ))}
-                  </Box>
-
-                  {/* Show More Button */}
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      pb: 2,
-                    }}
-                  >
-                    <Button
-                      variant="text"
-                      sx={{
-                        textTransform: "none",
-                        fontSize: { xs: "12px", sm: "13px" },
-                        fontWeight: "bold",
-                        color: "#36767E",
-                      }}
-                      onClick={() => handleOpen(module)}
-                    >
-                      Watch Video
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
-            </motion.div>
-          );
-        })}
-
-        {/* Modal Popup */}
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          fullWidth
-          maxWidth="md"
-          sx={{
-            "& .MuiPaper-root": {
-              borderRadius: "20px",
-              background: "linear-gradient(180deg, #73C7AD 0%, #3A7B81 100%)",
-              color: "white",
+            textAlign: "center",
+            px: { xs: 2, sm: 4, md: 6 },
+            py: 6,
+            "::before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
               width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
+              zIndex: 1,
             },
           }}
         >
-          {/* Close Button */}
-          <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
-            <IconButton onClick={handleClose} sx={{ color: "white" }}>
-              <CloseIcon />
-            </IconButton>
-          </Box>
-
-          {/* Modal Content */}
-          <DialogContent
+          <Box
             sx={{
-              px: { xs: 2, sm: 3, md: 4 },
-              pb: { xs: 2, sm: 3 },
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              position: "relative",
+              zIndex: 2,
+              color: "#ffffff",
+              textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)", // Subtle text shadow
             }}
           >
             <Typography
+              fontSize={{ xs: 18, sm: 24, md: 34 }}
+              fontWeight="bold"
+              px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
+            >
+              <Box component="span" color="#96e0cc">
+                17 Comprehensive Modules
+              </Box>{" "}
+              to cover Every
+              <Box component="span" color="#68b9ba">
+                {" "}
+                Aspect of Health & Safety Management
+              </Box>
+            </Typography>
+
+            <Typography
+              fontSize={{ xs: 14, sm: 16, md: 22 }}
+              fontWeight="bold"
+              px={{ xs: 2, sm: 6, md: 12, lg: 20 }}
+              mt={2}
+            >
+              Step into the future with DocRide—the smart, efficient way to
+              safeguard your workplace from Health and Safety Risks.
+            </Typography>
+
+            <Button
+              variant="contained"
               sx={{
-                fontSize: { xs: "16px", md: "32px" },
+                mt: 3,
+                backgroundColor: "#E25E3E",
+                color: "#ffffff",
                 fontWeight: "bold",
-                mb: { xs: 2, md: 4 },
+                textTransform: "none",
+                px: { xs: 3, sm: 4 },
+                py: { xs: 1, sm: 2 },
+                fontSize: { xs: "14px", sm: "16px" },
+                "&:hover": {
+                  backgroundColor: "#c94b32",
+                },
               }}
             >
-              {selectedFeature?.title}
-            </Typography>
-            {selectedFeature && (
-              <Box
-                sx={{
-                  width: "100%",
-                  maxWidth: {
-                    xs: "90vw",
-                    sm: "80vw",
-                    md: "70vw",
-                    lg: "60vw",
-                  },
-                  position: "relative",
-                  paddingBottom: "56.25%", // Aspect ratio 16:9
-                  overflow: "hidden",
-                  borderRadius: "15px",
-                  boxShadow: 3,
-                  background: "#EDF7F5",
-                }}
+              Learn More
+            </Button>
+          </Box>
+        </Box>
+
+        {/* Modules Section */}
+        <Container maxWidth="lg" sx={{ py: 10 }}>
+          {moduleData.map((module, index) => {
+            const ref = useRef(null);
+            const isInView = useInView(ref, { once: false, margin: "-100px" });
+
+            return (
+              <motion.div
+                ref={ref}
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                }
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                whileHover={{ y: -8 }} // Moves card slightly up on hover
+                whileTap={{ scale: 0.98 }} // Slight press effect when tapped
+                style={{ width: "100%" }}
               >
-                {/* Responsive iframe inside Box */}
-                <Box
+                <Card
                   sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
+                    borderRadius: "15px",
+                    background:
+                      "linear-gradient(180deg, #FFFFFF 0%, rgba(155, 215, 199, 0.43) 100%)",
                     display: "flex",
+                    flexDirection: { xs: "column", md: "row" },
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "space-between",
+                    maxWidth: "100%",
+                    minHeight: { xs: "auto", md: "550px" }, // Responsive height
+                    overflow: "hidden",
+                    mb: 4,
                   }}
                 >
-                  {selectedFeature.videoEmbed}
+                  {/* Module Image (On Small Screens: Image on Top, Content Below) */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                      height: "100%",
+                      minHeight: { xs: "250px", md: "550px" }, // Ensures equal height
+                      order: { xs: 1, md: 2 }, // Switches order on small screens
+                    }}
+                  >
+                    <img
+                      src={module.image}
+                      alt={module.title}
+                      style={{
+                        width: "100%",
+                        maxWidth: "600px", // Increased size
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "85px",
+                      }}
+                    />
+                  </Box>
+
+                  {/* Module Content */}
+                  <CardContent
+                    sx={{
+                      flex: 1,
+                      textAlign: "left",
+                      px: { xs: 2, sm: 4, md: 5 }, // Adjust padding for different screens
+                      py: { xs: 2, sm: 3, md: 4 },
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      height: "100%", // Ensure same height
+                      order: { xs: 2, md: 1 }, // Switch order on small screens
+                    }}
+                  >
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      gap={{ xs: 1.5, sm: 2, md: 3 }}
+                      mb={{ xs: 1, sm: 2 }}
+                    >
+                      {/* Icon Box - Applies Background Color if Needed */}
+                      <Box
+                        sx={{
+                          width: { xs: 60, sm: 70, md: 80 }, // Dynamic icon box size
+                          height: { xs: 60, sm: 70, md: 80 },
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRadius: "12px",
+                          background: module.bgcolor
+                            ? module.bgcolor
+                            : "transparent",
+                        }}
+                      >
+                        <img
+                          src={module.icon}
+                          alt="Module Icon"
+                          width="60%"
+                          height="60%"
+                          style={{ objectFit: "contain" }} // Ensures proper image scaling
+                        />
+                      </Box>
+
+                      <Box>
+                        <Typography
+                          variant="h5"
+                          fontWeight="bold"
+                          sx={{
+                            color: "#1E626C",
+                            fontSize: { xs: "18px", sm: "20px", md: "22px" }, // Responsive font size
+                          }}
+                        >
+                          {module.title}
+                        </Typography>
+                        {/* Orange Line Below the Title */}
+                        <Box
+                          sx={{
+                            width: { xs: "80px", sm: "100px" }, // Adjusts width for smaller screens
+                            height: "4px",
+                            bgcolor: "#E25E3E",
+                            mt: 1,
+                          }}
+                        />
+                      </Box>
+                    </Box>
+
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: "#333",
+                        fontSize: { xs: "14px", sm: "16px", md: "18px" }, // Dynamic text size
+                        ml: { xs: "8px", sm: "12px" },
+                      }}
+                    >
+                      {module.description}
+                    </Typography>
+
+                    <Box component="ul" sx={{ mt: { xs: 1, sm: 2 } }}>
+                      {module.content.map((point, i) => (
+                        <Typography
+                          key={i}
+                          component="li"
+                          sx={{
+                            fontSize: { xs: "12px", sm: "14px", md: "16px" }, // Ensures text remains readable
+                            color: "#444",
+                            mb: { xs: 0.5, sm: 1 },
+                          }}
+                        >
+                          {point}
+                        </Typography>
+                      ))}
+                    </Box>
+
+                    {/* Show More Button */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        pb: 2,
+                      }}
+                    >
+                      <Button
+                        variant="text"
+                        sx={{
+                          textTransform: "none",
+                          fontSize: { xs: "12px", sm: "13px" },
+                          fontWeight: "bold",
+                          color: "#36767E",
+                        }}
+                        onClick={() => handleOpen(module)}
+                      >
+                        Watch Video
+                      </Button>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+
+          {/* Modal Popup */}
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            fullWidth
+            maxWidth="md"
+            sx={{
+              "& .MuiPaper-root": {
+                borderRadius: "20px",
+                background: "linear-gradient(180deg, #73C7AD 0%, #3A7B81 100%)",
+                color: "white",
+                width: "100%",
+              },
+            }}
+          >
+            {/* Close Button */}
+            <Box sx={{ display: "flex", justifyContent: "flex-end", p: 1 }}>
+              <IconButton onClick={handleClose} sx={{ color: "white" }}>
+                <CloseIcon />
+              </IconButton>
+            </Box>
+
+            {/* Modal Content */}
+            <DialogContent
+              sx={{
+                px: { xs: 2, sm: 3, md: 4 },
+                pb: { xs: 2, sm: 3 },
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: { xs: "16px", md: "32px" },
+                  fontWeight: "bold",
+                  mb: { xs: 2, md: 4 },
+                }}
+              >
+                {selectedFeature?.title}
+              </Typography>
+              {selectedFeature && (
+                <Box
+                  sx={{
+                    width: "100%",
+                    maxWidth: {
+                      xs: "90vw",
+                      sm: "80vw",
+                      md: "70vw",
+                      lg: "60vw",
+                    },
+                    position: "relative",
+                    paddingBottom: "56.25%", // Aspect ratio 16:9
+                    overflow: "hidden",
+                    borderRadius: "15px",
+                    boxShadow: 3,
+                    background: "#EDF7F5",
+                  }}
+                >
+                  {/* Responsive iframe inside Box */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {selectedFeature.videoEmbed}
+                  </Box>
                 </Box>
-              </Box>
-            )}
-          </DialogContent>
-        </Dialog>
-      </Container>
-    </Box>
+              )}
+            </DialogContent>
+          </Dialog>
+        </Container>
+      </Box>
+    </>
   );
 };
 

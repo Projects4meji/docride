@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import {
   Box,
   Container,
@@ -33,6 +34,19 @@ function About() {
   const handleCloseReactiveModal = () => setOpenReactiveModal(false);
 
   return (
+    <>
+    <Helmet>
+        <title>About Us | ISO 45001 Certified OHS Management System</title>
+        <meta
+          name="description"
+          content="Discover how DocRide delivers AI-based OHS management, ISO 45001 compliance, incident reporting, risk assessment, and more for your safety needs."
+        />
+        <meta
+          name="keywords"
+          content="ISO 45001, OHS management system, Online OHS management, AI based OHS management, Risk assessment, OHS audit, Incident investigation, Incident reporting, Permit to work, Emergency preparedness response, OHS legal requirements, Paperless OHS management"
+        />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
     <Box sx={{ bgcolor: "#FFFFFF" }}>
       {/* Hero Section */}
       <Box
@@ -602,6 +616,7 @@ function About() {
 
       <FutureGoals />
     </Box>
+    </>
   );
 }
 

@@ -109,7 +109,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Let SITE_URL be based on environment (for Stripe return URL)
 SITE_URL = os.environ.get("SITE_URL", "http://localhost:5173")
 
-STRIPE_SECRET_KEY = 'sk_test_51R3Q1PEYQxHtXYU4rAo2IAxXrezUQ8Cmwk7hsH5A2qOlekKC2NM26b82pnyjeSMRWcIeFd5PBLcLgsAs7upo9Ysr00MNYn2ID0'
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

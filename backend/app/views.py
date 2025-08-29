@@ -28,18 +28,22 @@ class StripeCheckoutView(APIView):
             return Response({'error': 'Invalid plan type'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            # ✅ Set mode to 'subscription' for all plans
-            session_data = {
-                'ui_mode': 'embedded',
-                'line_items': [{'price': price_id, 'quantity': 1}],
-                'mode': 'subscription',
-                'return_url': f"{settings.SITE_URL}/?session_id={{CHECKOUT_SESSION_ID}}",
-            }
-
-            # ✅ For Test Drive, optionally apply trial (if not already configured in Stripe)
+            # ✅ Handle test_drive as one-time payment, others as subscriptions
             if plan_type == 'test_drive':
-                session_data['subscription_data'] = {
-                    'trial_period_days': 30  # 1 month free
+                print(f"Creating test_drive session with price: {price_id}")
+                session_data = {
+                    'ui_mode': 'embedded',
+                    'line_items': [{'price': price_id, 'quantity': 1}],
+                    'mode': 'payment',  # One-time payment for test_drive
+                    'return_url': f"{settings.SITE_URL}/?session_id={{CHECKOUT_SESSION_ID}}",
+                }
+            else:
+                # ✅ Set mode to 'subscription' for recurring plans
+                session_data = {
+                    'ui_mode': 'embedded',
+                    'line_items': [{'price': price_id, 'quantity': 1}],
+                    'mode': 'subscription',
+                    'return_url': f"{settings.SITE_URL}/?session_id={{CHECKOUT_SESSION_ID}}",
                 }
 
             session = stripe.checkout.Session.create(**session_data)
@@ -47,7 +51,8 @@ class StripeCheckoutView(APIView):
             return Response({'clientSecret': session.client_secret}, status=status.HTTP_200_OK)
 
         except Exception as e:
-            print("Stripe Error:", e)  # Add this line
+            print(f"Stripe Error for plan '{plan_type}':", e)  # Better error logging
+            print(f"Price ID used: {price_id}")  # Log the price ID being used
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
